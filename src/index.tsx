@@ -4,8 +4,8 @@ import App from './App';
 import NAVSPA from '@navikt/navspa';
 import './index.less';
 
-if (document.getElementById('oppfolging-tilretteleggingsbehov-utvikling')) {
-    ReactDOM.render(<App />, document.getElementById('oppfolging-tilretteleggingsbehov-utvikling'));
+if (document.getElementById('registrer-tilretteleggingsbehov-utvikling')) {
+    ReactDOM.render(<App />, document.getElementById('registrer-tilretteleggingsbehov-utvikling'));
 } else {
     NAVSPA.eksporter('tilretteleggingsbehov', App);
 }
