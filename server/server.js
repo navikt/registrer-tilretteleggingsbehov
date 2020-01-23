@@ -9,11 +9,14 @@ const BASE_PATH = '/registrer-tilretteleggingsbehov';
 const buildPath = path.join(__dirname, '../build');
 
 const startServer = () => {
-    app.use(BASE_PATH, express.static(buildPath), {
-        setHeaders: res => {
-            res.set('Cache-Control', 'no-cache');
-        },
-    });
+    app.use(
+        BASE_PATH,
+        express.static(buildPath, {
+            setHeaders: res => {
+                res.set('Cache-Control', 'no-cache');
+            },
+        })
+    );
 
     app.get(`${BASE_PATH}/internal/isAlive`, (req, res) => res.sendStatus(200));
     app.get(`${BASE_PATH}/internal/isReady`, (req, res) => res.sendStatus(200));
