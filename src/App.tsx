@@ -3,21 +3,21 @@ import Registrering from './registrering/Registrering';
 import Visning from './visning/Visning';
 
 export enum Visningstype {
-    VIS_TILRETTELEGGINGSBEHOV,
-    REGISTRER_TILRETTELEGGINGSBEHOV,
+    VIS_TILRETTELEGGINGSBEHOV = 'VIS_TILRETTELEGGINGSBEHOV',
+    REGISTRER_TILRETTELEGGINGSBEHOV = 'REGISTRER_TILRETTELEGGINGSBEHOV',
 }
 
 interface Props {
-    visningstype: Visningstype;
+    viewType: Visningstype;
 }
 
-const App: FunctionComponent<Props> = ({ visningstype }) => {
-    if (visningstype === Visningstype.REGISTRER_TILRETTELEGGINGSBEHOV) {
+const App: FunctionComponent<Props> = ({ viewType }) => {
+    if (viewType === Visningstype.REGISTRER_TILRETTELEGGINGSBEHOV) {
         return <Registrering />;
-    } else if (visningstype === Visningstype.VIS_TILRETTELEGGINGSBEHOV) {
+    } else if (viewType === Visningstype.VIS_TILRETTELEGGINGSBEHOV) {
         return <Visning />;
     } else {
-        const type = <h1>{visningstype}</h1>;
+        const type = <h1>{viewType}</h1>;
         return (
             <div>
                 feil type
