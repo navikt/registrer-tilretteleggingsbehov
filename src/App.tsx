@@ -17,7 +17,13 @@ const App: FunctionComponent<Props> = ({ visningstype }) => {
     } else if (visningstype === Visningstype.VIS_TILRETTELEGGINGSBEHOV) {
         return <Visning />;
     } else {
-        return null;
+        const type = <h1>{visningstype}</h1>;
+        return (
+            <div>
+                feil type
+                {type}
+            </div>
+        );
     }
 };
 
