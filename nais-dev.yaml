@@ -17,4 +17,3 @@ spec:
   readiness:
     initialDelay: 5
     path: /registrer-tilretteleggingsbehov/internal/isReady
-  env:
