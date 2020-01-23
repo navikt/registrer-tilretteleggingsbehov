@@ -12,8 +12,9 @@ const startServer = () => {
     app.use(
         BASE_PATH,
         express.static(buildPath, {
+            etag: false,
             setHeaders: res => {
-                res.set('Cache-Control', 'no-cache');
+                res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
             },
         })
     );
