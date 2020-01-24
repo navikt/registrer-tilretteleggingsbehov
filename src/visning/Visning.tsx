@@ -1,6 +1,8 @@
+import Behovgruppe from './Behovgruppe';
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { RestKandidat, Status } from '../api/Kandidat';
 import { hentKandidat } from '../api/api';
+import { FysiskBehov } from '../api/Behov';
 
 export const visRegistreringEvent = 'veilarbmaofs.visTilretteleggingsbehov';
 
@@ -25,6 +27,11 @@ const Visning: FunctionComponent<Props> = ({ fnr }) => {
     return (
         <>
             <button onClick={navigerTilRegistreringsside}>registrer</button>
+            <Behovgruppe
+                overskrift="Fysisk tilrettelegging"
+                beskrivelse="Behov for fysisk tilrettelegging på arbeidsplassen"
+                behov={[FysiskBehov.Ergonomi, FysiskBehov.TungeLøft]}
+            />
             Visning
             {kandidat.status === Status.Suksess && kandidat.data}
         </>
