@@ -1,7 +1,7 @@
 import Behovgruppe from './Behovgruppe';
 import React, { FunctionComponent, useEffect, useState } from 'react';
-import { RestKandidat, Status } from '../api/Kandidat';
 import { hentKandidat } from '../api/api';
+import { RestKandidat, Status } from '../api/RestKandidat';
 
 export const visRegistreringEvent = 'veilarbmaofs.visTilretteleggingsbehov';
 

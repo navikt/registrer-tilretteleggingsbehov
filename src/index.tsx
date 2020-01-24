@@ -5,6 +5,10 @@ import NAVSPA from '@navikt/navspa';
 import './index.less';
 import Utvikling from './utvikling/Utikling';
 
+if (process.env.REACT_APP_MOCK) {
+    require('./mock/mock');
+}
+
 if (document.getElementById('registrer-tilretteleggingsbehov-utvikling')) {
     ReactDOM.render(
         <Utvikling />,

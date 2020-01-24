@@ -2,6 +2,7 @@ import React, { FunctionComponent, useEffect, useState } from 'react';
 import App, { Visningstype } from '../App';
 import { visDetaljerEvent } from '../registrering/Registrering';
 import { visRegistreringEvent } from '../visning/Visning';
+import { etFnr } from '../mock/testdata';
 
 const Utvikling: FunctionComponent = () => {
     const [visningstype, setVisningstype] = useState<Visningstype>(
@@ -24,7 +25,7 @@ const Utvikling: FunctionComponent = () => {
         };
     }, []);
 
-    return <App viewType={visningstype} fnr={'12345678901'} />;
+    return <App viewType={visningstype} fnr={etFnr} />;
 };
 
 export default Utvikling;
