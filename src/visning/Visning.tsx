@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { RestKandidat, Status } from '../api/Kandidat';
-import { hentKandidat, hentVeileder } from '../api/api';
+import { hentVeileder } from '../api/api';
 
 export const visRegistreringEvent = 'veilarbmaofs.visTilretteleggingsbehov';
 
@@ -19,7 +19,7 @@ const Visning: FunctionComponent<Props> = ({ fnr }) => {
     useEffect(() => {
         const hent = async () => {
             setVeileder(await hentVeileder());
-            setKandidat(await hentKandidat(fnr));
+            setKandidat({ status: Status.IkkeLastet });
         };
         hent();
     }, [fnr]);
