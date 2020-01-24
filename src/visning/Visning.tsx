@@ -18,7 +18,7 @@ const Visning: FunctionComponent<Props> = ({ fnr }) => {
 
     useEffect(() => {
         const hent = async () => {
-            setKandidat(await hentKandidat(fnr));
+            // setKandidat(await hentKandidat(fnr));
             setVeileder(await hentVeileder());
         };
         hent();
