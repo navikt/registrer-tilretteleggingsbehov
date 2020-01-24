@@ -16,16 +16,6 @@ export const hentKandidat = async (fnr: string): Promise<RestKandidat> => {
     }
 };
 
-export const hentVeileder = async (): Promise<string> => {
-    try {
-        const response = await fetch('/finn-kandidat-api/veileder/me', medCookies);
-        const veileder = await response.text();
-        return Promise.resolve(veileder);
-    } catch (error) {
-        return Promise.reject('feil');
-    }
-};
-
 const medCookies: RequestInit = {
     credentials: 'same-origin',
 };

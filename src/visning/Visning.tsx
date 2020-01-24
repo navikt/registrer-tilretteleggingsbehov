@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { RestKandidat, Status } from '../api/Kandidat';
-import { hentVeileder } from '../api/api';
+import { hentKandidat } from '../api/api';
 
 export const visRegistreringEvent = 'veilarbmaofs.visTilretteleggingsbehov';
 
@@ -10,7 +10,6 @@ interface Props {
 
 const Visning: FunctionComponent<Props> = ({ fnr }) => {
     const [kandidat, setKandidat] = useState<RestKandidat>({ status: Status.IkkeLastet });
-    const [veileder, setVeileder] = useState<string>('');
 
     const navigerTilRegistreringsside = () => {
         dispatchEvent(new Event(visRegistreringEvent));
@@ -18,8 +17,7 @@ const Visning: FunctionComponent<Props> = ({ fnr }) => {
 
     useEffect(() => {
         const hent = async () => {
-            setVeileder(await hentVeileder());
-            setKandidat({ status: Status.IkkeLastet });
+            setKandidat(await hentKandidat(fnr));
         };
         hent();
     }, [fnr]);
@@ -29,7 +27,6 @@ const Visning: FunctionComponent<Props> = ({ fnr }) => {
             <button onClick={navigerTilRegistreringsside}>registrer</button>
             Visning
             {kandidat.status === Status.Suksess && kandidat.data}
-            Veileder: {veileder}
         </>
     );
 };
