@@ -1,11 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import { Normaltekst, Element } from 'nav-frontend-typografi';
-import { FysiskBehov } from '../api/Behov';
+import { Behov } from '../api/Behov';
 
 interface Props {
     overskrift: String;
     beskrivelse: String;
-    behov: FysiskBehov[];
+    behov: Behov[];
 }
 const Behovgruppe: FunctionComponent<Props> = ({ overskrift, beskrivelse, behov }) => {
     return (

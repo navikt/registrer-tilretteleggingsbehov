@@ -29,3 +29,5 @@ export enum GrunnleggendeBehov {
     RegningOgTallforståelse = 'REGNING_OG_TALLFORSTÅELSE',
     AndreUtfordringer = 'ANDRE_UTFORDRINGER',
 }
+
+export type Behov = ArbeidstidBehov | FysiskBehov | ArbeidsmijøBehov | GrunnleggendeBehov;

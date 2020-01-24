@@ -35,6 +35,16 @@ const Visning: FunctionComponent<Props> = ({ fnr }) => {
                 beskrivelse="Behov for fysisk tilrettelegging på arbeidsplassen"
                 behov={kandidat.data.fysiskeBehov}
             />
+            <Behovgruppe
+                overskrift="Arbeidshverdagen"
+                beskrivelse="Behov for tilpasninger i arbeidshverdagen"
+                behov={kandidat.data.arbeidsmiljøBehov}
+            />
+            <Behovgruppe
+                overskrift="Utfordringer med norsk"
+                beskrivelse="Kandidaten har utfordringer med å:"
+                behov={kandidat.data.grunnleggendeBehov}
+            />
         </>
     );
 };
