@@ -73,7 +73,7 @@ workflows:
                   context: tag-ci
                   requires:
                       - godkjenn-til-dev
-            - deploy-til-dev:
+            - deploy-til-dev-2:
                   context: tag-ci
                   requires:
                       - build
@@ -84,7 +84,7 @@ workflows:
             - deploy-til-prod:
                   context: tag-ci
                   requires:
-                    - deploy-til-dev
+                    - deploy-til-dev-2
                   filters:
                       branches:
                           only:
