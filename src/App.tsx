@@ -17,13 +17,7 @@ const App: FunctionComponent<Props> = ({ viewType }) => {
     } else if (viewType === Visningstype.VIS_TILRETTELEGGINGSBEHOV) {
         return <Visning />;
     } else {
-        const type = <h1>{viewType}</h1>;
-        return (
-            <div>
-                feil type
-                {type}
-            </div>
-        );
+        return null;
     }
 };
 
