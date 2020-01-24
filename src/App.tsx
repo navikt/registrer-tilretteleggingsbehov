@@ -3,8 +3,8 @@ import Registrering from './registrering/Registrering';
 import Visning from './visning/Visning';
 
 export enum Visningstype {
-    VIS_TILRETTELEGGINGSBEHOV = 'VIS_TILRETTELEGGINGSBEHOV',
-    REGISTRER_TILRETTELEGGINGSBEHOV = 'REGISTRER_TILRETTELEGGINGSBEHOV',
+    VisTilretteleggingsbehov = 'VIS_TILRETTELEGGINGSBEHOV',
+    RegistrerTilretteleggingsbehov = 'REGISTRER_TILRETTELEGGINGSBEHOV',
 }
 
 interface Props {
@@ -12,9 +12,9 @@ interface Props {
 }
 
 const App: FunctionComponent<Props> = ({ viewType }) => {
-    if (viewType === Visningstype.REGISTRER_TILRETTELEGGINGSBEHOV) {
+    if (viewType === Visningstype.RegistrerTilretteleggingsbehov) {
         return <Registrering />;
-    } else if (viewType === Visningstype.VIS_TILRETTELEGGINGSBEHOV) {
+    } else if (viewType === Visningstype.VisTilretteleggingsbehov) {
         return <Visning />;
     } else {
         return null;

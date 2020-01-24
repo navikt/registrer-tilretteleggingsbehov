@@ -5,15 +5,15 @@ import { visRegistreringEvent } from '../visning/Visning';
 
 const Utvikling: FunctionComponent = () => {
     const [visningstype, setVisningstype] = useState<Visningstype>(
-        Visningstype.VIS_TILRETTELEGGINGSBEHOV
+        Visningstype.VisTilretteleggingsbehov
     );
 
     useEffect(() => {
         const navigerTilVisning = () => {
-            setVisningstype(Visningstype.VIS_TILRETTELEGGINGSBEHOV);
+            setVisningstype(Visningstype.VisTilretteleggingsbehov);
         };
         const navigerTilRegistrering = () => {
-            setVisningstype(Visningstype.REGISTRER_TILRETTELEGGINGSBEHOV);
+            setVisningstype(Visningstype.RegistrerTilretteleggingsbehov);
         };
 
         window.addEventListener(visDetaljerEvent, navigerTilVisning);
