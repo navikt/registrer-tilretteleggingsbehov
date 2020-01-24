@@ -9,13 +9,14 @@ export enum Visningstype {
 
 interface Props {
     viewType: Visningstype;
+    fnr: string;
 }
 
-const App: FunctionComponent<Props> = ({ viewType }) => {
+const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
     if (viewType === Visningstype.RegistrerTilretteleggingsbehov) {
         return <Registrering />;
     } else if (viewType === Visningstype.VisTilretteleggingsbehov) {
-        return <Visning />;
+        return <Visning fnr={fnr} />;
     } else {
         return null;
     }
