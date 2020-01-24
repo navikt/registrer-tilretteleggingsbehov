@@ -24,7 +24,7 @@ const Utvikling: FunctionComponent = () => {
         };
     }, []);
 
-    return <App viewType={visningstype} />;
+    return <App viewType={visningstype} fnr={'12345678901'} />;
 };
 
 export default Utvikling;
