@@ -1,13 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import { Normaltekst, Element } from 'nav-frontend-typografi';
+import { FysiskBehov } from '../api/Behov';
 
 interface Props {
-    overskrift: String,
-    beskrivelse: String,
-    behov: String[]
+    overskrift: String;
+    beskrivelse: String;
+    behov: FysiskBehov[];
 }
 const Behovgruppe: FunctionComponent<Props> = ({ overskrift, beskrivelse, behov }) => {
-
     return (
         <section className="blokk-xs">
             <Element>{overskrift}</Element>
@@ -16,7 +16,6 @@ const Behovgruppe: FunctionComponent<Props> = ({ overskrift, beskrivelse, behov 
                 <Normaltekst>{b}</Normaltekst>
             ))}
         </section>
-
     );
 };
 
