@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from 'react';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { Feilmelding, Sidetittel } from 'nav-frontend-typografi';
-import KategoriSpørsmål from './KategoriSpørsmål';
+import KategoriSpørsmål from './kategori-spørsmål/KategoriSpørsmål';
 import {
     ArbeidsmijøBehov,
     ArbeidstidBehov,
@@ -13,6 +13,8 @@ import { navigerTilVisningsside } from '../utils/navigering';
 import { NyKandidat } from '../api/Kandidat';
 import { opprettKandidat } from '../api/api';
 import { RestKandidat, Status } from '../api/RestKandidat';
+import Alertstripe from 'nav-frontend-alertstriper';
+import './Registrering.less';
 
 interface Props {
     fnr: string;
@@ -42,15 +44,17 @@ const Registrering: FunctionComponent<Props> = ({ fnr }) => {
     };
 
     return (
-        <>
-            <Knapp onClick={navigerTilVisningsside}>Tilbake til detaljer</Knapp>
-            <form>
-                <Sidetittel>Registrer tilretteleggingsbehov</Sidetittel>
-                <section>
+        <div className="registrering">
+            <main className="registrering__innhold">
+                <Knapp onClick={navigerTilVisningsside} className="registrering__tilbake">
+                    Tilbake til detaljer
+                </Knapp>
+                <Sidetittel className="blokk-m">Registrer tilretteleggingsbehov</Sidetittel>
+                <Alertstripe className="blokk-m" type="info">
                     Før du registrerer behovene, må du ha hatt en dialog med brukeren. Brukeren vil
                     kunne se disse opplysningene.
-                </section>
-                <section>
+                </Alertstripe>
+                <form className="registrering__form">
                     <KategoriSpørsmål
                         tittel="Arbeidstid"
                         beskrivelse="Behov for tilrettelegging av arbeidstiden"
@@ -90,9 +94,9 @@ const Registrering: FunctionComponent<Props> = ({ fnr }) => {
                         (status === Status.UkjentFeil && (
                             <Feilmelding>Kunne ikke lagre behov</Feilmelding>
                         ))}
-                </section>
-            </form>
-        </>
+                </form>
+            </main>
+        </div>
     );
 };
 

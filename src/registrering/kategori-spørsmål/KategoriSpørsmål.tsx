@@ -1,8 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { Undertittel } from 'nav-frontend-typografi';
 import { Checkbox, CheckboxGruppe } from 'nav-frontend-skjema';
-import { Alternativ, hentAlternativer } from './alternativ';
-import { Behov } from '../api/Behov';
+import { Alternativ, hentAlternativer } from '../alternativ';
+import { Behov } from '../../api/Behov';
+import './KategoriSpørsmål.less';
 
 export type Kategori = 'arbeidstid' | 'fysisk' | 'arbeidsmiljø' | 'grunnleggende';
 
@@ -32,11 +33,11 @@ const KategoriSpørsmål: FunctionComponent<Props> = ({
     };
 
     return (
-        <section>
-            <Undertittel>{tittel}</Undertittel>
+        <section className="kategori-spørsmål">
+            <Undertittel className="blokk-xxs">{tittel}</Undertittel>
             <CheckboxGruppe legend={beskrivelse}>
                 {alternativer.map((alternativ: Alternativ) => (
-                    <>
+                    <div className="kategori-spørsmål__checkbox">
                         <Checkbox
                             key={alternativ.behov}
                             label={alternativ.label}
@@ -45,11 +46,14 @@ const KategoriSpørsmål: FunctionComponent<Props> = ({
                             aria-describedby={alternativ.behov + '_hjelpetekst'}
                         />
                         {alternativ.hjelpetekst && (
-                            <div id={alternativ.behov + '_hjelpetekst'}>
+                            <div
+                                id={alternativ.behov + '_hjelpetekst'}
+                                className="kategori-spørsmål__hjelpetekst"
+                            >
                                 {alternativ.hjelpetekst}
                             </div>
                         )}
-                    </>
+                    </div>
                 ))}
             </CheckboxGruppe>
         </section>

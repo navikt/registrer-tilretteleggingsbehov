@@ -5,7 +5,7 @@ import {
     FysiskBehov,
     GrunnleggendeBehov,
 } from '../api/Behov';
-import { Kategori } from './KategoriSpørsmål';
+import { Kategori } from './kategori-spørsmål/KategoriSpørsmål';
 
 export type Alternativ = {
     behov: Behov;

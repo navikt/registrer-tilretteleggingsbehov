@@ -5,7 +5,7 @@ import { visDetaljerEvent, visRegistreringEvent } from '../utils/navigering';
 
 const Utvikling: FunctionComponent = () => {
     const [visningstype, setVisningstype] = useState<Visningstype>(
-        Visningstype.VisTilretteleggingsbehov
+        Visningstype.RegistrerTilretteleggingsbehov
     );
 
     useEffect(() => {
