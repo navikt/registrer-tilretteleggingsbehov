@@ -4,7 +4,7 @@ import { ArbeidstidBehov } from './Behov';
 
 export const hentKandidat = async (fnr: string): Promise<RestKandidat> => {
     try {
-        const respons = await fetch('/finn-kandidat-api/kandidater/fnr/' + fnr, medCookies);
+        const respons = await fetch('/finn-kandidat-api/kandidater/' + fnr, medCookies);
         if (!respons.ok) {
             return { status: Status.Feil, statusKode: respons.status };
         }
@@ -20,7 +20,7 @@ export const opprettKandidat = async (nyKandidat: NyKandidat): Promise<RestKandi
     try {
         const respons = await fetch(
             '/finn-kandidat-api/kandidater',
-            body({
+            medBody({
                 ...nyKandidat,
                 arbeidstidBehov:
                     nyKandidat.arbeidstidBehov.length !== 0
@@ -39,7 +39,7 @@ export const opprettKandidat = async (nyKandidat: NyKandidat): Promise<RestKandi
     }
 };
 
-const body = (body: any) => ({
+const medBody = (body: any) => ({
     method: 'POST',
     body: JSON.stringify(body),
     headers: { 'Content-Type': 'application/json' },
