@@ -36,12 +36,20 @@ const KategoriSpørsmål: FunctionComponent<Props> = ({
             <Undertittel>{tittel}</Undertittel>
             <CheckboxGruppe legend={beskrivelse}>
                 {alternativer.map((alternativ: Alternativ) => (
-                    <Checkbox
-                        key={alternativ.behov}
-                        label={alternativ.label}
-                        checked={valgteBehov.includes(alternativ.behov)}
-                        onChange={() => toggleAlternativ(alternativ.behov)}
-                    />
+                    <>
+                        <Checkbox
+                            key={alternativ.behov}
+                            label={alternativ.label}
+                            checked={valgteBehov.includes(alternativ.behov)}
+                            onChange={() => toggleAlternativ(alternativ.behov)}
+                            aria-describedby={alternativ.behov + '_hjelpetekst'}
+                        />
+                        {alternativ.hjelpetekst && (
+                            <div id={alternativ.behov + '_hjelpetekst'}>
+                                {alternativ.hjelpetekst}
+                            </div>
+                        )}
+                    </>
                 ))}
             </CheckboxGruppe>
         </section>
