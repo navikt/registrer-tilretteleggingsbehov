@@ -4,4 +4,4 @@ import { enKandidat, etFnr } from './testdata';
 const basePath = '/finn-kandidat-api';
 
 fetchMock.get(`${basePath}/kandidater/fnr/${etFnr}`, enKandidat);
-fetchMock.post(`${basePath}/kandidater`, [201, enKandidat]);
+fetchMock.post(`${basePath}/kandidater/fnr`, [201, enKandidat]);
