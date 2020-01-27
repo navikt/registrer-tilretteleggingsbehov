@@ -1,27 +1,23 @@
 import Behovgruppe from './Behovgruppe';
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { hentKandidat } from '../api/api';
-import { RestKandidat, Status } from '../api/RestKandidat';
+import { ikkeLastet, lasterInn, RestKandidat, Status } from '../api/RestKandidat';
+import { navigerTilRegistreringsside } from '../utils/navigering';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
 
-import './Visning.less'
-
-export const visRegistreringEvent = 'veilarbmaofs.visTilretteleggingsbehov';
+import './Visning.less';
 
 interface Props {
     fnr: string;
 }
 
 const Visning: FunctionComponent<Props> = ({ fnr }) => {
-    const [kandidat, setKandidat] = useState<RestKandidat>({ status: Status.IkkeLastet });
-
-    const navigerTilRegistreringsside = () => {
-        dispatchEvent(new Event(visRegistreringEvent));
-    };
+    const [kandidat, setKandidat] = useState<RestKandidat>(ikkeLastet);
 
     useEffect(() => {
         const hent = async () => {
+            setKandidat(lasterInn);
             setKandidat(await hentKandidat(fnr));
         };
         hent();

@@ -13,7 +13,7 @@ export interface Kandidat {
 }
 
 export interface NyKandidat {
-    aktørId: string;
+    fnr: string;
     arbeidstidBehov: ArbeidstidBehov[];
     fysiskeBehov: FysiskBehov[];
     arbeidsmiljøBehov: ArbeidsmijøBehov[];
