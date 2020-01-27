@@ -1,13 +1,13 @@
 import { Kandidat } from './Kandidat';
 
-export type RestKandidat = IkkeLastet | LasterInn | SenderInn | Suksess | Feil;
+export type RestKandidat = IkkeLastet | LasterInn | Suksess | Feil | UkjentFeil;
 
 export enum Status {
-    'IkkeLastet',
-    'LasterInn',
-    'SenderInn',
-    'Suksess',
-    'Feil',
+    IkkeLastet,
+    LasterInn,
+    Suksess,
+    Feil,
+    UkjentFeil,
 }
 
 interface IkkeLastet {
@@ -18,11 +18,6 @@ interface LasterInn {
     status: Status.LasterInn;
 }
 
-interface SenderInn {
-    status: Status.SenderInn;
-    data: Kandidat;
-}
-
 interface Suksess {
     status: Status.Suksess;
     data: Kandidat;
@@ -30,5 +25,13 @@ interface Suksess {
 
 interface Feil {
     status: Status.Feil;
-    error: string;
+    statusKode: number;
 }
+
+interface UkjentFeil {
+    status: Status.UkjentFeil;
+}
+
+export const ikkeLastet: IkkeLastet = { status: Status.IkkeLastet };
+export const lasterInn: LasterInn = { status: Status.LasterInn };
+export const ukjentFeil: UkjentFeil = { status: Status.UkjentFeil };
