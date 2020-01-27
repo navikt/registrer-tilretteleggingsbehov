@@ -2,8 +2,7 @@ import Behovgruppe from './Behovgruppe';
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { hentKandidat } from '../api/api';
 import { RestKandidat, Status } from '../api/RestKandidat';
-
-export const visRegistreringEvent = 'veilarbmaofs.visTilretteleggingsbehov';
+import { navigerTilRegistreringsside } from '../utils/navigering';
 
 interface Props {
     fnr: string;
@@ -11,10 +10,6 @@ interface Props {
 
 const Visning: FunctionComponent<Props> = ({ fnr }) => {
     const [kandidat, setKandidat] = useState<RestKandidat>({ status: Status.IkkeLastet });
-
-    const navigerTilRegistreringsside = () => {
-        dispatchEvent(new Event(visRegistreringEvent));
-    };
 
     useEffect(() => {
         const hent = async () => {

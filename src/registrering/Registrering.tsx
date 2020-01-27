@@ -3,8 +3,7 @@ import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { Sidetittel } from 'nav-frontend-typografi';
 import KategoriSpørsmål from './KategoriSpørsmål';
 import { Behov } from '../api/Behov';
-
-export const visDetaljerEvent = 'veilarbmaofs.visDetaljer';
+import { navigerTilVisningsside } from '../utils/navigering';
 
 interface Props {
     fnr: string;
@@ -15,10 +14,6 @@ const Registrering: FunctionComponent<Props> = ({ fnr }) => {
     const [fysisk, setFysisk] = useState<Behov[]>([]);
     const [arbeidsmiljø, setArbeidsmiljø] = useState<Behov[]>([]);
     const [grunnleggende, setGrunnleggende] = useState<Behov[]>([]);
-
-    const navigerTilVisningsside = () => {
-        dispatchEvent(new Event(visDetaljerEvent));
-    };
 
     const lagreBehov = () => {
         console.log('lagrer behov');
