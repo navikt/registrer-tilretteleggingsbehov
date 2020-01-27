@@ -32,11 +32,11 @@ const Visning: FunctionComponent<Props> = ({ fnr }) => {
     }
 
     return (
-        <div className="Visning">
+        <div className="visning">
             <div className="sistendret">
                 <Normaltekst>Sist endret: {kandidat.data.sistEndret}</Normaltekst>
             </div>
-            <div className="Behovkategorier">
+            <div className="visning__behovkategorier">
                 <Behovgruppe
                     overskrift="Fysisk tilrettelegging"
                     beskrivelse="Behov for fysisk tilrettelegging på arbeidsplassen"
