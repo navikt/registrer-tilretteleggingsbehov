@@ -1,5 +1,6 @@
 import { RestKandidat, Status, ukjentFeil } from './RestKandidat';
 import { NyKandidat } from './Kandidat';
+import { ArbeidstidBehov } from './Behov';
 
 export const hentKandidat = async (fnr: string): Promise<RestKandidat> => {
     try {
@@ -17,7 +18,16 @@ export const hentKandidat = async (fnr: string): Promise<RestKandidat> => {
 
 export const opprettKandidat = async (nyKandidat: NyKandidat): Promise<RestKandidat> => {
     try {
-        const respons = await fetch('/finn-kandidat-api/kandidater', body(nyKandidat));
+        const respons = await fetch(
+            '/finn-kandidat-api/kandidater',
+            body({
+                ...nyKandidat,
+                arbeidstidBehov:
+                    nyKandidat.arbeidstidBehov.length !== 0
+                        ? nyKandidat.arbeidstidBehov[0]
+                        : ArbeidstidBehov.Heltid,
+            })
+        );
         if (!respons.ok) {
             return { status: Status.Feil, statusKode: respons.status };
         }
