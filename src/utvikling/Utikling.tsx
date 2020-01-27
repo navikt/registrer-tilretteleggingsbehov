@@ -1,8 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import App, { Visningstype } from '../App';
-import { visDetaljerEvent } from '../registrering/Registrering';
-import { visRegistreringEvent } from '../visning/Visning';
 import { etFnr } from '../mock/testdata';
+import { visDetaljerEvent, visRegistreringEvent } from '../utils/navigering';
 
 const Utvikling: FunctionComponent = () => {
     const [visningstype, setVisningstype] = useState<Visningstype>(
