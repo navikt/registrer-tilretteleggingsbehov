@@ -1,7 +1,8 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { Sidetittel } from 'nav-frontend-typografi';
-import Kategori from './Kategori';
+import KategoriSpørsmål from './KategoriSpørsmål';
+import { Behov } from '../api/Behov';
 
 export const visDetaljerEvent = 'veilarbmaofs.visDetaljer';
 
@@ -10,6 +11,11 @@ interface Props {
 }
 
 const Registrering: FunctionComponent<Props> = ({ fnr }) => {
+    const [arbeidstid, setArbeidstid] = useState<Behov[]>([]);
+    const [fysisk, setFysisk] = useState<Behov[]>([]);
+    const [arbeidsmiljø, setArbeidsmiljø] = useState<Behov[]>([]);
+    const [grunnleggende, setGrunnleggende] = useState<Behov[]>([]);
+
     const navigerTilVisningsside = () => {
         dispatchEvent(new Event(visDetaljerEvent));
     };
@@ -27,10 +33,33 @@ const Registrering: FunctionComponent<Props> = ({ fnr }) => {
                 kunne se disse opplysningene.
             </section>
             <section>
-                <Kategori
-                    kategori="Arbeidstid"
+                <KategoriSpørsmål
+                    tittel="Arbeidstid"
                     beskrivelse="Behov for tilrettelegging av arbeidstiden"
-                    alternativer={['Alternativ 1', 'Alternativ 2']}
+                    valgteBehov={arbeidstid}
+                    onChange={setArbeidstid}
+                    kategori="arbeidstid"
+                />
+                <KategoriSpørsmål
+                    tittel="Fysisk tilrettelegging"
+                    beskrivelse="Behov for fysisk tilrettelegging på arbeidsplassen"
+                    valgteBehov={fysisk}
+                    onChange={setFysisk}
+                    kategori="fysisk"
+                />
+                <KategoriSpørsmål
+                    tittel="Arbeidsmiljø"
+                    beskrivelse="Dersom det er behov for tilrettelegging av arbeidsmiljøet, hvordan bør det tilrettelegges for kandidaten?"
+                    valgteBehov={arbeidsmiljø}
+                    onChange={setArbeidsmiljø}
+                    kategori="arbeidsmiljø"
+                />
+                <KategoriSpørsmål
+                    tittel="Grunnleggende ferdigheter"
+                    beskrivelse="Har kandidaten utfordringer med noe av dette?"
+                    valgteBehov={grunnleggende}
+                    onChange={setGrunnleggende}
+                    kategori="grunnleggende"
                 />
                 <Hovedknapp onClick={lagreBehov}>Lagre behov</Hovedknapp>
             </section>
