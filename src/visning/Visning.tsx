@@ -2,6 +2,10 @@ import Behovgruppe from './Behovgruppe';
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { hentKandidat } from '../api/api';
 import { RestKandidat, Status } from '../api/RestKandidat';
+import { Hovedknapp } from 'nav-frontend-knapper';
+import { Normaltekst } from 'nav-frontend-typografi';
+
+import './Visning.less'
 
 export const visRegistreringEvent = 'veilarbmaofs.visTilretteleggingsbehov';
 
@@ -24,28 +28,33 @@ const Visning: FunctionComponent<Props> = ({ fnr }) => {
     }, [fnr]);
 
     if (kandidat.status !== Status.Suksess) {
-        return null;
+        return <div></div>;
     }
 
     return (
-        <>
-            <button onClick={navigerTilRegistreringsside}>registrer</button>
-            <Behovgruppe
-                overskrift="Fysisk tilrettelegging"
-                beskrivelse="Behov for fysisk tilrettelegging på arbeidsplassen"
-                behov={kandidat.data.fysiskeBehov}
-            />
-            <Behovgruppe
-                overskrift="Arbeidshverdagen"
-                beskrivelse="Behov for tilpasninger i arbeidshverdagen"
-                behov={kandidat.data.arbeidsmiljøBehov}
-            />
-            <Behovgruppe
-                overskrift="Utfordringer med norsk"
-                beskrivelse="Kandidaten har utfordringer med å:"
-                behov={kandidat.data.grunnleggendeBehov}
-            />
-        </>
+        <div className="visning">
+            <div className="sistendret">
+                <Normaltekst>Sist endret: {kandidat.data.sistEndret}</Normaltekst>
+            </div>
+            <div className="visning__behovkategorier">
+                <Behovgruppe
+                    overskrift="Fysisk tilrettelegging"
+                    beskrivelse="Behov for fysisk tilrettelegging på arbeidsplassen"
+                    behov={kandidat.data.fysiskeBehov}
+                />
+                <Behovgruppe
+                    overskrift="Arbeidshverdagen"
+                    beskrivelse="Behov for tilpasninger i arbeidshverdagen"
+                    behov={kandidat.data.arbeidsmiljøBehov}
+                />
+                <Behovgruppe
+                    overskrift="Utfordringer med norsk"
+                    beskrivelse="Kandidaten har utfordringer med å:"
+                    behov={kandidat.data.grunnleggendeBehov}
+                />
+            </div>
+            <Hovedknapp onClick={navigerTilRegistreringsside}>registrer</Hovedknapp>
+        </div>
     );
 };
 
