@@ -9,7 +9,7 @@ interface Props {
 }
 const Behovgruppe: FunctionComponent<Props> = ({ overskrift, beskrivelse, behov }) => {
     return (
-        <section className="blokk-xs visning__behovgruppe">
+        <section className="visning__behovgruppe">
             <Element>{overskrift}</Element>
             <Normaltekst>{beskrivelse}</Normaltekst>
             {behov.map(b => (

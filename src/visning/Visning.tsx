@@ -53,7 +53,7 @@ const Visning: FunctionComponent<Props> = ({ fnr }) => {
                     behov={kandidat.data.grunnleggendeBehov}
                 />
             </div>
-            <Hovedknapp className="naviger" onClick={navigerTilRegistreringsside}>registrer</Hovedknapp>
+            <Hovedknapp onClick={navigerTilRegistreringsside}>registrer</Hovedknapp>
         </div>
     );
 };
