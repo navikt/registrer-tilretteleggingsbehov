@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import { Undertittel, Element } from 'nav-frontend-typografi';
-import { Checkbox } from 'nav-frontend-skjema';
+import { Undertittel } from 'nav-frontend-typografi';
+import { Checkbox, CheckboxGruppe } from 'nav-frontend-skjema';
 import { Alternativ, hentAlternativer } from './alternativ';
 import { Behov } from '../api/Behov';
 
@@ -32,18 +32,19 @@ const KategoriSpørsmål: FunctionComponent<Props> = ({
     };
 
     return (
-        <div key={kategori}>
+        <section>
             <Undertittel>{tittel}</Undertittel>
-            <Element>{beskrivelse}</Element>
-            {alternativer.map((alternativ: Alternativ) => (
-                <Checkbox
-                    key={alternativ.behov}
-                    label={alternativ.label}
-                    checked={valgteBehov.includes(alternativ.behov)}
-                    onChange={() => toggleAlternativ(alternativ.behov)}
-                />
-            ))}
-        </div>
+            <CheckboxGruppe legend={beskrivelse}>
+                {alternativer.map((alternativ: Alternativ) => (
+                    <Checkbox
+                        key={alternativ.behov}
+                        label={alternativ.label}
+                        checked={valgteBehov.includes(alternativ.behov)}
+                        onChange={() => toggleAlternativ(alternativ.behov)}
+                    />
+                ))}
+            </CheckboxGruppe>
+        </section>
     );
 };
 
