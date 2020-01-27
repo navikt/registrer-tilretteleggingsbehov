@@ -14,7 +14,7 @@ interface Props {
 
 const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
     if (viewType === Visningstype.RegistrerTilretteleggingsbehov) {
-        return <Registrering />;
+        return <Registrering fnr={fnr} />;
     } else if (viewType === Visningstype.VisTilretteleggingsbehov) {
         return <Visning fnr={fnr} />;
     } else {
