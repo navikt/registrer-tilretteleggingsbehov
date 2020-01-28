@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from 'react';
-import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
+import { Hovedknapp } from 'nav-frontend-knapper';
 import { Feilmelding, Sidetittel } from 'nav-frontend-typografi';
 import KategoriSpørsmål from './kategori-spørsmål/KategoriSpørsmål';
 import {
@@ -48,9 +48,6 @@ const Registrering: FunctionComponent<Props> = ({ fnr }) => {
     return (
         <div className="registrering">
             <main className="registrering__innhold">
-                {/*<Tilbakeknapp onClick={navigerTilVisningsside} className="registrering__tilbake">*/}
-                {/*    Tilbake til detaljer*/}
-                {/*</Tilbakeknapp>*/}
                 <Lenke
                     href=""
                     onClick={e => {
