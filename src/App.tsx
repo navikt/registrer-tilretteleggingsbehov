@@ -23,7 +23,7 @@ const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
         return null;
     }
 
-    return <Normaltekst>{side}</Normaltekst>;
+    return <Normaltekst tag="div">{side}</Normaltekst>;
 };
 
 export default App;

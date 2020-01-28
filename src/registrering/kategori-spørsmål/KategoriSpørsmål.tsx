@@ -37,9 +37,8 @@ const KategoriSpørsmål: FunctionComponent<Props> = ({
             <Undertittel className="blokk-xxs">{tittel}</Undertittel>
             <CheckboxGruppe legend={beskrivelse}>
                 {alternativer.map((alternativ: Alternativ) => (
-                    <div className="kategori-spørsmål__checkbox">
+                    <div className="kategori-spørsmål__checkbox" key={alternativ.behov}>
                         <Checkbox
-                            key={alternativ.behov}
                             label={alternativ.label}
                             checked={valgteBehov.includes(alternativ.behov)}
                             onChange={() => toggleAlternativ(alternativ.behov)}
