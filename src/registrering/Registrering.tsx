@@ -63,7 +63,7 @@ const Registrering: FunctionComponent<Props> = ({ fnr }) => {
                     className="registrering__tilbake"
                 >
                     <VenstreChevron />
-                    Lenke med ikon
+                    Tilbake til detaljer
                 </Lenke>
                 <Sidetittel className="blokk-m">Registrer tilretteleggingsbehov</Sidetittel>
                 <Alertstripe className="blokk-m" type="info">
