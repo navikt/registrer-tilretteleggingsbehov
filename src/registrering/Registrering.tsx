@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Feilmelding, Sidetittel } from 'nav-frontend-typografi';
 import KategoriSpørsmål from './kategori-spørsmål/KategoriSpørsmål';
@@ -28,6 +28,12 @@ const Registrering: FunctionComponent<Props> = ({ fnr }) => {
     const [arbeidsmiljø, setArbeidsmiljø] = useState<Behov[]>([]);
     const [grunnleggende, setGrunnleggende] = useState<Behov[]>([]);
     const [status, setStatus] = useState<Status>(Status.IkkeLastet);
+
+    useEffect(() => {
+        if (status === Status.Suksess) {
+            navigerTilVisningsside();
+        }
+    }, [status]);
 
     const lagreBehov = async () => {
         if (status === Status.LasterInn) return;
