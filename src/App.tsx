@@ -1,10 +1,11 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState, ReactNode } from 'react';
 import Registrering from './registrering/Registrering';
 import Visning from './visning/Visning';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { ikkeLastet, lasterInn, RestKandidat, Status } from './api/RestKandidat';
 import { hentKandidat } from './api/api';
 import Endring from './endring/Endring';
+import Introduksjon from './introduksjon/Introduksjon';
 
 export enum Visningstype {
     VisTilretteleggingsbehov = 'VIS_TILRETTELEGGINGSBEHOV',
@@ -27,7 +28,7 @@ const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
         hent();
     }, [fnr]);
 
-    let side;
+    let side: ReactNode = '';
     if (viewType === Visningstype.RegistrerTilretteleggingsbehov) {
         if (kandidat.status === Status.Suksess) {
             side = <Endring kandidat={kandidat.data} />;
@@ -36,9 +37,11 @@ const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
             side = <Registrering fnr={fnr} />;
         }
     } else if (viewType === Visningstype.VisTilretteleggingsbehov) {
-        side = <Visning fnr={fnr} />;
-    } else {
-        return null;
+        if (kandidat.status === Status.Suksess) {
+            side = <Visning fnr={fnr} />;
+        } else if (kandidat.status === Status.Feil && kandidat.statusKode === 404) {
+            side = <Introduksjon />;
+        }
     }
 
     return <Normaltekst tag="div">{side}</Normaltekst>;
