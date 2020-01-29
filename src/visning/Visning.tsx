@@ -4,6 +4,7 @@ import React, { FunctionComponent } from 'react';
 import { navigerTilRegistreringsside } from '../utils/navigering';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
+import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
 
 import {
     arbeidstidTekster,
@@ -19,6 +20,8 @@ interface Props {
     kandidat: Kandidat;
 }
 
+const j = false;
+
 const Visning: FunctionComponent<Props> = ({ kandidat }) => {
     return (
         <div className="visning">
@@ -27,6 +30,8 @@ const Visning: FunctionComponent<Props> = ({ kandidat }) => {
                     Sist endret: {formaterDato(new Date(kandidat.sistEndret))}
                 </Normaltekst>
             </div>
+            {j && <AlertStripeAdvarsel className='visning__jobbprofiladvarsel'>Brukeren har ikke jobbprofil, og vil derfor ikke være synlig i kandidatsøket.</AlertStripeAdvarsel>
+            }
             <div className="visning__behovkategorier">
                 <Behovgruppe
                     overskrift="Arbeidstid"
