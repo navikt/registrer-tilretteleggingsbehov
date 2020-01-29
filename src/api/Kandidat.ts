@@ -12,7 +12,7 @@ export interface Kandidat {
     grunnleggendeBehov: GrunnleggendeBehov[];
 }
 
-export interface NyKandidat {
+export interface KandidatDto {
     fnr: string;
     arbeidstidBehov: ArbeidstidBehov[];
     fysiskeBehov: FysiskBehov[];

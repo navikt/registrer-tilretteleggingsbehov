@@ -1,11 +1,12 @@
 import { Kandidat } from './Kandidat';
 
-export type RestKandidat = IkkeLastet | LasterInn | Suksess | Feil | UkjentFeil;
+export type RestKandidat = IkkeLastet | LasterInn | Suksess | Slettet | Feil | UkjentFeil;
 
 export enum Status {
     IkkeLastet,
     LasterInn,
     Suksess,
+    Slettet,
     Feil,
     UkjentFeil,
 }
@@ -23,6 +24,9 @@ interface Suksess {
     data: Kandidat;
 }
 
+interface Slettet {
+    status: Status.Slettet;
+}
 interface Feil {
     status: Status.Feil;
     statusKode: number;

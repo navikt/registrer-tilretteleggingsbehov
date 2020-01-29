@@ -1,7 +1,4 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
-import { Hovedknapp } from 'nav-frontend-knapper';
-import { Feilmelding, Sidetittel } from 'nav-frontend-typografi';
-import KategoriSpørsmål from './kategori-spørsmål/KategoriSpørsmål';
 import {
     ArbeidsmijøBehov,
     ArbeidstidBehov,
@@ -9,68 +6,82 @@ import {
     FysiskBehov,
     GrunnleggendeBehov,
 } from '../api/Behov';
-import { navigerTilVisningsside } from '../utils/navigering';
-import { KandidatDto } from '../api/Kandidat';
-import { opprettKandidat } from '../api/api';
 import { RestKandidat, Status } from '../api/RestKandidat';
-import Alertstripe from 'nav-frontend-alertstriper';
 import Lenke from 'nav-frontend-lenker';
+import { navigerTilVisningsside } from '../utils/navigering';
 import { VenstreChevron } from 'nav-frontend-chevron';
-import './Registrering.less';
+import { Feilmelding, Sidetittel } from 'nav-frontend-typografi';
+import Alertstripe from 'nav-frontend-alertstriper';
+import KategoriSpørsmål from '../registrering/kategori-spørsmål/KategoriSpørsmål';
+import { Kandidat, KandidatDto } from '../api/Kandidat';
+import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
+import './Endre.less';
+import { endreKandidat, slettKandidat } from '../api/api';
 
 interface Props {
-    fnr: string;
+    kandidat: Kandidat;
 }
 
-const Registrering: FunctionComponent<Props> = ({ fnr }) => {
-    const [arbeidstid, setArbeidstid] = useState<Behov[]>([]);
-    const [fysisk, setFysisk] = useState<Behov[]>([]);
-    const [arbeidsmiljø, setArbeidsmiljø] = useState<Behov[]>([]);
-    const [grunnleggende, setGrunnleggende] = useState<Behov[]>([]);
-    const [status, setStatus] = useState<Status>(Status.IkkeLastet);
+const Endre: FunctionComponent<Props> = ({ kandidat }) => {
+    const [arbeidstid, setArbeidstid] = useState<Behov[]>(kandidat.arbeidstidBehov);
+    const [fysisk, setFysisk] = useState<Behov[]>(kandidat.fysiskeBehov);
+    const [arbeidsmiljø, setArbeidsmiljø] = useState<Behov[]>(kandidat.arbeidsmiljøBehov);
+    const [grunnleggende, setGrunnleggende] = useState<Behov[]>(kandidat.grunnleggendeBehov);
+    const [endreStatus, setEndreStatus] = useState<Status>(Status.IkkeLastet);
+    const [sletteStatus, setSletteStatus] = useState<Status>(Status.IkkeLastet);
 
     useEffect(() => {
-        if (status === Status.Suksess) {
+        if (endreStatus === Status.Suksess) {
             navigerTilVisningsside();
         }
-    }, [status]);
+    }, [endreStatus]);
 
-    const lagreBehov = async () => {
-        if (status === Status.LasterInn) return;
+    const slettBehov = async () => {
+        const respons: RestKandidat = await slettKandidat(kandidat.fnr);
+        setSletteStatus(respons.status);
+    };
 
-        const kandidat: KandidatDto = {
-            fnr,
+    const endreBehov = async () => {
+        if (endreStatus === Status.LasterInn) return;
+
+        const endring: KandidatDto = {
+            fnr: kandidat.fnr,
             arbeidstidBehov: arbeidstid as ArbeidstidBehov[],
             fysiskeBehov: fysisk as FysiskBehov[],
             arbeidsmiljøBehov: arbeidsmiljø as ArbeidsmijøBehov[],
             grunnleggendeBehov: grunnleggende as GrunnleggendeBehov[],
         };
 
-        setStatus(Status.LasterInn);
-        const respons: RestKandidat = await opprettKandidat(kandidat);
-        setStatus(respons.status);
+        setEndreStatus(Status.LasterInn);
+        const respons: RestKandidat = await endreKandidat(endring);
+        setEndreStatus(respons.status);
     };
 
     return (
-        <div className="registrering">
-            <main className="registrering__innhold">
+        <div className="endre">
+            <main className="endre__innhold">
                 <Lenke
                     href=""
                     onClick={e => {
                         e.preventDefault();
                         navigerTilVisningsside();
                     }}
-                    className="registrering__tilbake"
+                    className="endre__tilbake"
                 >
                     <VenstreChevron />
                     Tilbake til detaljer
                 </Lenke>
-                <Sidetittel className="blokk-m">Registrer tilretteleggingsbehov</Sidetittel>
+                <div className="endre__tittel-wrapper">
+                    <Sidetittel>Endre tilretteleggingsbehov</Sidetittel>
+                    <Knapp onClick={slettBehov} mini={true}>
+                        Slett
+                    </Knapp>
+                </div>
                 <Alertstripe className="blokk-m" type="info">
                     Før du registrerer behovene, må du ha hatt en dialog med brukeren. Brukeren vil
                     kunne se disse opplysningene.
                 </Alertstripe>
-                <form className="registrering__form">
+                <form className="endre__form">
                     <KategoriSpørsmål
                         tittel="Arbeidstid"
                         beskrivelse="Behov for tilrettelegging av arbeidstiden"
@@ -100,15 +111,16 @@ const Registrering: FunctionComponent<Props> = ({ fnr }) => {
                         kategori="grunnleggende"
                     />
                     <Hovedknapp
-                        onClick={lagreBehov}
-                        spinner={status === Status.LasterInn}
+                        onClick={endreBehov}
+                        spinner={endreStatus === Status.LasterInn}
                         htmlType="button"
                     >
-                        Lagre behov
+                        Lagre endringer
                     </Hovedknapp>
-                    {status === Status.Feil ||
-                        (status === Status.UkjentFeil && (
-                            <Feilmelding>Kunne ikke lagre tilretteleggingsbehov</Feilmelding>
+                    <Knapp onClick={navigerTilVisningsside}>Avbryt</Knapp>
+                    {endreStatus === Status.Feil ||
+                        (endreStatus === Status.UkjentFeil && (
+                            <Feilmelding>Kunne ikke endre tilretteleggingsbehov</Feilmelding>
                         ))}
                 </form>
             </main>
@@ -116,4 +128,4 @@ const Registrering: FunctionComponent<Props> = ({ fnr }) => {
     );
 };
 
-export default Registrering;
+export default Endre;
