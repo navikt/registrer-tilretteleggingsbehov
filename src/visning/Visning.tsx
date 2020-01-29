@@ -6,6 +6,14 @@ import { navigerTilRegistreringsside } from '../utils/navigering';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
 
+import {
+    arbeidstidMapping,
+    arbeidsmiljøMapping,
+    fysiskMapping,
+    grunnleggendeMapping,
+    behovtekster,
+} from '../api/Behovtekster';
+
 import './Visning.less';
 
 interface Props {
@@ -27,6 +35,17 @@ const Visning: FunctionComponent<Props> = ({ fnr }) => {
         return <div></div>;
     }
 
+    const arbeidstidbehov = [kandidat.data.arbeidstidBehov].map(_ =>
+        behovtekster(_, arbeidstidMapping)
+    );
+    const fysiskeBehov = kandidat.data.fysiskeBehov.map(_ => behovtekster(_, fysiskMapping));
+    const arbeidsmiljøBehov = kandidat.data.arbeidsmiljøBehov.map(_ =>
+        behovtekster(_, arbeidsmiljøMapping)
+    );
+    const grunnleggendeBehov = kandidat.data.grunnleggendeBehov.map(_ =>
+        behovtekster(_, grunnleggendeMapping)
+    );
+
     return (
         <div className="visning">
             <div className="sistendret">
@@ -34,19 +53,24 @@ const Visning: FunctionComponent<Props> = ({ fnr }) => {
             </div>
             <div className="visning__behovkategorier">
                 <Behovgruppe
+                    overskrift="Arbeidstid"
+                    beskrivelse="Behov for fysisk tilrettelegging på arbeidsplassen"
+                    behov={arbeidstidbehov}
+                />
+                <Behovgruppe
                     overskrift="Fysisk tilrettelegging"
                     beskrivelse="Behov for fysisk tilrettelegging på arbeidsplassen"
-                    behov={kandidat.data.fysiskeBehov}
+                    behov={fysiskeBehov}
                 />
                 <Behovgruppe
                     overskrift="Arbeidshverdagen"
                     beskrivelse="Behov for tilpasninger i arbeidshverdagen"
-                    behov={kandidat.data.arbeidsmiljøBehov}
+                    behov={arbeidsmiljøBehov}
                 />
                 <Behovgruppe
                     overskrift="Utfordringer med norsk"
                     beskrivelse="Kandidaten har utfordringer med å:"
-                    behov={kandidat.data.grunnleggendeBehov}
+                    behov={grunnleggendeBehov}
                 />
             </div>
             <Hovedknapp onClick={navigerTilRegistreringsside}>registrer</Hovedknapp>

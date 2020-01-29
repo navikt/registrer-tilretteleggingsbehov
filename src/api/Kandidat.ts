@@ -6,7 +6,7 @@ export interface Kandidat {
     sistEndret: string;
     sistEndretAv: string;
     navKontor: string;
-    arbeidstidBehov: ArbeidstidBehov[];
+    arbeidstidBehov: ArbeidstidBehov;
     fysiskeBehov: FysiskBehov[];
     arbeidsmiljøBehov: ArbeidsmijøBehov[];
     grunnleggendeBehov: GrunnleggendeBehov[];
@@ -14,7 +14,7 @@ export interface Kandidat {
 
 export interface NyKandidat {
     fnr: string;
-    arbeidstidBehov: ArbeidstidBehov[];
+    arbeidstidBehov: ArbeidstidBehov;
     fysiskeBehov: FysiskBehov[];
     arbeidsmiljøBehov: ArbeidsmijøBehov[];
     grunnleggendeBehov: GrunnleggendeBehov[];
