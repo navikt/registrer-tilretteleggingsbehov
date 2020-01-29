@@ -16,7 +16,8 @@ import KategoriSpørsmål from '../registrering/kategori-spørsmål/KategoriSpø
 import { Kandidat, KandidatDto } from '../api/Kandidat';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import './Endring.less';
-import { endreKandidat, slettKandidat } from '../api/api';
+import { endreKandidat } from '../api/api';
+import SlettModal from './slett-modal/SlettModal';
 
 interface Props {
     kandidat: Kandidat;
@@ -28,18 +29,13 @@ const Endring: FunctionComponent<Props> = ({ kandidat }) => {
     const [arbeidsmiljø, setArbeidsmiljø] = useState<Behov[]>(kandidat.arbeidsmiljøBehov);
     const [grunnleggende, setGrunnleggende] = useState<Behov[]>(kandidat.grunnleggendeBehov);
     const [endreStatus, setEndreStatus] = useState<Status>(Status.IkkeLastet);
-    const [sletteStatus, setSletteStatus] = useState<Status>(Status.IkkeLastet);
+    const [visSlettModal, toggleSlettModal] = useState<boolean>(false);
 
     useEffect(() => {
-        if (endreStatus === Status.Suksess || sletteStatus === Status.Slettet) {
+        if (endreStatus === Status.Suksess) {
             navigerTilVisningsside();
         }
-    }, [endreStatus, sletteStatus]);
-
-    const slettBehov = async () => {
-        const respons: RestKandidat = await slettKandidat(kandidat.fnr);
-        setSletteStatus(respons.status);
-    };
+    }, [endreStatus]);
 
     const endreBehov = async () => {
         if (endreStatus === Status.LasterInn) return;
@@ -73,7 +69,7 @@ const Endring: FunctionComponent<Props> = ({ kandidat }) => {
                 </Lenke>
                 <div className="endring__tittel-wrapper">
                     <Sidetittel>Endre tilretteleggingsbehov</Sidetittel>
-                    <Knapp onClick={slettBehov} mini={true}>
+                    <Knapp onClick={() => toggleSlettModal(true)} mini={true}>
                         Slett
                     </Knapp>
                 </div>
@@ -125,6 +121,11 @@ const Endring: FunctionComponent<Props> = ({ kandidat }) => {
                         ))}
                 </form>
             </main>
+            <SlettModal
+                erÅpen={visSlettModal}
+                fnr={kandidat.fnr}
+                lukk={() => toggleSlettModal(false)}
+            />
         </div>
     );
 };
