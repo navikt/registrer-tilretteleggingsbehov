@@ -64,7 +64,9 @@ const Visning: FunctionComponent<Props> = ({ fnr }) => {
                     behov={grunnleggendeTekster(kandidat.data.grunnleggendeBehov)}
                 />
             </div>
-            <Hovedknapp onClick={navigerTilRegistreringsside}>endre</Hovedknapp>
+            <Hovedknapp mini onClick={navigerTilRegistreringsside}>
+                Endre
+            </Hovedknapp>
         </div>
     );
 };
