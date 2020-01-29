@@ -1,6 +1,5 @@
 import { RestKandidat, Status, ukjentFeil } from './RestKandidat';
-import { NyKandidat } from './Kandidat';
-import { ArbeidstidBehov } from './Behov';
+import { KandidatDto } from './Kandidat';
 
 export const hentKandidat = async (fnr: string): Promise<RestKandidat> => {
     try {
@@ -16,18 +15,9 @@ export const hentKandidat = async (fnr: string): Promise<RestKandidat> => {
     }
 };
 
-export const opprettKandidat = async (nyKandidat: NyKandidat): Promise<RestKandidat> => {
+export const opprettKandidat = async (kandidat: KandidatDto): Promise<RestKandidat> => {
     try {
-        const respons = await fetch(
-            '/finn-kandidat-api/kandidater',
-            medBody({
-                ...nyKandidat,
-                arbeidstidBehov:
-                    nyKandidat.arbeidstidBehov.length !== 0
-                        ? nyKandidat.arbeidstidBehov[0]
-                        : ArbeidstidBehov.Heltid,
-            })
-        );
+        const respons = await fetch('/finn-kandidat-api/kandidater', options('POST', kandidat));
         if (!respons.ok) {
             return { status: Status.Feil, statusKode: respons.status };
         }
@@ -39,8 +29,38 @@ export const opprettKandidat = async (nyKandidat: NyKandidat): Promise<RestKandi
     }
 };
 
-const medBody = (body: any) => ({
-    method: 'POST',
+export const endreKandidat = async (kandidat: KandidatDto): Promise<RestKandidat> => {
+    try {
+        const respons = await fetch('/finn-kandidat-api/kandidater', options('PUT', kandidat));
+        if (!respons.ok) {
+            return { status: Status.Feil, statusKode: respons.status };
+        }
+
+        const endretKandidat = await respons.json();
+        return { status: Status.Suksess, data: endretKandidat };
+    } catch (error) {
+        return ukjentFeil;
+    }
+};
+
+export const slettKandidat = async (fnr: string): Promise<RestKandidat> => {
+    try {
+        const respons = await fetch('/finn-kandidat-api/kandidater/' + fnr, {
+            method: 'DELETE',
+            ...medCookies,
+        });
+        if (!respons.ok) {
+            return { status: Status.Feil, statusKode: respons.status };
+        }
+
+        return { status: Status.Slettet };
+    } catch (error) {
+        return ukjentFeil;
+    }
+};
+
+const options = (method: string, body: any) => ({
+    method,
     body: JSON.stringify(body),
     headers: { 'Content-Type': 'application/json' },
     ...medCookies,
