@@ -1,4 +1,5 @@
 import Behovgruppe from './Behovgruppe';
+import { formaterDato } from '../utils/datoUtils';
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { hentKandidat } from '../api/api';
 import { ikkeLastet, lasterInn, RestKandidat, Status } from '../api/RestKandidat';
@@ -37,7 +38,9 @@ const Visning: FunctionComponent<Props> = ({ fnr }) => {
     return (
         <div className="visning">
             <div className="sistendret">
-                <Normaltekst>Sist endret: {kandidat.data.sistEndret}</Normaltekst>
+                <Normaltekst>
+                    Sist endret: {formaterDato(new Date(kandidat.data.sistEndret))}
+                </Normaltekst>
             </div>
             <div className="visning__behovkategorier">
                 <Behovgruppe
@@ -46,14 +49,14 @@ const Visning: FunctionComponent<Props> = ({ fnr }) => {
                     behov={arbeidstidTekster(kandidat.data.arbeidstidBehov)}
                 />
                 <Behovgruppe
-                    overskrift="Fysisk tilrettelegging"
-                    beskrivelse="Behov for fysisk tilrettelegging på arbeidsplassen"
-                    behov={fysiskTekster(kandidat.data.fysiskeBehov)}
-                />
-                <Behovgruppe
                     overskrift="Arbeidshverdagen"
                     beskrivelse="Behov for tilpasninger i arbeidshverdagen"
                     behov={arbeidsmiljøTekster(kandidat.data.arbeidsmiljøBehov)}
+                />
+                <Behovgruppe
+                    overskrift="Fysisk tilrettelegging"
+                    beskrivelse="Behov for fysisk tilrettelegging på arbeidsplassen"
+                    behov={fysiskTekster(kandidat.data.fysiskeBehov)}
                 />
                 <Behovgruppe
                     overskrift="Utfordringer med norsk"
@@ -61,7 +64,7 @@ const Visning: FunctionComponent<Props> = ({ fnr }) => {
                     behov={grunnleggendeTekster(kandidat.data.grunnleggendeBehov)}
                 />
             </div>
-            <Hovedknapp onClick={navigerTilRegistreringsside}>registrer</Hovedknapp>
+            <Hovedknapp onClick={navigerTilRegistreringsside}>endre</Hovedknapp>
         </div>
     );
 };
