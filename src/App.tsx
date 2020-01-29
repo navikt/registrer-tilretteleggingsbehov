@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { FunctionComponent, useCallback, useState } from 'react';
 import Registrering from './registrering/Registrering';
 import Visning from './visning/Visning';
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -24,9 +24,7 @@ const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
         setKandidat(respons);
     };
 
-    useEffect(() => {
-        hentKandidatFraApi();
-    }, [fnr]);
+    useCallback(hentKandidatFraApi, [fnr]);
 
     let side;
     if (viewType === Visningstype.RegistrerTilretteleggingsbehov) {
