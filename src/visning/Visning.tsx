@@ -35,7 +35,7 @@ const Visning: FunctionComponent<Props> = ({ fnr }) => {
         return <div></div>;
     }
 
-    const arbeidstidbehov = [kandidat.data.arbeidstidBehov].map(_ =>
+    const arbeidstidbehov = kandidat.data.arbeidstidBehov.map(_ =>
         behovtekster(_, arbeidstidMapping)
     );
     const fysiskeBehov = kandidat.data.fysiskeBehov.map(_ => behovtekster(_, fysiskMapping));
