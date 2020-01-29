@@ -1,8 +1,8 @@
-import React, { FunctionComponent, useCallback, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import Registrering from './registrering/Registrering';
 import Visning from './visning/Visning';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { ikkeLastet, RestKandidat, Status } from './api/RestKandidat';
+import { ikkeLastet, lasterInn, RestKandidat, Status } from './api/RestKandidat';
 import { hentKandidat } from './api/api';
 import Endre from './endre/Endre';
 
@@ -19,12 +19,13 @@ interface Props {
 const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
     const [kandidat, setKandidat] = useState<RestKandidat>(ikkeLastet);
 
-    const hentKandidatFraApi = async () => {
-        const respons = await hentKandidat(fnr);
-        setKandidat(respons);
-    };
-
-    useCallback(hentKandidatFraApi, [fnr]);
+    useEffect(() => {
+        const hent = async () => {
+            setKandidat(lasterInn);
+            setKandidat(await hentKandidat(fnr));
+        };
+        hent();
+    }, [fnr]);
 
     let side;
     if (viewType === Visningstype.RegistrerTilretteleggingsbehov) {
