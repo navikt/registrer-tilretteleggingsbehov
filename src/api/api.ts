@@ -64,7 +64,7 @@ export const endreKandidat = async (kandidat: KandidatDto): Promise<RestKandidat
 
 export const slettKandidat = async (fnr: string): Promise<RestKandidat> => {
     try {
-        const respons = await fetch('finn-kandidat-api/kandidater/' + fnr, {
+        const respons = await fetch('/finn-kandidat-api/kandidater/' + fnr, {
             method: 'DELETE',
             ...medCookies,
         });
