@@ -1,4 +1,11 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
+import Modal from 'nav-frontend-modal';
+import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
+import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
+import { RestKandidat, Status } from '../../api/RestKandidat';
+import { slettKandidat } from '../../api/api';
+import { navigerTilVisningsside } from '../../utils/navigering';
+import './SlettModal.less';
 
 interface Props {
     erÅpen: boolean;
@@ -7,35 +14,39 @@ interface Props {
 }
 
 const SlettModal: FunctionComponent<Props> = ({ erÅpen, fnr, lukk }) => {
-    return null;
-    // const [sletterKandidat, toggleSletterKandidat] = useState<boolean>(false);
-    //
-    // const slettKandidatOgLukk = async () => {};
-    //
-    // return (
-    //     <Modal
-    //         className={cls.block}
-    //         closeButton
-    //         isOpen={erÅpen}
-    //         onRequestClose={lukk}
-    //         contentLabel="Slett kandidat"
-    //     >
-    //         <Element className={cls.element('tekst')}>
-    //             Er du sikker på at du vil slette tilretteleggingsbehovene til denne kandidaten?
-    //         </Element>
-    //         <div className={cls.element('knapper')}>
-    //             <Hovedknapp spinner={sletterKandidat} onClick={slettKandidatOgLukk}>
-    //                 Slett
-    //             </Hovedknapp>
-    //             <Knapp onClick={lukk}>Avbryt</Knapp>
-    //         </div>
-    //         {feilmelding && (
-    //             <AlertStripeFeil className={cls.element('feilmelding')}>
-    //                 {feilmelding}
-    //             </AlertStripeFeil>
-    //         )}
-    //     </Modal>
-    // );
+    const [sletteStatus, setSletteStatus] = useState<Status>(Status.IkkeLastet);
+
+    useEffect(() => {
+        if (sletteStatus === Status.Slettet) {
+            navigerTilVisningsside();
+        }
+    }, [sletteStatus]);
+
+    const slettKandidatOgLukk = async () => {
+        const respons: RestKandidat = await slettKandidat(fnr);
+        setSletteStatus(respons.status);
+    };
+
+    return (
+        <Modal
+            isOpen={erÅpen}
+            onRequestClose={lukk}
+            closeButton={true}
+            contentLabel="Slett tilretteleggingsbehov"
+            className="slett-modal"
+        >
+            <Systemtittel className="blokk-s">Slett tilretteleggingsbehov</Systemtittel>
+            <Normaltekst className="blokk-l">
+                Er du sikker på at du vil slette tilretteleggingsbehovene til denne kandidaten?
+            </Normaltekst>
+            <div>
+                <Hovedknapp className="slett-modal__slettknapp" onClick={slettKandidatOgLukk}>
+                    Slett
+                </Hovedknapp>
+                <Knapp onClick={lukk}>Avbryt</Knapp>
+            </div>
+        </Modal>
+    );
 };
 
 export default SlettModal;

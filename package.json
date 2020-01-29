@@ -23,6 +23,10 @@
         "nav-frontend-knapper-style": "^0.3.34",
         "nav-frontend-lenker": "^1.0.33",
         "nav-frontend-lenker-style": "^0.2.24",
+        "nav-frontend-lukknapp": "^1.0.24",
+        "nav-frontend-lukknapp-style": "^0.2.21",
+        "nav-frontend-modal": "^1.0.32",
+        "nav-frontend-modal-style": "^0.3.31",
         "nav-frontend-paneler-style": "^0.3.17",
         "nav-frontend-skjema": "^2.0.6",
         "nav-frontend-skjema-style": "^2.0.1",
@@ -31,6 +35,7 @@
         "prop-types": "^15.7.2",
         "react": "^16.12.0",
         "react-dom": "^16.12.0",
+        "react-modal": "^3.11.1",
         "react-scripts": "3.3.0",
         "typescript": "^3.7.5"
     },
