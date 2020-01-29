@@ -31,10 +31,10 @@ const Endre: FunctionComponent<Props> = ({ kandidat }) => {
     const [sletteStatus, setSletteStatus] = useState<Status>(Status.IkkeLastet);
 
     useEffect(() => {
-        if (endreStatus === Status.Suksess) {
+        if (endreStatus === Status.Suksess || sletteStatus === Status.Slettet) {
             navigerTilVisningsside();
         }
-    }, [endreStatus]);
+    }, [endreStatus, sletteStatus]);
 
     const slettBehov = async () => {
         const respons: RestKandidat = await slettKandidat(kandidat.fnr);
