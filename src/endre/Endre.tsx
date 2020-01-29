@@ -114,6 +114,7 @@ const Endre: FunctionComponent<Props> = ({ kandidat }) => {
                         onClick={endreBehov}
                         spinner={endreStatus === Status.LasterInn}
                         htmlType="button"
+                        className="endre__lagreknapp"
                     >
                         Lagre endringer
                     </Hovedknapp>
