@@ -6,6 +6,13 @@ import { navigerTilRegistreringsside } from '../utils/navigering';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
 
+import {
+    arbeidstidTekster,
+    fysiskTekster,
+    grunnleggendeTekster,
+    arbeidsmiljøTekster,
+} from '../api/Behovtekster';
+
 import './Visning.less';
 
 interface Props {
@@ -34,19 +41,24 @@ const Visning: FunctionComponent<Props> = ({ fnr }) => {
             </div>
             <div className="visning__behovkategorier">
                 <Behovgruppe
+                    overskrift="Arbeidstid"
+                    beskrivelse="Behov for fysisk tilrettelegging på arbeidsplassen"
+                    behov={arbeidstidTekster(kandidat.data.arbeidstidBehov)}
+                />
+                <Behovgruppe
                     overskrift="Fysisk tilrettelegging"
                     beskrivelse="Behov for fysisk tilrettelegging på arbeidsplassen"
-                    behov={kandidat.data.fysiskeBehov}
+                    behov={fysiskTekster(kandidat.data.fysiskeBehov)}
                 />
                 <Behovgruppe
                     overskrift="Arbeidshverdagen"
                     beskrivelse="Behov for tilpasninger i arbeidshverdagen"
-                    behov={kandidat.data.arbeidsmiljøBehov}
+                    behov={arbeidsmiljøTekster(kandidat.data.arbeidsmiljøBehov)}
                 />
                 <Behovgruppe
                     overskrift="Utfordringer med norsk"
                     beskrivelse="Kandidaten har utfordringer med å:"
-                    behov={kandidat.data.grunnleggendeBehov}
+                    behov={grunnleggendeTekster(kandidat.data.grunnleggendeBehov)}
                 />
             </div>
             <Hovedknapp onClick={navigerTilRegistreringsside}>registrer</Hovedknapp>
