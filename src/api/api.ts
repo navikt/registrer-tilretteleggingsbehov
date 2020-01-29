@@ -1,6 +1,5 @@
 import { RestKandidat, Status, ukjentFeil } from './RestKandidat';
 import { KandidatDto } from './Kandidat';
-import { ArbeidstidBehov } from './Behov';
 
 export const hentKandidat = async (fnr: string): Promise<RestKandidat> => {
     try {
@@ -18,16 +17,7 @@ export const hentKandidat = async (fnr: string): Promise<RestKandidat> => {
 
 export const opprettKandidat = async (kandidat: KandidatDto): Promise<RestKandidat> => {
     try {
-        const respons = await fetch(
-            '/finn-kandidat-api/kandidater',
-            options('POST', {
-                ...kandidat,
-                arbeidstidBehov:
-                    kandidat.arbeidstidBehov.length !== 0
-                        ? kandidat.arbeidstidBehov[0]
-                        : ArbeidstidBehov.Heltid,
-            })
-        );
+        const respons = await fetch('/finn-kandidat-api/kandidater', options('POST', kandidat));
         if (!respons.ok) {
             return { status: Status.Feil, statusKode: respons.status };
         }
@@ -41,16 +31,7 @@ export const opprettKandidat = async (kandidat: KandidatDto): Promise<RestKandid
 
 export const endreKandidat = async (kandidat: KandidatDto): Promise<RestKandidat> => {
     try {
-        const respons = await fetch(
-            '/finn-kandidat-api/kandidater',
-            options('PUT', {
-                ...kandidat,
-                arbeidstidBehov:
-                    kandidat.arbeidstidBehov.length !== 0
-                        ? kandidat.arbeidstidBehov[0]
-                        : ArbeidstidBehov.Heltid,
-            })
-        );
+        const respons = await fetch('/finn-kandidat-api/kandidater', options('PUT', kandidat));
         if (!respons.ok) {
             return { status: Status.Feil, statusKode: respons.status };
         }
