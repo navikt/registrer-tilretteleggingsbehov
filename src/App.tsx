@@ -4,7 +4,7 @@ import Visning from './visning/Visning';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { ikkeLastet, lasterInn, RestKandidat, Status } from './api/RestKandidat';
 import { hentKandidat } from './api/api';
-import Endre from './endre/Endre';
+import Endring from './endring/Endring';
 
 export enum Visningstype {
     VisTilretteleggingsbehov = 'VIS_TILRETTELEGGINGSBEHOV',
@@ -30,7 +30,7 @@ const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
     let side;
     if (viewType === Visningstype.RegistrerTilretteleggingsbehov) {
         if (kandidat.status === Status.Suksess) {
-            side = <Endre kandidat={kandidat.data} />;
+            side = <Endring kandidat={kandidat.data} />;
         }
         if (kandidat.status === Status.Feil && kandidat.statusKode === 404) {
             side = <Registrering fnr={fnr} />;

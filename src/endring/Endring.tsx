@@ -15,14 +15,14 @@ import Alertstripe from 'nav-frontend-alertstriper';
 import KategoriSpørsmål from '../registrering/kategori-spørsmål/KategoriSpørsmål';
 import { Kandidat, KandidatDto } from '../api/Kandidat';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
-import './Endre.less';
+import './Endring.less';
 import { endreKandidat, slettKandidat } from '../api/api';
 
 interface Props {
     kandidat: Kandidat;
 }
 
-const Endre: FunctionComponent<Props> = ({ kandidat }) => {
+const Endring: FunctionComponent<Props> = ({ kandidat }) => {
     const [arbeidstid, setArbeidstid] = useState<Behov[]>(kandidat.arbeidstidBehov);
     const [fysisk, setFysisk] = useState<Behov[]>(kandidat.fysiskeBehov);
     const [arbeidsmiljø, setArbeidsmiljø] = useState<Behov[]>(kandidat.arbeidsmiljøBehov);
@@ -58,20 +58,20 @@ const Endre: FunctionComponent<Props> = ({ kandidat }) => {
     };
 
     return (
-        <div className="endre">
-            <main className="endre__innhold">
+        <div className="endring">
+            <main className="endring__innhold">
                 <Lenke
                     href=""
                     onClick={e => {
                         e.preventDefault();
                         navigerTilVisningsside();
                     }}
-                    className="endre__tilbake"
+                    className="endring__tilbake"
                 >
                     <VenstreChevron />
                     Tilbake til detaljer
                 </Lenke>
-                <div className="endre__tittel-wrapper">
+                <div className="endring__tittel-wrapper">
                     <Sidetittel>Endre tilretteleggingsbehov</Sidetittel>
                     <Knapp onClick={slettBehov} mini={true}>
                         Slett
@@ -81,7 +81,7 @@ const Endre: FunctionComponent<Props> = ({ kandidat }) => {
                     Før du registrerer behovene, må du ha hatt en dialog med brukeren. Brukeren vil
                     kunne se disse opplysningene.
                 </Alertstripe>
-                <form className="endre__form">
+                <form className="endring__form">
                     <KategoriSpørsmål
                         tittel="Arbeidstid"
                         beskrivelse="Behov for tilrettelegging av arbeidstiden"
@@ -114,7 +114,7 @@ const Endre: FunctionComponent<Props> = ({ kandidat }) => {
                         onClick={endreBehov}
                         spinner={endreStatus === Status.LasterInn}
                         htmlType="button"
-                        className="endre__lagreknapp"
+                        className="endring__lagreknapp"
                     >
                         Lagre endringer
                     </Hovedknapp>
@@ -129,4 +129,4 @@ const Endre: FunctionComponent<Props> = ({ kandidat }) => {
     );
 };
 
-export default Endre;
+export default Endring;
