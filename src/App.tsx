@@ -32,13 +32,12 @@ const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
     if (viewType === Visningstype.RegistrerTilretteleggingsbehov) {
         if (kandidat.status === Status.Suksess) {
             side = <Endring kandidat={kandidat.data} />;
-        }
-        if (kandidat.status === Status.Feil && kandidat.statusKode === 404) {
+        } else if (kandidat.status === Status.Feil && kandidat.statusKode === 404) {
             side = <Registrering fnr={fnr} />;
         }
     } else if (viewType === Visningstype.VisTilretteleggingsbehov) {
         if (kandidat.status === Status.Suksess) {
-            side = <Visning fnr={fnr} />;
+            side = <Visning kandidat={kandidat.data} />;
         } else if (kandidat.status === Status.Feil && kandidat.statusKode === 404) {
             side = <Introduksjon />;
         }
