@@ -11,7 +11,7 @@ import {
     arbeidsmiljøMapping,
     fysiskMapping,
     grunnleggendeMapping,
-    behovtekster,
+    hentBehovtekster,
 } from '../api/Behovtekster';
 
 import './Visning.less';
@@ -36,14 +36,14 @@ const Visning: FunctionComponent<Props> = ({ fnr }) => {
     }
 
     const arbeidstidbehov = kandidat.data.arbeidstidBehov.map(_ =>
-        behovtekster(_, arbeidstidMapping)
+        hentBehovtekster(_, arbeidstidMapping)
     );
-    const fysiskeBehov = kandidat.data.fysiskeBehov.map(_ => behovtekster(_, fysiskMapping));
+    const fysiskeBehov = kandidat.data.fysiskeBehov.map(_ => hentBehovtekster(_, fysiskMapping));
     const arbeidsmiljøBehov = kandidat.data.arbeidsmiljøBehov.map(_ =>
-        behovtekster(_, arbeidsmiljøMapping)
+        hentBehovtekster(_, arbeidsmiljøMapping)
     );
     const grunnleggendeBehov = kandidat.data.grunnleggendeBehov.map(_ =>
-        behovtekster(_, grunnleggendeMapping)
+        hentBehovtekster(_, grunnleggendeMapping)
     );
 
     return (

@@ -63,6 +63,6 @@ export const grunnleggendeMapping: Behovmapping = new Map([
     [GrunnleggendeBehov.AndreUtfordringer, { label: 'Andre utfordringer' }],
 ]);
 
-export function behovtekster(behov: Behov, mapping: Behovmapping): Alternativtekster {
+export function hentBehovtekster(behov: Behov, mapping: Behovmapping): Alternativtekster {
     return mapping.get(behov) || { label: '' };
 }
