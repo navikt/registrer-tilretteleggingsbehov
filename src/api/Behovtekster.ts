@@ -7,7 +7,7 @@ export type Alternativtekster = {
 
 export declare type Behovmapping = Map<String, Alternativtekster>;
 
-export const arbeidstidMapping: Behovmapping = new Map([
+const arbeidstidMapping: Behovmapping = new Map([
     [ArbeidstidBehov.KanIkkeJobbe, { label: 'Kan ikke jobbe nå' }],
     [ArbeidstidBehov.Heltid, { label: 'Heltid' }],
     [ArbeidstidBehov.IkkeHeleDager, { label: 'Kan jobbe hver ukedag, men ikke hele dager' }],
@@ -18,7 +18,7 @@ export const arbeidstidMapping: Behovmapping = new Map([
     [ArbeidstidBehov.Fleksibel, { label: 'Må ha fleksible arbeidsdager' }],
 ]);
 
-export const fysiskMapping: Behovmapping = new Map([
+const fysiskMapping: Behovmapping = new Map([
     [FysiskBehov.Arbeidsstilling, { label: 'Varierte arbeidsstillinger' }],
     [
         FysiskBehov.Ergonomi,
@@ -33,7 +33,7 @@ export const fysiskMapping: Behovmapping = new Map([
     [FysiskBehov.AndreFormer, { label: 'Andre former for fysisk tilrettelegging' }],
 ]);
 
-export const arbeidsmiljøMapping: Behovmapping = new Map([
+const arbeidsmiljøMapping: Behovmapping = new Map([
     [
         ArbeidsmijøBehov.TilrettelagtOpplæring,
         {
@@ -55,7 +55,7 @@ export const arbeidsmiljøMapping: Behovmapping = new Map([
     [ArbeidsmijøBehov.Annet, { label: 'Andre former for tilrettelegging' }],
 ]);
 
-export const grunnleggendeMapping: Behovmapping = new Map([
+const grunnleggendeMapping: Behovmapping = new Map([
     [GrunnleggendeBehov.SnakkeNorsk, { label: 'Snakke norsk' }],
     [GrunnleggendeBehov.SkriveNorsk, { label: 'Skrive norsk' }],
     [GrunnleggendeBehov.LeseNorsk, { label: 'Lese norsk' }],
@@ -63,6 +63,24 @@ export const grunnleggendeMapping: Behovmapping = new Map([
     [GrunnleggendeBehov.AndreUtfordringer, { label: 'Andre utfordringer' }],
 ]);
 
-export function hentBehovtekster(behov: Behov, mapping: Behovmapping): Alternativtekster {
+const hentBehovtekster = (behov: Behov, mapping: Behovmapping): Alternativtekster => {
     return mapping.get(behov) || { label: '' };
-}
+};
+
+export const arbeidstidTekster = (arbeidstidBehov: ArbeidstidBehov[]): Alternativtekster[] => {
+    return arbeidstidBehov.map(behov => hentBehovtekster(behov, arbeidstidMapping));
+};
+
+export const fysiskTekster = (fysiskeBehov: FysiskBehov[]): Alternativtekster[] => {
+    return fysiskeBehov.map(behov => hentBehovtekster(behov, fysiskMapping));
+};
+
+export const arbeidsmiljøTekster = (arbeidsmiljøBehov: ArbeidsmijøBehov[]): Alternativtekster[] => {
+    return arbeidsmiljøBehov.map(behov => hentBehovtekster(behov, arbeidsmiljøMapping));
+};
+
+export const grunnleggendeTekster = (
+    grunnleggendeBehov: GrunnleggendeBehov[]
+): Alternativtekster[] => {
+    return grunnleggendeBehov.map(behov => hentBehovtekster(behov, grunnleggendeMapping));
+};
