@@ -66,4 +66,4 @@ const options = (method: string, body: any) => ({
     ...medCookies,
 });
 
-const medCookies: RequestInit = { credentials: 'same-origin' };
+export const medCookies: RequestInit = { credentials: 'same-origin' };

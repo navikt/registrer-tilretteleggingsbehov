@@ -1,9 +1,12 @@
 import Behovgruppe from './Behovgruppe';
 import { formaterDato } from '../utils/datoUtils';
-import React, { FunctionComponent } from 'react';
+import { RestJobbprofil, ikkeLastet } from '../api/RestJobbprofil';
+import { hentJobbprofilstatus } from '../api/JobbprofilApi';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { navigerTilRegistreringsside } from '../utils/navigering';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
+import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
 
 import {
     arbeidstidTekster,
@@ -14,12 +17,23 @@ import {
 
 import './Visning.less';
 import { Kandidat } from '../api/Kandidat';
+import { Status } from '../api/RestJobbprofil';
 
 interface Props {
     kandidat: Kandidat;
 }
 
 const Visning: FunctionComponent<Props> = ({ kandidat }) => {
+    const [jobbprofilstatus, setJobbprofilstatus] = useState<RestJobbprofil>(ikkeLastet);
+
+    useEffect(() => {
+        const hentJobbprofil = async () => {
+            setJobbprofilstatus(ikkeLastet);
+            setJobbprofilstatus(await hentJobbprofilstatus(kandidat.aktørId));
+        };
+        hentJobbprofil();
+    }, [kandidat.aktørId]);
+
     return (
         <div className="visning">
             <div className="sistendret">
@@ -27,6 +41,11 @@ const Visning: FunctionComponent<Props> = ({ kandidat }) => {
                     Sist endret: {formaterDato(new Date(kandidat.sistEndret))}
                 </Normaltekst>
             </div>
+            {jobbprofilstatus.status === Status.IkkeFunnet && (
+                <AlertStripeAdvarsel className="visning__jobbprofiladvarsel">
+                    Brukeren har ikke jobbprofil, og vil derfor ikke være synlig i kandidatsøket.
+                </AlertStripeAdvarsel>
+            )}
             <div className="visning__behovkategorier">
                 <Behovgruppe
                     overskrift="Arbeidstid"
