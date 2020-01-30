@@ -19,8 +19,9 @@ const SlettModal: FunctionComponent<Props> = ({ erÅpen, fnr, lukk }) => {
     useEffect(() => {
         if (sletteStatus === Status.Slettet) {
             navigerTilVisningsside();
+            lukk();
         }
-    }, [sletteStatus]);
+    }, [sletteStatus, lukk]);
 
     const slettKandidatOgLukk = async () => {
         const respons: RestKandidat = await slettKandidat(fnr);
