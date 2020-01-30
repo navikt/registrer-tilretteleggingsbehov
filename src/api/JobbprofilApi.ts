@@ -1,20 +1,23 @@
-import { RestJobbprofil, Status, ukjentFeil } from './RestJobbprofil';
+import { Jobbprofilstatus, Status } from './RestKandidat';
 import { medCookies } from './api';
 
-export const hentJobbprofilstatus = async (aktørid: string): Promise<RestJobbprofil> => {
+export const hentJobbprofilstatus = async (aktørid: string): Promise<Jobbprofilstatus> => {
     try {
         const respons = await fetch(
             '/pam-cv-api/rest/v1/arbeidssoker/' + aktørid + '/',
             medCookies
         );
+
+        if (respons.ok) {
+            return Status.Suksess;
+        }
+
         if (respons.status === 404) {
-            return { status: Status.IkkeFunnet };
+            return Status.IkkeFunnet;
         }
-        if (!respons.ok) {
-            return { status: Status.Feil, statusKode: respons.status };
-        }
-        return { status: Status.Suksess };
+
+        return Status.Feil;
     } catch (error) {
-        return ukjentFeil;
+        return Status.UkjentFeil;
     }
 };
