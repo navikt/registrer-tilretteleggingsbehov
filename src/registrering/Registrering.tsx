@@ -12,7 +12,7 @@ import {
 import { navigerTilVisningsside } from '../utils/navigering';
 import { KandidatDto } from '../api/Kandidat';
 import { opprettKandidat } from '../api/api';
-import { RestKandidat, Status } from '../api/RestKandidat';
+import { RestKandidat, Status, ikkeLastet, lasterInn } from '../api/RestKandidat';
 import Alertstripe from 'nav-frontend-alertstriper';
 import Lenke from 'nav-frontend-lenker';
 import { VenstreChevron } from 'nav-frontend-chevron';
@@ -20,23 +20,26 @@ import './Registrering.less';
 
 interface Props {
     fnr: string;
+    setRegistrertKandidat: (kandidat: RestKandidat) => void;
 }
 
-const Registrering: FunctionComponent<Props> = ({ fnr }) => {
+const Registrering: FunctionComponent<Props> = ({ fnr, setRegistrertKandidat }) => {
     const [arbeidstid, setArbeidstid] = useState<Behov[]>([]);
     const [fysisk, setFysisk] = useState<Behov[]>([]);
     const [arbeidsmiljø, setArbeidsmiljø] = useState<Behov[]>([]);
     const [grunnleggende, setGrunnleggende] = useState<Behov[]>([]);
-    const [status, setStatus] = useState<Status>(Status.IkkeLastet);
+
+    const [respons, setRespons] = useState<RestKandidat>(ikkeLastet);
 
     useEffect(() => {
-        if (status === Status.Suksess) {
+        if (respons.status === Status.Suksess) {
+            setRegistrertKandidat(respons);
             navigerTilVisningsside();
         }
-    }, [status]);
+    }, [respons, setRegistrertKandidat]);
 
     const lagreBehov = async () => {
-        if (status === Status.LasterInn) return;
+        if (respons.status === Status.LasterInn) return;
 
         const kandidat: KandidatDto = {
             fnr,
@@ -46,9 +49,9 @@ const Registrering: FunctionComponent<Props> = ({ fnr }) => {
             grunnleggendeBehov: grunnleggende as GrunnleggendeBehov[],
         };
 
-        setStatus(Status.LasterInn);
-        const respons: RestKandidat = await opprettKandidat(kandidat);
-        setStatus(respons.status);
+        setRespons(lasterInn);
+        const responsFraRegistrering: RestKandidat = await opprettKandidat(kandidat);
+        setRespons(responsFraRegistrering);
     };
 
     return (
@@ -101,13 +104,13 @@ const Registrering: FunctionComponent<Props> = ({ fnr }) => {
                     />
                     <Hovedknapp
                         onClick={lagreBehov}
-                        spinner={status === Status.LasterInn}
+                        spinner={respons.status === Status.LasterInn}
                         htmlType="button"
                     >
                         Lagre behov
                     </Hovedknapp>
-                    {status === Status.Feil ||
-                        (status === Status.UkjentFeil && (
+                    {respons.status === Status.Feil ||
+                        (respons.status === Status.UkjentFeil && (
                             <Feilmelding>Kunne ikke lagre tilretteleggingsbehov</Feilmelding>
                         ))}
                 </form>
