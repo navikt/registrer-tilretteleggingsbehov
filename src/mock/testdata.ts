@@ -12,5 +12,8 @@ export const enKandidat: Kandidat = {
     arbeidstidBehov: [ArbeidstidBehov.IkkeHeleDager, ArbeidstidBehov.Fleksibel],
     fysiskeBehov: [FysiskBehov.Arbeidsstilling],
     arbeidsmiljøBehov: [],
-    grunnleggendeBehov: [GrunnleggendeBehov.SkriveNorsk],
+    grunnleggendeBehov: [
+        GrunnleggendeBehov.SkriveNorsk,
+        GrunnleggendeBehov.RegningOgTallforståelse,
+    ],
 };

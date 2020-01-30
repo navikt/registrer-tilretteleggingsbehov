@@ -30,12 +30,12 @@ const Visning: FunctionComponent<Props> = ({ kandidat }) => {
             <div className="visning__behovkategorier">
                 <Behovgruppe
                     overskrift="Arbeidstid"
-                    beskrivelse="Behov for fysisk tilrettelegging på arbeidsplassen"
+                    beskrivelse="Behov for tilrettelegging av arbeidstiden"
                     behov={arbeidstidTekster(kandidat.arbeidstidBehov)}
                 />
                 <Behovgruppe
-                    overskrift="Arbeidshverdagen"
-                    beskrivelse="Behov for tilpasninger i arbeidshverdagen"
+                    overskrift="Arbeidsmiljø"
+                    beskrivelse="Behov for tilpasninger av arbeidsmiljøet"
                     behov={arbeidsmiljøTekster(kandidat.arbeidsmiljøBehov)}
                 />
                 <Behovgruppe
@@ -44,8 +44,8 @@ const Visning: FunctionComponent<Props> = ({ kandidat }) => {
                     behov={fysiskTekster(kandidat.fysiskeBehov)}
                 />
                 <Behovgruppe
-                    overskrift="Utfordringer med norsk"
-                    beskrivelse="Kandidaten har utfordringer med å:"
+                    overskrift="Grunnleggende ferdigheter"
+                    beskrivelse="Kandidaten har utfordringer med:"
                     behov={grunnleggendeTekster(kandidat.grunnleggendeBehov)}
                 />
             </div>

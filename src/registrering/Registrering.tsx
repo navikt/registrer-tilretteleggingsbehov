@@ -88,7 +88,7 @@ const Registrering: FunctionComponent<Props> = ({ fnr }) => {
                     />
                     <KategoriSpørsmål
                         tittel="Arbeidsmiljø"
-                        beskrivelse="Dersom det er behov for tilrettelegging av arbeidsmiljøet, hvordan bør det tilrettelegges for kandidaten?"
+                        beskrivelse="Behov for tilpasning av arbeidsmiljøet"
                         valgteBehov={arbeidsmiljø}
                         onChange={setArbeidsmiljø}
                         kategori="arbeidsmiljø"
