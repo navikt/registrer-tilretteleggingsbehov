@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useState, useCallback } from 'react';
+import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import Registrering from './registrering/Registrering';
 import Visning from './visning/Visning';
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -7,6 +7,7 @@ import { hentKandidat } from './api/api';
 import Endring from './endring/Endring';
 import Introduksjon from './introduksjon/Introduksjon';
 import { visDetaljerEvent } from './utils/navigering';
+import { AlertStripeFeil } from 'nav-frontend-alertstriper';
 
 export enum Visningstype {
     VisTilretteleggingsbehov = 'VIS_TILRETTELEGGINGSBEHOV',
@@ -54,6 +55,10 @@ const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
             } else if (kandidatErIkkeRegistrert) {
                 return <Introduksjon />;
             }
+        }
+
+        if (kandidat.status === Status.Feil) {
+            return <AlertStripeFeil>Kunne ikke hente tilretteleggingsbehov</AlertStripeFeil>;
         }
     };
 
