@@ -2,6 +2,8 @@ import React, { FunctionComponent, useEffect, useState } from 'react';
 import App, { Visningstype } from '../App';
 import { etFnr } from '../mock/testdata';
 import { visDetaljerEvent, visRegistreringEvent } from '../utils/navigering';
+import { Innholdstittel } from 'nav-frontend-typografi';
+import './Utvikling.less';
 
 const Utvikling: FunctionComponent = () => {
     const [visningstype, setVisningstype] = useState<Visningstype>(
@@ -24,7 +26,18 @@ const Utvikling: FunctionComponent = () => {
         };
     }, []);
 
-    return <App viewType={visningstype} fnr={etFnr} />;
+    const className = `utvikling__${
+        visningstype === Visningstype.VisTilretteleggingsbehov ? 'vis' : 'registrer'
+    }`;
+
+    return (
+        <div className="utvikling">
+            <Innholdstittel>Utviklingsapp for tilretteleggingsbehov</Innholdstittel>
+            <div className={className}>
+                <App viewType={visningstype} fnr={etFnr} />
+            </div>
+        </div>
+    );
 };
 
 export default Utvikling;
