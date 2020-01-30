@@ -2,12 +2,14 @@ import React, { FunctionComponent, useCallback, useEffect, useState } from 'reac
 import Registrering from './registrering/Registrering';
 import Visning from './visning/Visning';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { ikkeLastet, lasterInn, RestKandidat, Status } from './api/RestKandidat';
+import { ikkeLastet, lasterInn, RestKandidat, Status, Jobbprofilstatus } from './api/RestKandidat';
 import { hentKandidat } from './api/api';
 import Endring from './endring/Endring';
 import Introduksjon from './introduksjon/Introduksjon';
 import { visDetaljerEvent } from './utils/navigering';
 import { AlertStripeFeil } from 'nav-frontend-alertstriper';
+import { Kandidat } from './api/Kandidat';
+import { hentJobbprofilstatus } from './api/jobbprofilApi';
 
 export enum Visningstype {
     VisTilretteleggingsbehov = 'VIS_TILRETTELEGGINGSBEHOV',
@@ -21,15 +23,27 @@ interface Props {
 
 const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
     const [kandidat, setKandidat] = useState<RestKandidat>(ikkeLastet);
+    const [jobbprofilstatus, setJobbprofilstatus] = useState<Jobbprofilstatus>(Status.IkkeLastet);
 
     const hentKandidatFraApi = useCallback(async () => {
         setKandidat(lasterInn);
         setKandidat(await hentKandidat(fnr));
     }, [fnr]);
 
+    const hentJobbprofil = async (kandidat: Kandidat) => {
+        setJobbprofilstatus(Status.LasterInn);
+        setJobbprofilstatus(await hentJobbprofilstatus(kandidat.aktørId));
+    };
+
     useEffect(() => {
         hentKandidatFraApi();
     }, [hentKandidatFraApi]);
+
+    useEffect(() => {
+        if (kandidat.status === Status.Suksess) {
+            hentJobbprofil(kandidat.data);
+        }
+    }, [kandidat]);
 
     useEffect(() => {
         window.addEventListener(visDetaljerEvent, hentKandidatFraApi);
@@ -51,7 +65,7 @@ const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
             }
         } else if (viewType === Visningstype.VisTilretteleggingsbehov) {
             if (kandidat.status === Status.Suksess) {
-                return <Visning kandidat={kandidat.data} />;
+                return <Visning kandidat={kandidat.data} jobbprofilstatus={jobbprofilstatus} />;
             } else if (kandidatErIkkeRegistrert) {
                 return <Introduksjon />;
             }

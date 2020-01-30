@@ -1,12 +1,9 @@
 import Behovgruppe from './Behovgruppe';
 import { formaterDato } from '../utils/datoUtils';
-import { RestJobbprofil, ikkeLastet } from '../api/RestJobbprofil';
-import { hentJobbprofilstatus } from '../api/JobbprofilApi';
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { FunctionComponent } from 'react';
 import { navigerTilRegistreringsside } from '../utils/navigering';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
 
 import {
     arbeidstidTekster,
@@ -17,35 +14,23 @@ import {
 
 import './Visning.less';
 import { Kandidat } from '../api/Kandidat';
-import { Status } from '../api/RestJobbprofil';
+import { Jobbprofilstatus } from '../api/RestKandidat';
+import IngenJobbprofil from '../ingen-jobbprofil/IngenJobbprofil';
 
 interface Props {
     kandidat: Kandidat;
+    jobbprofilstatus: Jobbprofilstatus;
 }
 
-const Visning: FunctionComponent<Props> = ({ kandidat }) => {
-    const [jobbprofilstatus, setJobbprofilstatus] = useState<RestJobbprofil>(ikkeLastet);
-
-    useEffect(() => {
-        const hentJobbprofil = async () => {
-            setJobbprofilstatus(ikkeLastet);
-            setJobbprofilstatus(await hentJobbprofilstatus(kandidat.aktørId));
-        };
-        hentJobbprofil();
-    }, [kandidat.aktørId]);
-
+const Visning: FunctionComponent<Props> = ({ kandidat, jobbprofilstatus }) => {
     return (
         <div className="visning">
             <div className="sistendret">
-                <Normaltekst>
+                <Normaltekst className="blokk-s">
                     Sist endret: {formaterDato(new Date(kandidat.sistEndret))}
                 </Normaltekst>
             </div>
-            {jobbprofilstatus.status === Status.IkkeFunnet && (
-                <AlertStripeAdvarsel className="visning__jobbprofiladvarsel">
-                    Brukeren har ikke jobbprofil, og vil derfor ikke være synlig i kandidatsøket.
-                </AlertStripeAdvarsel>
-            )}
+            <IngenJobbprofil status={jobbprofilstatus} />
             <div className="visning__behovkategorier">
                 <Behovgruppe
                     overskrift="Arbeidstid"

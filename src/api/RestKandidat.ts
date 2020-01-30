@@ -1,6 +1,13 @@
 import { Kandidat } from './Kandidat';
 
 export type RestKandidat = IkkeLastet | LasterInn | Suksess | Slettet | Feil | UkjentFeil;
+export type Jobbprofilstatus =
+    | Status.IkkeLastet
+    | Status.Suksess
+    | Status.LasterInn
+    | Status.IkkeFunnet
+    | Status.Feil
+    | Status.UkjentFeil;
 
 export enum Status {
     IkkeLastet,
@@ -8,6 +15,7 @@ export enum Status {
     Suksess,
     Slettet,
     Feil,
+    IkkeFunnet,
     UkjentFeil,
 }
 
