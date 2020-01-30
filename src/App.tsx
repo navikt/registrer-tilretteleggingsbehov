@@ -31,9 +31,9 @@ const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
     let side: ReactNode = '';
     if (viewType === Visningstype.RegistrerTilretteleggingsbehov) {
         if (kandidat.status === Status.Suksess) {
-            side = <Endring kandidat={kandidat.data} />;
+            side = <Endring kandidat={kandidat.data} setEndretKandidat={setKandidat} />;
         } else if (kandidat.status === Status.Feil && kandidat.statusKode === 404) {
-            side = <Registrering fnr={fnr} />;
+            side = <Registrering fnr={fnr} setRegistrertKandidat={setKandidat} />;
         }
     } else if (viewType === Visningstype.VisTilretteleggingsbehov) {
         if (kandidat.status === Status.Suksess) {

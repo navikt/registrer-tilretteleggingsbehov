@@ -6,7 +6,7 @@ import {
     FysiskBehov,
     GrunnleggendeBehov,
 } from '../api/Behov';
-import { RestKandidat, Status } from '../api/RestKandidat';
+import { RestKandidat, Status, ikkeLastet, lasterInn } from '../api/RestKandidat';
 import Lenke from 'nav-frontend-lenker';
 import { navigerTilVisningsside } from '../utils/navigering';
 import { VenstreChevron } from 'nav-frontend-chevron';
@@ -21,24 +21,27 @@ import SlettModal from './slett-modal/SlettModal';
 
 interface Props {
     kandidat: Kandidat;
+    setEndretKandidat: (kandidat: RestKandidat) => void;
 }
 
-const Endring: FunctionComponent<Props> = ({ kandidat }) => {
+const Endring: FunctionComponent<Props> = ({ kandidat, setEndretKandidat }) => {
     const [arbeidstid, setArbeidstid] = useState<Behov[]>(kandidat.arbeidstidBehov);
     const [fysisk, setFysisk] = useState<Behov[]>(kandidat.fysiskeBehov);
     const [arbeidsmiljø, setArbeidsmiljø] = useState<Behov[]>(kandidat.arbeidsmiljøBehov);
     const [grunnleggende, setGrunnleggende] = useState<Behov[]>(kandidat.grunnleggendeBehov);
-    const [endreStatus, setEndreStatus] = useState<Status>(Status.IkkeLastet);
+
+    const [respons, setRespons] = useState<RestKandidat>(ikkeLastet);
     const [visSlettModal, toggleSlettModal] = useState<boolean>(false);
 
     useEffect(() => {
-        if (endreStatus === Status.Suksess) {
+        if (respons.status === Status.Suksess) {
+            setEndretKandidat(respons);
             navigerTilVisningsside();
         }
-    }, [endreStatus]);
+    }, [respons, setEndretKandidat]);
 
     const endreBehov = async () => {
-        if (endreStatus === Status.LasterInn) return;
+        if (respons.status === Status.LasterInn) return;
 
         const endring: KandidatDto = {
             fnr: kandidat.fnr,
@@ -48,9 +51,9 @@ const Endring: FunctionComponent<Props> = ({ kandidat }) => {
             grunnleggendeBehov: grunnleggende as GrunnleggendeBehov[],
         };
 
-        setEndreStatus(Status.LasterInn);
-        const respons: RestKandidat = await endreKandidat(endring);
-        setEndreStatus(respons.status);
+        setRespons(lasterInn);
+        const responsFraEndring: RestKandidat = await endreKandidat(endring);
+        setRespons(responsFraEndring);
     };
 
     return (
@@ -108,15 +111,15 @@ const Endring: FunctionComponent<Props> = ({ kandidat }) => {
                     />
                     <Hovedknapp
                         onClick={endreBehov}
-                        spinner={endreStatus === Status.LasterInn}
+                        spinner={respons.status === Status.LasterInn}
                         htmlType="button"
                         className="endring__lagreknapp"
                     >
                         Lagre endringer
                     </Hovedknapp>
                     <Knapp onClick={navigerTilVisningsside}>Avbryt</Knapp>
-                    {endreStatus === Status.Feil ||
-                        (endreStatus === Status.UkjentFeil && (
+                    {respons.status === Status.Feil ||
+                        (respons.status === Status.UkjentFeil && (
                             <Feilmelding>Kunne ikke endre tilretteleggingsbehov</Feilmelding>
                         ))}
                 </form>
