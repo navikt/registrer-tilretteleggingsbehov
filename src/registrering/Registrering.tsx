@@ -20,10 +20,9 @@ import './Registrering.less';
 
 interface Props {
     fnr: string;
-    setRegistrertKandidat: (kandidat: RestKandidat) => void;
 }
 
-const Registrering: FunctionComponent<Props> = ({ fnr, setRegistrertKandidat }) => {
+const Registrering: FunctionComponent<Props> = ({ fnr }) => {
     const [arbeidstid, setArbeidstid] = useState<Behov[]>([]);
     const [fysisk, setFysisk] = useState<Behov[]>([]);
     const [arbeidsmiljø, setArbeidsmiljø] = useState<Behov[]>([]);
@@ -33,10 +32,9 @@ const Registrering: FunctionComponent<Props> = ({ fnr, setRegistrertKandidat }) 
 
     useEffect(() => {
         if (respons.status === Status.Suksess) {
-            setRegistrertKandidat(respons);
             navigerTilVisningsside();
         }
-    }, [respons, setRegistrertKandidat]);
+    }, [respons]);
 
     const lagreBehov = async () => {
         if (respons.status === Status.LasterInn) return;

@@ -21,11 +21,9 @@ import SlettModal from './slett-modal/SlettModal';
 
 interface Props {
     kandidat: Kandidat;
-    setEndretKandidat: (kandidat: RestKandidat) => void;
-    setSlettetKandidat: (kandidat: RestKandidat) => void;
 }
 
-const Endring: FunctionComponent<Props> = ({ kandidat, setEndretKandidat, setSlettetKandidat }) => {
+const Endring: FunctionComponent<Props> = ({ kandidat }) => {
     const [arbeidstid, setArbeidstid] = useState<Behov[]>(kandidat.arbeidstidBehov);
     const [fysisk, setFysisk] = useState<Behov[]>(kandidat.fysiskeBehov);
     const [arbeidsmiljø, setArbeidsmiljø] = useState<Behov[]>(kandidat.arbeidsmiljøBehov);
@@ -36,10 +34,9 @@ const Endring: FunctionComponent<Props> = ({ kandidat, setEndretKandidat, setSle
 
     useEffect(() => {
         if (respons.status === Status.Suksess) {
-            setEndretKandidat(respons);
             navigerTilVisningsside();
         }
-    }, [respons, setEndretKandidat]);
+    }, [respons]);
 
     const endreBehov = async () => {
         if (respons.status === Status.LasterInn) return;
@@ -129,7 +126,6 @@ const Endring: FunctionComponent<Props> = ({ kandidat, setEndretKandidat, setSle
                 erÅpen={visSlettModal}
                 fnr={kandidat.fnr}
                 lukk={() => toggleSlettModal(false)}
-                setSlettetKandidat={setSlettetKandidat}
             />
         </div>
     );

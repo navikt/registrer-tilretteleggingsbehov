@@ -11,19 +11,17 @@ interface Props {
     erÅpen: boolean;
     fnr: string;
     lukk: () => void;
-    setSlettetKandidat: (kandidat: RestKandidat) => void;
 }
 
-const SlettModal: FunctionComponent<Props> = ({ erÅpen, fnr, lukk, setSlettetKandidat }) => {
+const SlettModal: FunctionComponent<Props> = ({ erÅpen, fnr, lukk }) => {
     const [respons, setRespons] = useState<RestKandidat>(ikkeLastet);
 
     useEffect(() => {
         if (respons.status === Status.Slettet) {
             navigerTilVisningsside();
-            setSlettetKandidat(respons);
             lukk();
         }
-    }, [respons, setSlettetKandidat, lukk]);
+    }, [respons, lukk]);
 
     const slettKandidatOgLukk = async () => {
         const responsFraSletting: RestKandidat = await slettKandidat(fnr);
