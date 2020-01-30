@@ -2,7 +2,7 @@ import React, { FunctionComponent, useEffect, useState } from 'react';
 import Modal from 'nav-frontend-modal';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
-import { RestKandidat, Status } from '../../api/RestKandidat';
+import { RestKandidat, Status, ikkeLastet } from '../../api/RestKandidat';
 import { slettKandidat } from '../../api/api';
 import { navigerTilVisningsside } from '../../utils/navigering';
 import './SlettModal.less';
@@ -11,21 +11,23 @@ interface Props {
     erÅpen: boolean;
     fnr: string;
     lukk: () => void;
+    setSlettetKandidat: (kandidat: RestKandidat) => void;
 }
 
-const SlettModal: FunctionComponent<Props> = ({ erÅpen, fnr, lukk }) => {
-    const [sletteStatus, setSletteStatus] = useState<Status>(Status.IkkeLastet);
+const SlettModal: FunctionComponent<Props> = ({ erÅpen, fnr, lukk, setSlettetKandidat }) => {
+    const [respons, setRespons] = useState<RestKandidat>(ikkeLastet);
 
     useEffect(() => {
-        if (sletteStatus === Status.Slettet) {
+        if (respons.status === Status.Slettet) {
             navigerTilVisningsside();
+            setSlettetKandidat(respons);
             lukk();
         }
-    }, [sletteStatus, lukk]);
+    }, [respons, setSlettetKandidat, lukk]);
 
     const slettKandidatOgLukk = async () => {
-        const respons: RestKandidat = await slettKandidat(fnr);
-        setSletteStatus(respons.status);
+        const responsFraSletting: RestKandidat = await slettKandidat(fnr);
+        setRespons(responsFraSletting);
     };
 
     return (

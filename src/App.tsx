@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useState, ReactNode } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import Registrering from './registrering/Registrering';
 import Visning from './visning/Visning';
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -28,22 +28,33 @@ const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
         hent();
     }, [fnr]);
 
-    let side: ReactNode = '';
-    if (viewType === Visningstype.RegistrerTilretteleggingsbehov) {
-        if (kandidat.status === Status.Suksess) {
-            side = <Endring kandidat={kandidat.data} setEndretKandidat={setKandidat} />;
-        } else if (kandidat.status === Status.Feil && kandidat.statusKode === 404) {
-            side = <Registrering fnr={fnr} setRegistrertKandidat={setKandidat} />;
-        }
-    } else if (viewType === Visningstype.VisTilretteleggingsbehov) {
-        if (kandidat.status === Status.Suksess) {
-            side = <Visning kandidat={kandidat.data} />;
-        } else if (kandidat.status === Status.Feil && kandidat.statusKode === 404) {
-            side = <Introduksjon />;
-        }
-    }
+    const kandidatErIkkeRegistrert =
+        (kandidat.status === Status.Feil && kandidat.statusKode === 404) ||
+        kandidat.status === Status.Slettet;
 
-    return <Normaltekst tag="div">{side}</Normaltekst>;
+    const visKomponent = () => {
+        if (viewType === Visningstype.RegistrerTilretteleggingsbehov) {
+            if (kandidat.status === Status.Suksess) {
+                return (
+                    <Endring
+                        kandidat={kandidat.data}
+                        setEndretKandidat={setKandidat}
+                        setSlettetKandidat={setKandidat}
+                    />
+                );
+            } else if (kandidatErIkkeRegistrert) {
+                return <Registrering fnr={fnr} setRegistrertKandidat={setKandidat} />;
+            }
+        } else if (viewType === Visningstype.VisTilretteleggingsbehov) {
+            if (kandidat.status === Status.Suksess) {
+                return <Visning kandidat={kandidat.data} />;
+            } else if (kandidatErIkkeRegistrert) {
+                return <Introduksjon />;
+            }
+        }
+    };
+
+    return <Normaltekst tag="div">{visKomponent()}</Normaltekst>;
 };
 
 export default App;
