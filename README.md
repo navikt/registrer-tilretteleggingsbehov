@@ -2,4 +2,4 @@
 
 Microfrontend for å vise og endre tilretteleggingsbehov til oppfølgingsbrukere.
 
-Injiseres i [https://github.com/navikt/veilarbmaofs](Veilarbmaofs), en tjeneste for veiledere.
+Injiseres i [Veilarbmaofs](https://github.com/navikt/veilarbmaofs), en tjeneste for veiledere.
