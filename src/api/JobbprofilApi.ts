@@ -8,7 +8,6 @@ export const hentJobbprofilstatus = async (aktørid: string): Promise<RestJobbpr
             medCookies
         );
         if (respons.status === 404) {
-            console.log('kkkk')
             return {status: Status.IkkeFunnet}
         }
         if (!respons.ok) {

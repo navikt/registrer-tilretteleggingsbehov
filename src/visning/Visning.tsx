@@ -1,11 +1,6 @@
 import Behovgruppe from './Behovgruppe';
 import { formaterDato } from '../utils/datoUtils';
-import {
-    ikkeLastet as jobbprofilIkkelastet,
-    lasterInn as jobbprofilLasterInn,
-    ikkeFunnet as jobbprofilIkkeFunnet,
-    RestJobbprofil,
-} from '../api/RestJobbprofil';
+import { RestJobbprofil, ikkeLastet } from '../api/RestJobbprofil';
 import { hentJobbprofilstatus } from '../api/JobbprofilApi';
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { navigerTilRegistreringsside } from '../utils/navigering';
@@ -22,17 +17,18 @@ import {
 
 import './Visning.less';
 import { Kandidat } from '../api/Kandidat';
+import { Status } from '../api/RestJobbprofil';
 
 interface Props {
     kandidat: Kandidat;
 }
 
 const Visning: FunctionComponent<Props> = ({ kandidat }) => {
-    const [jobbprofilstatus, setJobbprofilstatus] = useState<RestJobbprofil>(jobbprofilIkkelastet);
+    const [jobbprofilstatus, setJobbprofilstatus] = useState<RestJobbprofil>(ikkeLastet);
 
     useEffect(() => {
         const hentJobbprofil = async () => {
-            setJobbprofilstatus(jobbprofilLasterInn);
+            setJobbprofilstatus(ikkeLastet);
             setJobbprofilstatus(await hentJobbprofilstatus(kandidat.aktørId));
         };
         hentJobbprofil();
@@ -45,7 +41,7 @@ const Visning: FunctionComponent<Props> = ({ kandidat }) => {
                     Sist endret: {formaterDato(new Date(kandidat.sistEndret))}
                 </Normaltekst>
             </div>
-            {jobbprofilstatus.status === jobbprofilIkkeFunnet.status && (
+            {jobbprofilstatus.status === Status.IkkeFunnet && (
                 <AlertStripeAdvarsel className="visning__jobbprofiladvarsel">
                     Brukeren har ikke jobbprofil, og vil derfor ikke være synlig i kandidatsøket.
                 </AlertStripeAdvarsel>
