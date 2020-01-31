@@ -10,6 +10,7 @@ import { visDetaljerEvent } from './utils/navigering';
 import { AlertStripeFeil } from 'nav-frontend-alertstriper';
 import { Kandidat } from './api/Kandidat';
 import { hentJobbprofilstatus } from './api/jobbprofilApi';
+import './App.less';
 
 export enum Visningstype {
     VisTilretteleggingsbehov = 'VIS_TILRETTELEGGINGSBEHOV',
@@ -76,7 +77,11 @@ const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
         }
     };
 
-    return <Normaltekst tag="div">{visKomponent()}</Normaltekst>;
+    return (
+        <Normaltekst className="registrer-tilretteleggingsbehov-app" tag="div">
+            {visKomponent()}
+        </Normaltekst>
+    );
 };
 
 export default App;
