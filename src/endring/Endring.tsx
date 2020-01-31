@@ -17,6 +17,7 @@ import { endreKandidat } from '../api/api';
 import SlettModal from './slett-modal/SlettModal';
 import Tilbakeknapp from '../tilbakeknapp/Tilbakeknapp';
 import './Endring.less';
+import GiTilbakemelding from '../gi-tilbakemelding/GiTilbakemelding';
 
 interface Props {
     kandidat: Kandidat;
@@ -96,6 +97,7 @@ const Endring: FunctionComponent<Props> = ({ kandidat }) => {
                         onChange={setGrunnleggende}
                         kategori="grunnleggende"
                     />
+                    <GiTilbakemelding />
                     <Hovedknapp
                         onClick={endreBehov}
                         spinner={respons.status === Status.LasterInn}

@@ -16,6 +16,7 @@ import { RestKandidat, Status, ikkeLastet, lasterInn } from '../api/RestKandidat
 import Alertstripe from 'nav-frontend-alertstriper';
 import Tilbakeknapp from '../tilbakeknapp/Tilbakeknapp';
 import './Registrering.less';
+import GiTilbakemelding from '../gi-tilbakemelding/GiTilbakemelding';
 
 interface Props {
     fnr: string;
@@ -89,6 +90,7 @@ const Registrering: FunctionComponent<Props> = ({ fnr }) => {
                         onChange={setGrunnleggende}
                         kategori="grunnleggende"
                     />
+                    <GiTilbakemelding />
                     <Hovedknapp
                         onClick={lagreBehov}
                         spinner={respons.status === Status.LasterInn}
