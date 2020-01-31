@@ -28,7 +28,7 @@ const GiTilbakemelding: FunctionComponent = () => {
         if (tilbakemelding.length === 0) {
             setFeilmelding('Vennligst fyll ut feltet.');
             return false;
-        } else if (tilbakemelding.length < 10) {
+        } else if (tilbakemelding.length < 5) {
             setFeilmelding('Forslaget er for kort.');
             return false;
         }
@@ -71,7 +71,6 @@ const GiTilbakemelding: FunctionComponent = () => {
                         mini
                         className="gi-tilbakemelding__sendknapp"
                         htmlType="button"
-                        disabled={Boolean(feilmelding)}
                         onClick={validerOgSendForslag}
                         spinner={status === Status.LasterInn}
                     >
