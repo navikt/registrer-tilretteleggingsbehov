@@ -59,11 +59,14 @@ export const slettKandidat = async (fnr: string): Promise<RestKandidat> => {
     }
 };
 
-export const sendTilbakemelding = async (tilbakemelding: any): Promise<Tilbakemeldingstatus> => {
+export const sendTilbakemelding = async (tilbakemelding: string): Promise<Tilbakemeldingstatus> => {
     try {
         const respons = await fetch(
             '/finn-kandidat-api/tilbakemeldinger',
-            options('POST', tilbakemelding)
+            options('POST', {
+                tilbakemelding,
+                behov: 'arbeidstid',
+            })
         );
 
         if (respons.ok) {

@@ -1,11 +1,11 @@
-import React, { FunctionComponent, useState, ChangeEvent } from 'react';
-import { AlertStripeSuksess } from 'nav-frontend-alertstriper';
-import { Knapp } from 'nav-frontend-knapper';
-import { Normaltekst } from 'nav-frontend-typografi';
-import { sendTilbakemelding } from '../api/api';
-import { Textarea } from 'nav-frontend-skjema';
-import { Tilbakemeldingstatus, Status } from '../api/RestKandidat';
+import { AlertStripeSuksess, AlertStripeFeil } from 'nav-frontend-alertstriper';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
+import { Knapp } from 'nav-frontend-knapper';
+import { Textarea } from 'nav-frontend-skjema';
+import { Normaltekst } from 'nav-frontend-typografi';
+import React, { ChangeEvent, FunctionComponent, useState } from 'react';
+import { sendTilbakemelding } from '../api/api';
+import { Status, Tilbakemeldingstatus } from '../api/RestKandidat';
 import './GiTilbakemelding.less';
 
 const GiTilbakemelding: FunctionComponent = () => {
@@ -42,14 +42,11 @@ const GiTilbakemelding: FunctionComponent = () => {
 
         if (validerTilbakemelding(tilbakemelding)) {
             setStatus(Status.LasterInn);
-            setStatus(
-                await sendTilbakemelding({
-                    behov: 'arbeidstid',
-                    tilbakemelding,
-                })
-            );
+            setStatus(await sendTilbakemelding(tilbakemelding));
         }
     };
+
+    const visTilbakemeldingsboks = status === Status.IkkeLastet || status === Status.LasterInn;
 
     return (
         <Ekspanderbartpanel
@@ -58,7 +55,7 @@ const GiTilbakemelding: FunctionComponent = () => {
             tittelProps="element"
             className="gi-tilbakemelding blokk-m"
         >
-            {status !== Status.Suksess ? (
+            {visTilbakemeldingsboks && (
                 <>
                     <Normaltekst className="blokk-s">
                         Send oss et forslag. Forslaget blir kun brukt til videreutvikling av
@@ -81,8 +78,14 @@ const GiTilbakemelding: FunctionComponent = () => {
                         Send forslag
                     </Knapp>
                 </>
-            ) : (
+            )}
+
+            {status === Status.Suksess && (
                 <AlertStripeSuksess>Takk for din tilbakemelding!</AlertStripeSuksess>
+            )}
+
+            {status === Status.Feil && (
+                <AlertStripeFeil>Det skjedde en feil, vennligst prøv igjen senere.</AlertStripeFeil>
             )}
         </Ekspanderbartpanel>
     );

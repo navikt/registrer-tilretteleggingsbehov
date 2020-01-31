@@ -8,6 +8,7 @@ export type Jobbprofilstatus =
     | Status.IkkeFunnet
     | Status.Feil
     | Status.UkjentFeil;
+
 export type Tilbakemeldingstatus =
     | Status.IkkeLastet
     | Status.LasterInn
