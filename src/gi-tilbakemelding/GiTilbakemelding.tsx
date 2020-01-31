@@ -28,7 +28,7 @@ const GiTilbakemelding: FunctionComponent = () => {
         if (tilbakemelding.length === 0) {
             setFeilmelding('Vennligst fyll ut feltet.');
             return false;
-        } else if (tilbakemelding.length < 5) {
+        } else if (tilbakemelding.length < 3) {
             setFeilmelding('Forslaget er for kort.');
             return false;
         }
