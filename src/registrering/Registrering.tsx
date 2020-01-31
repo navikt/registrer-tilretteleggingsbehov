@@ -14,8 +14,7 @@ import { KandidatDto } from '../api/Kandidat';
 import { opprettKandidat } from '../api/api';
 import { RestKandidat, Status, ikkeLastet, lasterInn } from '../api/RestKandidat';
 import Alertstripe from 'nav-frontend-alertstriper';
-import Lenke from 'nav-frontend-lenker';
-import { VenstreChevron } from 'nav-frontend-chevron';
+import Tilbakeknapp from '../tilbakeknapp/Tilbakeknapp';
 import './Registrering.less';
 
 interface Props {
@@ -55,17 +54,7 @@ const Registrering: FunctionComponent<Props> = ({ fnr }) => {
     return (
         <div className="registrering">
             <main className="registrering__innhold">
-                <Lenke
-                    href=""
-                    onClick={e => {
-                        e.preventDefault();
-                        navigerTilVisningsside();
-                    }}
-                    className="registrering__tilbake"
-                >
-                    <VenstreChevron />
-                    Tilbake til detaljer
-                </Lenke>
+                <Tilbakeknapp />
                 <Sidetittel className="blokk-m">Registrer tilretteleggingsbehov</Sidetittel>
                 <Alertstripe className="blokk-m" type="info">
                     Før du registrerer behovene, må du ha hatt en dialog med brukeren. Brukeren vil

@@ -7,17 +7,16 @@ import {
     GrunnleggendeBehov,
 } from '../api/Behov';
 import { RestKandidat, Status, ikkeLastet, lasterInn } from '../api/RestKandidat';
-import Lenke from 'nav-frontend-lenker';
 import { navigerTilVisningsside } from '../utils/navigering';
-import { VenstreChevron } from 'nav-frontend-chevron';
 import { Feilmelding, Sidetittel } from 'nav-frontend-typografi';
 import Alertstripe from 'nav-frontend-alertstriper';
 import KategoriSpørsmål from '../registrering/kategori-spørsmål/KategoriSpørsmål';
 import { Kandidat, KandidatDto } from '../api/Kandidat';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
-import './Endring.less';
 import { endreKandidat } from '../api/api';
 import SlettModal from './slett-modal/SlettModal';
+import Tilbakeknapp from '../tilbakeknapp/Tilbakeknapp';
+import './Endring.less';
 
 interface Props {
     kandidat: Kandidat;
@@ -57,17 +56,7 @@ const Endring: FunctionComponent<Props> = ({ kandidat }) => {
     return (
         <div className="endring">
             <main className="endring__innhold">
-                <Lenke
-                    href=""
-                    onClick={e => {
-                        e.preventDefault();
-                        navigerTilVisningsside();
-                    }}
-                    className="endring__tilbake"
-                >
-                    <VenstreChevron />
-                    Tilbake til detaljer
-                </Lenke>
+                <Tilbakeknapp />
                 <div className="endring__tittel-wrapper">
                     <Sidetittel>Endre tilretteleggingsbehov</Sidetittel>
                     <Knapp onClick={() => toggleSlettModal(true)} mini={true}>
