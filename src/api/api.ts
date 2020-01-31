@@ -1,4 +1,4 @@
-import { RestKandidat, Status, ukjentFeil } from './RestKandidat';
+import { RestKandidat, Status, ukjentFeil, Tilbakemeldingstatus } from './RestKandidat';
 import { KandidatDto } from './Kandidat';
 
 export const hentKandidat = async (fnr: string): Promise<RestKandidat> => {
@@ -56,6 +56,23 @@ export const slettKandidat = async (fnr: string): Promise<RestKandidat> => {
         return { status: Status.Slettet };
     } catch (error) {
         return ukjentFeil;
+    }
+};
+
+export const sendTilbakemelding = async (tilbakemelding: any): Promise<Tilbakemeldingstatus> => {
+    try {
+        const respons = await fetch(
+            '/finn-kandidat-api/tilbakemeldinger',
+            options('POST', tilbakemelding)
+        );
+
+        if (respons.ok) {
+            return Status.Suksess;
+        }
+
+        return Status.Feil;
+    } catch (error) {
+        return Status.UkjentFeil;
     }
 };
 

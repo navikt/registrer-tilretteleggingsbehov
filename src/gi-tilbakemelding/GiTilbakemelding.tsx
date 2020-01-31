@@ -1,11 +1,12 @@
 import React, { FunctionComponent, useState, ChangeEvent } from 'react';
+import { AlertStripeSuksess } from 'nav-frontend-alertstriper';
 import { Knapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
+import { sendTilbakemelding } from '../api/api';
 import { Textarea } from 'nav-frontend-skjema';
 import { Tilbakemeldingstatus, Status } from '../api/RestKandidat';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import './GiTilbakemelding.less';
-import { AlertStripeSuksess } from 'nav-frontend-alertstriper';
 
 const GiTilbakemelding: FunctionComponent = () => {
     const [tilbakemelding, setTilbakemelding] = useState<string>('');
@@ -36,12 +37,17 @@ const GiTilbakemelding: FunctionComponent = () => {
         return true;
     };
 
-    const validerOgSendForslag = () => {
+    const validerOgSendForslag = async () => {
         setHarTrykketSend(true);
 
         if (validerTilbakemelding(tilbakemelding)) {
             setStatus(Status.LasterInn);
-            console.warn('Sender inn tilbakemelding:', tilbakemelding);
+            setStatus(
+                await sendTilbakemelding({
+                    behov: 'arbeidstid',
+                    tilbakemelding,
+                })
+            );
         }
     };
 
