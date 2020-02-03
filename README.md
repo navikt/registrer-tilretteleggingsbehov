@@ -6,7 +6,7 @@ Injiseres i [Veilarbmaofs](https://github.com/navikt/veilarbmaofs), en tjeneste 
 
 # Henvendelser
 
-## For NAV-ansatte
+## For Nav-ansatte
 * Dette Git-repositoriet eies av team Inkludering i produktormåde Arbeidsgvier.
 * Slack-kanaler: [#inkludering-utvikling](https://nav-it.slack.com/archives/CQZU35J6A) eller [#arbeidsgiver-general](https://nav-it.slack.com/archives/CCM649PDH)
 
