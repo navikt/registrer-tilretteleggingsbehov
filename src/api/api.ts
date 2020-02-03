@@ -65,7 +65,7 @@ export const sendTilbakemelding = async (tilbakemelding: string): Promise<Tilbak
             '/finn-kandidat-api/tilbakemeldinger',
             options('POST', {
                 tilbakemelding,
-                behov: 'arbeidstid',
+                behov: 'ARBEIDSTID',
             })
         );
 
