@@ -11,17 +11,17 @@ import {
     grunnleggendeTekster,
     arbeidsmiljøTekster,
 } from '../api/Behovtekster';
-import { RestCvOgJobbprofil } from '../api/Rest';
-import IngenCvEllerJobbprofil from '../ingen-cv-eller-jobbprofil/IngenCvEllerJobbprofil';
+import { RestArbeidssøker } from '../api/Rest';
+import Advarsel from '../advarsel/Advarsel';
 import { Kandidat } from '../api/Kandidat';
 import './Visning.less';
 
 interface Props {
     kandidat: Kandidat;
-    cvOgJobbprofil: RestCvOgJobbprofil;
+    arbeidssøker: RestArbeidssøker;
 }
 
-const Visning: FunctionComponent<Props> = ({ kandidat, cvOgJobbprofil }) => {
+const Visning: FunctionComponent<Props> = ({ kandidat, arbeidssøker }) => {
     return (
         <div className="visning">
             <div className="sistendret">
@@ -29,7 +29,7 @@ const Visning: FunctionComponent<Props> = ({ kandidat, cvOgJobbprofil }) => {
                     Sist endret: {formaterDato(new Date(kandidat.sistEndret))}
                 </Normaltekst>
             </div>
-            <IngenCvEllerJobbprofil cvOgJobbprofil={cvOgJobbprofil} />
+            <Advarsel arbeidssøker={arbeidssøker} />
             <div className="visning__behovkategorier">
                 <Behovgruppe
                     overskrift="Arbeidstid"

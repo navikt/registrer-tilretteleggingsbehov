@@ -2,7 +2,7 @@ import fetchMock from 'fetch-mock';
 import { enKandidat, etFnr } from './testdata';
 
 const basePath = '/finn-kandidat-api';
-const jobbprofilpath = '/pam-cv-api';
+const pamBasePath = '/pam-cv-api';
 
 fetchMock
     .get(`${basePath}/kandidater/${etFnr}`, enKandidat)
@@ -15,5 +15,5 @@ fetchMock
         sistEndret: new Date().toISOString(),
     })
     .delete(`${basePath}/kandidater/${etFnr}`, 200)
-    .get(`${jobbprofilpath}/rest/v1/arbeidssoker/${enKandidat.aktørId}/`, 200)
+    .get(`${pamBasePath}/rest/v1/arbeidssoker/${enKandidat.aktørId}/`, 404)
     .post(`${basePath}/tilbakemeldinger`, 201);

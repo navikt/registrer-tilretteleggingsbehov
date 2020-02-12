@@ -1,11 +1,11 @@
-import { RestCvOgJobbprofil, Status } from './Rest';
+import { RestArbeidssøker, Status } from './Rest';
 import { medCookies } from './api';
 
-export interface CvOgJobbprofil {
+export interface Arbeidssøker {
     jobbprofil: any;
 }
 
-export const hentCvOgJobbprofil = async (aktørid: string): Promise<RestCvOgJobbprofil> => {
+export const hentArbeidssøker = async (aktørid: string): Promise<RestArbeidssøker> => {
     try {
         const respons = await fetch(
             '/pam-cv-api/rest/v1/arbeidssoker/' + aktørid + '/',
@@ -19,11 +19,9 @@ export const hentCvOgJobbprofil = async (aktørid: string): Promise<RestCvOgJobb
             };
         }
 
-        const cvOgJobbprofil: CvOgJobbprofil = await respons.json();
-
         return {
             status: Status.Suksess,
-            data: cvOgJobbprofil,
+            data: await respons.json(),
         };
     } catch (error) {
         return {

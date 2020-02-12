@@ -1,13 +1,14 @@
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { AlertStripeFeil } from 'nav-frontend-alertstriper';
-import { hentCvOgJobbprofil } from './api/cvOgJobbprofilApi';
-import { hentKandidat } from './api/api';
-import { ikkeLastet, lasterInn, RestKandidat, Status, RestCvOgJobbprofil } from './api/Rest';
 import { Normaltekst } from 'nav-frontend-typografi';
+
+import { hentArbeidssøker } from './api/arbeidssøkerApi';
+import { hentKandidat } from './api/api';
+import { ikkeLastet, lasterInn, RestKandidat, Status, RestArbeidssøker } from './api/Rest';
+import { Kandidat } from './api/Kandidat';
 import { visDetaljerEvent } from './utils/navigering';
 import Endring from './endring/Endring';
 import Introduksjon from './introduksjon/Introduksjon';
-import { Kandidat } from './api/Kandidat';
 import Registrering from './registrering/Registrering';
 import Visning from './visning/Visning';
 import './App.less';
@@ -24,16 +25,16 @@ interface Props {
 
 const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
     const [kandidat, setKandidat] = useState<RestKandidat>(ikkeLastet);
-    const [cvOgJobbprofil, setCvOgJobbprofil] = useState<RestCvOgJobbprofil>(ikkeLastet);
+    const [arbeidssøker, setArbeidssøker] = useState<RestArbeidssøker>(ikkeLastet);
 
     const hentKandidatFraApi = useCallback(async () => {
         setKandidat(lasterInn);
         setKandidat(await hentKandidat(fnr));
     }, [fnr]);
 
-    const hentJobbprofil = async (kandidat: Kandidat) => {
-        setCvOgJobbprofil(lasterInn);
-        setCvOgJobbprofil(await hentCvOgJobbprofil(kandidat.aktørId));
+    const hentOgSettArbeidssøker = async (kandidat: Kandidat) => {
+        setArbeidssøker(lasterInn);
+        setArbeidssøker(await hentArbeidssøker(kandidat.aktørId));
     };
 
     useEffect(() => {
@@ -42,7 +43,7 @@ const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
 
     useEffect(() => {
         if (kandidat.status === Status.Suksess) {
-            hentJobbprofil(kandidat.data);
+            hentOgSettArbeidssøker(kandidat.data);
         }
     }, [kandidat]);
 
@@ -66,7 +67,7 @@ const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
             }
         } else if (viewType === Visningstype.VisTilretteleggingsbehov) {
             if (kandidat.status === Status.Suksess) {
-                return <Visning kandidat={kandidat.data} cvOgJobbprofil={cvOgJobbprofil} />;
+                return <Visning kandidat={kandidat.data} arbeidssøker={arbeidssøker} />;
             } else if (kandidatErIkkeRegistrert) {
                 return <Introduksjon />;
             }

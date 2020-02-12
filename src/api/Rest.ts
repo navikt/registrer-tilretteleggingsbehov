@@ -1,13 +1,8 @@
 import { Kandidat } from './Kandidat';
-import { CvOgJobbprofil } from './cvOgJobbprofilApi';
+import { Arbeidssøker } from './arbeidssøkerApi';
 
 export type RestKandidat = IkkeLastet | LasterInn | Suksess<Kandidat> | Slettet | Feil | UkjentFeil;
-export type RestCvOgJobbprofil =
-    | IkkeLastet
-    | LasterInn
-    | Suksess<CvOgJobbprofil>
-    | Feil
-    | UkjentFeil;
+export type RestArbeidssøker = IkkeLastet | LasterInn | Suksess<Arbeidssøker> | Feil | UkjentFeil;
 
 export type Tilbakemeldingstatus =
     | Status.IkkeLastet
