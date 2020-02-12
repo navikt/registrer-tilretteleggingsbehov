@@ -5,7 +5,7 @@ import { Textarea } from 'nav-frontend-skjema';
 import { Normaltekst } from 'nav-frontend-typografi';
 import React, { ChangeEvent, FunctionComponent, useState } from 'react';
 import { sendTilbakemelding } from '../api/api';
-import { Status, Tilbakemeldingstatus } from '../api/RestKandidat';
+import { Status, Tilbakemeldingstatus } from '../api/Rest';
 import './GiTilbakemelding.less';
 
 const GiTilbakemelding: FunctionComponent = () => {

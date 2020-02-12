@@ -1,15 +1,15 @@
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
-import Registrering from './registrering/Registrering';
-import Visning from './visning/Visning';
-import { Normaltekst } from 'nav-frontend-typografi';
-import { ikkeLastet, lasterInn, RestKandidat, Status, Jobbprofilstatus } from './api/RestKandidat';
+import { AlertStripeFeil } from 'nav-frontend-alertstriper';
+import { hentCvOgJobbprofil } from './api/cvOgJobbprofilApi';
 import { hentKandidat } from './api/api';
+import { ikkeLastet, lasterInn, RestKandidat, Status, RestCvOgJobbprofil } from './api/Rest';
+import { Normaltekst } from 'nav-frontend-typografi';
+import { visDetaljerEvent } from './utils/navigering';
 import Endring from './endring/Endring';
 import Introduksjon from './introduksjon/Introduksjon';
-import { visDetaljerEvent } from './utils/navigering';
-import { AlertStripeFeil } from 'nav-frontend-alertstriper';
 import { Kandidat } from './api/Kandidat';
-import { hentJobbprofilstatus } from './api/jobbprofilApi';
+import Registrering from './registrering/Registrering';
+import Visning from './visning/Visning';
 import './App.less';
 
 export enum Visningstype {
@@ -24,7 +24,7 @@ interface Props {
 
 const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
     const [kandidat, setKandidat] = useState<RestKandidat>(ikkeLastet);
-    const [jobbprofilstatus, setJobbprofilstatus] = useState<Jobbprofilstatus>(Status.IkkeLastet);
+    const [cvOgJobbprofil, setCvOgJobbprofil] = useState<RestCvOgJobbprofil>(ikkeLastet);
 
     const hentKandidatFraApi = useCallback(async () => {
         setKandidat(lasterInn);
@@ -32,8 +32,8 @@ const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
     }, [fnr]);
 
     const hentJobbprofil = async (kandidat: Kandidat) => {
-        setJobbprofilstatus(Status.LasterInn);
-        setJobbprofilstatus(await hentJobbprofilstatus(kandidat.aktørId));
+        setCvOgJobbprofil(lasterInn);
+        setCvOgJobbprofil(await hentCvOgJobbprofil(kandidat.aktørId));
     };
 
     useEffect(() => {
@@ -66,7 +66,7 @@ const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
             }
         } else if (viewType === Visningstype.VisTilretteleggingsbehov) {
             if (kandidat.status === Status.Suksess) {
-                return <Visning kandidat={kandidat.data} jobbprofilstatus={jobbprofilstatus} />;
+                return <Visning kandidat={kandidat.data} cvOgJobbprofil={cvOgJobbprofil} />;
             } else if (kandidatErIkkeRegistrert) {
                 return <Introduksjon />;
             }
