@@ -15,5 +15,5 @@ fetchMock
         sistEndret: new Date().toISOString(),
     })
     .delete(`${basePath}/kandidater/${etFnr}`, 200)
-    .get(`${pamBasePath}/rest/v1/arbeidssoker/${enKandidat.aktørId}/`, 404)
+    .get(`${pamBasePath}/rest/v1/arbeidssoker/${enKandidat.aktørId}/`, 403)
     .post(`${basePath}/tilbakemeldinger`, 201);

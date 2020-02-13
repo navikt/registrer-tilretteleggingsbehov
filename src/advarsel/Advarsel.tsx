@@ -8,6 +8,7 @@ enum Variant {
     IngenAdvarsel,
     IngenJobbprofil = 'Brukeren har ikke jobbprofil, og vil derfor ikke være synlig i kandidatsøket.',
     VerkenCvEllerJobbprofil = 'Brukeren har verken CV eller jobbprofil, og vil derfor ikke være synlig i kandidatsøket.',
+    VeilederHarIkkeTilgang = 'Brukeren er ikke tilgjengelig i kandidatsøket.',
 }
 
 interface Props {
@@ -19,6 +20,10 @@ const Advarsel: FunctionComponent<Props> = ({ arbeidssøker }) => {
 
     if (arbeidssøker.status === Status.Suksess && !arbeidssøker.data.jobbprofil) {
         advarsel = Variant.IngenJobbprofil;
+    }
+
+    if (arbeidssøker.status === Status.Feil && arbeidssøker.statusKode === 403) {
+        advarsel = Variant.VeilederHarIkkeTilgang;
     }
 
     const notFoundNoContent = (status: number) => status === 404 || status === 204;
