@@ -12,7 +12,7 @@ import {
 import { navigerTilVisningsside } from '../utils/navigering';
 import { KandidatDto } from '../api/Kandidat';
 import { opprettKandidat } from '../api/api';
-import { RestKandidat, Status, ikkeLastet, lasterInn } from '../api/RestKandidat';
+import { RestKandidat, Status, ikkeLastet, lasterInn } from '../api/Rest';
 import Alertstripe from 'nav-frontend-alertstriper';
 import Tilbakeknapp from '../tilbakeknapp/Tilbakeknapp';
 import './Registrering.less';

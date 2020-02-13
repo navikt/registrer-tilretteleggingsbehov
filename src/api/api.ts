@@ -1,4 +1,4 @@
-import { RestKandidat, Status, ukjentFeil, Tilbakemeldingstatus } from './RestKandidat';
+import { RestKandidat, Status, ukjentFeil, Tilbakemeldingstatus } from './Rest';
 import { KandidatDto } from './Kandidat';
 
 export const hentKandidat = async (fnr: string): Promise<RestKandidat> => {

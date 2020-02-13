@@ -1,15 +1,16 @@
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
-import Registrering from './registrering/Registrering';
-import Visning from './visning/Visning';
+import { AlertStripeFeil } from 'nav-frontend-alertstriper';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { ikkeLastet, lasterInn, RestKandidat, Status, Jobbprofilstatus } from './api/RestKandidat';
+
+import { hentArbeidssøker } from './api/arbeidssøkerApi';
 import { hentKandidat } from './api/api';
+import { ikkeLastet, lasterInn, RestKandidat, Status, RestArbeidssøker } from './api/Rest';
+import { Kandidat } from './api/Kandidat';
+import { visDetaljerEvent } from './utils/navigering';
 import Endring from './endring/Endring';
 import Introduksjon from './introduksjon/Introduksjon';
-import { visDetaljerEvent } from './utils/navigering';
-import { AlertStripeFeil } from 'nav-frontend-alertstriper';
-import { Kandidat } from './api/Kandidat';
-import { hentJobbprofilstatus } from './api/jobbprofilApi';
+import Registrering from './registrering/Registrering';
+import Visning from './visning/Visning';
 import './App.less';
 
 export enum Visningstype {
@@ -24,16 +25,16 @@ interface Props {
 
 const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
     const [kandidat, setKandidat] = useState<RestKandidat>(ikkeLastet);
-    const [jobbprofilstatus, setJobbprofilstatus] = useState<Jobbprofilstatus>(Status.IkkeLastet);
+    const [arbeidssøker, setArbeidssøker] = useState<RestArbeidssøker>(ikkeLastet);
 
     const hentKandidatFraApi = useCallback(async () => {
         setKandidat(lasterInn);
         setKandidat(await hentKandidat(fnr));
     }, [fnr]);
 
-    const hentJobbprofil = async (kandidat: Kandidat) => {
-        setJobbprofilstatus(Status.LasterInn);
-        setJobbprofilstatus(await hentJobbprofilstatus(kandidat.aktørId));
+    const hentOgSettArbeidssøker = async (kandidat: Kandidat) => {
+        setArbeidssøker(lasterInn);
+        setArbeidssøker(await hentArbeidssøker(kandidat.aktørId));
     };
 
     useEffect(() => {
@@ -42,7 +43,7 @@ const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
 
     useEffect(() => {
         if (kandidat.status === Status.Suksess) {
-            hentJobbprofil(kandidat.data);
+            hentOgSettArbeidssøker(kandidat.data);
         }
     }, [kandidat]);
 
@@ -66,7 +67,7 @@ const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
             }
         } else if (viewType === Visningstype.VisTilretteleggingsbehov) {
             if (kandidat.status === Status.Suksess) {
-                return <Visning kandidat={kandidat.data} jobbprofilstatus={jobbprofilstatus} />;
+                return <Visning kandidat={kandidat.data} arbeidssøker={arbeidssøker} />;
             } else if (kandidatErIkkeRegistrert) {
                 return <Introduksjon />;
             }
