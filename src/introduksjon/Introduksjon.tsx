@@ -8,11 +8,11 @@ const Introduksjon: FunctionComponent = () => (
     <>
         <Normaltekst className="introduksjon__tekst">
             Har brukeren behov som gjør at tilrettelegging er nødvendig for å kunne være i jobb?
-            Mulighetene på arbeidsmarkedet kan bli styrket når du registrerer tilretteleggingsbehov,
-            fordi behovene kobles sammen med arbeidsgivere som kan tilrettelegge.
+            Mulighetene på arbeidsmarkedet kan bli styrket når du registrerer behov for
+            tilrettelegging, fordi behovene kobles sammen med arbeidsgivere som kan tilrettelegge.
         </Normaltekst>
         <Normaltekst className="introduksjon__tekst">
-            Du kan søke fram brukere med tilretteleggingsbehov i Rekrutteringsbistand.
+            Du kan søke fram brukere med behov for tilrettelegging i Rekrutteringsbistand.
         </Normaltekst>
         <Hovedknapp mini onClick={navigerTilRegistreringsside}>
             Registrer

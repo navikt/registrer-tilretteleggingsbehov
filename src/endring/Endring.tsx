@@ -59,7 +59,7 @@ const Endring: FunctionComponent<Props> = ({ kandidat }) => {
             <main className="endring__innhold">
                 <Tilbakeknapp />
                 <div className="endring__tittel-wrapper">
-                    <Sidetittel>Endre tilretteleggingsbehov</Sidetittel>
+                    <Sidetittel>Endre behov for tilrettelegging</Sidetittel>
                     <Knapp onClick={() => toggleSlettModal(true)} mini={true}>
                         Slett
                     </Knapp>
@@ -109,7 +109,7 @@ const Endring: FunctionComponent<Props> = ({ kandidat }) => {
                     <Knapp onClick={navigerTilVisningsside}>Avbryt</Knapp>
                     {respons.status === Status.Feil ||
                         (respons.status === Status.UkjentFeil && (
-                            <Feilmelding>Kunne ikke endre tilretteleggingsbehov</Feilmelding>
+                            <Feilmelding>Kunne ikke endre behov for tilrettelegging</Feilmelding>
                         ))}
                 </form>
             </main>

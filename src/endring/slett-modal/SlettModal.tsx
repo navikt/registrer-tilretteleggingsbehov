@@ -33,10 +33,10 @@ const SlettModal: FunctionComponent<Props> = ({ erÅpen, fnr, lukk }) => {
             isOpen={erÅpen}
             onRequestClose={lukk}
             closeButton={true}
-            contentLabel="Slett tilretteleggingsbehov"
+            contentLabel="Slett behov for tilrettelegging"
             className="slett-modal"
         >
-            <Systemtittel className="blokk-s">Slett tilretteleggingsbehov</Systemtittel>
+            <Systemtittel className="blokk-s">Slett behov for tilrettelegging</Systemtittel>
             <Normaltekst className="blokk-l">
                 Er du sikker på at du vil slette tilretteleggingsbehovene til denne kandidaten?
             </Normaltekst>

@@ -56,7 +56,7 @@ const Registrering: FunctionComponent<Props> = ({ fnr }) => {
         <div className="registrering">
             <main className="registrering__innhold">
                 <Tilbakeknapp />
-                <Sidetittel className="blokk-m">Registrer tilretteleggingsbehov</Sidetittel>
+                <Sidetittel className="blokk-m">Registrer behov for tilrettelegging</Sidetittel>
                 <Alertstripe className="blokk-m" type="info">
                     Før du registrerer behovene, må du ha hatt en dialog med brukeren. Brukeren vil
                     kunne se disse opplysningene.
