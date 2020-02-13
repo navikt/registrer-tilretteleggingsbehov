@@ -1,13 +1,8 @@
 import { Kandidat } from './Kandidat';
+import { Arbeidssøker } from './arbeidssøkerApi';
 
-export type RestKandidat = IkkeLastet | LasterInn | Suksess | Slettet | Feil | UkjentFeil;
-export type Jobbprofilstatus =
-    | Status.IkkeLastet
-    | Status.Suksess
-    | Status.LasterInn
-    | Status.IkkeFunnet
-    | Status.Feil
-    | Status.UkjentFeil;
+export type RestKandidat = IkkeLastet | LasterInn | Suksess<Kandidat> | Slettet | Feil | UkjentFeil;
+export type RestArbeidssøker = IkkeLastet | LasterInn | Suksess<Arbeidssøker> | Feil | UkjentFeil;
 
 export type Tilbakemeldingstatus =
     | Status.IkkeLastet
@@ -34,14 +29,15 @@ interface LasterInn {
     status: Status.LasterInn;
 }
 
-interface Suksess {
+interface Suksess<T> {
     status: Status.Suksess;
-    data: Kandidat;
+    data: T;
 }
 
 interface Slettet {
     status: Status.Slettet;
 }
+
 interface Feil {
     status: Status.Feil;
     statusKode: number;

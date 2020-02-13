@@ -6,7 +6,7 @@ import {
     FysiskBehov,
     GrunnleggendeBehov,
 } from '../api/Behov';
-import { RestKandidat, Status, ikkeLastet, lasterInn } from '../api/RestKandidat';
+import { RestKandidat, Status, ikkeLastet, lasterInn } from '../api/Rest';
 import { navigerTilVisningsside } from '../utils/navigering';
 import { Feilmelding, Sidetittel } from 'nav-frontend-typografi';
 import Alertstripe from 'nav-frontend-alertstriper';

@@ -2,7 +2,7 @@ import React, { FunctionComponent, useEffect, useState } from 'react';
 import Modal from 'nav-frontend-modal';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
-import { RestKandidat, Status, ikkeLastet } from '../../api/RestKandidat';
+import { RestKandidat, Status, ikkeLastet } from '../../api/Rest';
 import { slettKandidat } from '../../api/api';
 import { navigerTilVisningsside } from '../../utils/navigering';
 import './SlettModal.less';
