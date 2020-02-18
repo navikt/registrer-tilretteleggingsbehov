@@ -1,9 +1,9 @@
 import {
-    ArbeidsmijøBehov,
-    ArbeidstidBehov,
     Behov,
-    FysiskBehov,
-    GrunnleggendeBehov,
+    Arbeidstid,
+    FysiskTilrettelegging,
+    Arbeidshverdagen,
+    UtfordringerMedNorsk,
 } from '../api/Behov';
 import { Kategori } from './kategori-spørsmål/KategoriSpørsmål';
 
@@ -15,91 +15,83 @@ export type Alternativ = {
 
 export const hentAlternativer = (kategori: Kategori): Alternativ[] => {
     switch (kategori) {
-        case 'arbeidstid':
+        case Kategori.Arbeidstid:
             return arbeidstid;
 
-        case 'fysisk':
-            return fysisk;
+        case Kategori.FysiskTilrettelegging:
+            return fysiskTilrettelegging;
 
-        case 'arbeidsmiljø':
-            return arbeidsmiljø;
+        case Kategori.Arbeidshverdagen:
+            return arbeidshverdagen;
 
-        case 'grunnleggende':
-            return grunnleggende;
+        case Kategori.UtfordringerMedNorsk:
+            return utfordringerMedNorsk;
 
         default:
             return [];
     }
 };
 
-const arbeidstid = [
-    { behov: ArbeidstidBehov.KanIkkeJobbe, label: 'Kan ikke jobbe nå' },
-    { behov: ArbeidstidBehov.Heltid, label: 'Heltid' },
+const arbeidstid: Alternativ[] = [
     {
-        behov: ArbeidstidBehov.IkkeHeleDager,
+        behov: Arbeidstid.IkkeHeleDager,
         label: 'Kan jobbe hver ukedag, men ikke hele dager',
     },
     {
-        behov: ArbeidstidBehov.BorteFasteDagerEllerTider,
+        behov: Arbeidstid.BorteFasteDagerEllerTider,
         label: 'Må være borte fra jobben til faste dager eller tider',
     },
-    { behov: ArbeidstidBehov.Fleksibel, label: 'Må ha fleksible arbeidsdager' },
+    { behov: Arbeidstid.Fleksibel, label: 'Må ha fleksible arbeidsdager' },
+    { behov: Arbeidstid.GradvisØkning, label: 'Ønsker gradvis økning av stillingsprosenten' },
 ];
 
-const fysisk = [
+const fysiskTilrettelegging: Alternativ[] = [
     {
-        behov: FysiskBehov.Arbeidsstilling,
+        behov: FysiskTilrettelegging.Arbeidsstilling,
         label: 'Varierte arbeidsstillinger',
     },
     {
-        behov: FysiskBehov.Ergonomi,
+        behov: FysiskTilrettelegging.Ergonomi,
         label: 'Ergonomiske tilpasninger',
-        hjelpetekst: 'For eksempel hev/senk-pult eller tilpassede lys- eller lydforhold',
+        hjelpetekst: 'For eksempel hev-senk-pult eller spesialstol',
     },
-    { behov: FysiskBehov.TungeLøft, label: 'Unngå tunge løft' },
-    { behov: FysiskBehov.Hørsel, label: 'Hørsel' },
-    { behov: FysiskBehov.Syn, label: 'Syn' },
+    { behov: FysiskTilrettelegging.TungeLøft, label: 'Unngå tunge løft' },
     {
-        behov: FysiskBehov.AndreFormer,
-        label: 'Andre former for fysisk tilrettelegging',
+        behov: FysiskTilrettelegging.UniversellUtforming,
+        label: 'Universell utforming av arbeidsplassen',
     },
 ];
 
-const arbeidsmiljø = [
+const arbeidshverdagen: Alternativ[] = [
     {
-        behov: ArbeidsmijøBehov.TilrettelagtOpplæring,
-        label: 'Tilrettelagt opplæring',
+        behov: Arbeidshverdagen.Opplæring,
+        label: 'Opplæring',
         hjelpetekst: 'For eksempel hyppige tilbakemeldinger eller lengre opplæringsperiode',
     },
     {
-        behov: ArbeidsmijøBehov.TilrettelagteArbeidsoppgaver,
-        label: 'Tilrettelagte arbeidsoppgaver',
+        behov: Arbeidshverdagen.Arbeidsoppgaver,
+        label: 'Arbeidsoppgaver',
         hjelpetekst: 'For eksempel tydelige oppgaver eller unntak fra noen typer oppgaver',
     },
     {
-        behov: ArbeidsmijøBehov.Mentor,
-        label: 'Mentor',
+        behov: Arbeidshverdagen.TettOppfølging,
+        label: 'Tett oppfølging',
         hjelpetekst: 'En egen person med ansvar for tett oppfølging',
     },
-    { behov: ArbeidsmijøBehov.Annet, label: 'Andre former for tilrettelegging' },
+    { behov: Arbeidshverdagen.StilleOgRoligMiljø, label: 'Stille og rolig miljø' },
 ];
 
-const grunnleggende = [
+const utfordringerMedNorsk: Alternativ[] = [
     {
-        behov: GrunnleggendeBehov.SnakkeNorsk,
-        label: 'Snakke norsk',
+        behov: UtfordringerMedNorsk.Snakke,
+        label: 'Snakke',
     },
     {
-        behov: GrunnleggendeBehov.SkriveNorsk,
-        label: 'Skrive norsk',
+        behov: UtfordringerMedNorsk.Skrive,
+        label: 'Skrive',
     },
     {
-        behov: GrunnleggendeBehov.LeseNorsk,
-        label: 'Lese norsk',
+        behov: UtfordringerMedNorsk.Lese,
+        label: 'Lese',
     },
-    {
-        behov: GrunnleggendeBehov.RegningOgTallforståelse,
-        label: 'Regning og tallforståelse',
-    },
-    { behov: GrunnleggendeBehov.AndreUtfordringer, label: 'Andre utfordringer' },
 ];

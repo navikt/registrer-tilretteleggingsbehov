@@ -5,7 +5,12 @@ import { Alternativ, hentAlternativer } from '../alternativ';
 import { Behov } from '../../api/Behov';
 import './KategoriSpørsmål.less';
 
-export type Kategori = 'arbeidstid' | 'fysisk' | 'arbeidsmiljø' | 'grunnleggende';
+export enum Kategori {
+    Arbeidstid = 'arbeidstid',
+    FysiskTilrettelegging = 'fysiskTilrettelegging',
+    Arbeidshverdagen = 'arbeidshverdagen',
+    UtfordringerMedNorsk = 'utfordringerMedNorsk',
+}
 
 interface Props {
     tittel: string;
