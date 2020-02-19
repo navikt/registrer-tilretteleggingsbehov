@@ -49,7 +49,7 @@ const fysiskTilrettelegging: Alternativ[] = [
     {
         behov: FysiskTilrettelegging.Ergonomi,
         label: 'Ergonomiske tilpasninger',
-        hjelpetekst: 'For eksempel hev-senk pult eller spesialstol',
+        hjelpetekst: 'For eksempel heve-/senkepult eller spesialstol',
     },
     {
         behov: FysiskTilrettelegging.UniversellUtforming,

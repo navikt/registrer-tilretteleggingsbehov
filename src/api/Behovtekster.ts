@@ -28,7 +28,7 @@ const fysiskTilretteleggingMapping: Behovmapping = new Map([
         FysiskTilrettelegging.Ergonomi,
         {
             label: 'Ergonomiske tilpasninger',
-            hjelpetekster: 'For eksempel hev-senk pult eller spesialstol',
+            hjelpetekster: 'For eksempel heve-/senkepult eller spesialstol',
         },
     ],
     [
