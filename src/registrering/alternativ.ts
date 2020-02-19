@@ -41,25 +41,26 @@ const arbeidstid: Alternativ[] = [
         behov: Arbeidstid.BorteFasteDagerEllerTider,
         label: 'Må være borte fra jobben til faste dager eller tider',
     },
-    { behov: Arbeidstid.Fleksibel, label: 'Må ha fleksible arbeidsdager' },
     { behov: Arbeidstid.GradvisØkning, label: 'Ønsker gradvis økning av stillingsprosenten' },
+    { behov: Arbeidstid.Fleksibel, label: 'Må ha fleksible arbeidsdager' },
 ];
 
 const fysiskTilrettelegging: Alternativ[] = [
     {
-        behov: FysiskTilrettelegging.Arbeidsstilling,
-        label: 'Varierte arbeidsstillinger',
-    },
-    {
         behov: FysiskTilrettelegging.Ergonomi,
         label: 'Ergonomiske tilpasninger',
-        hjelpetekst: 'For eksempel hev-senk-pult eller spesialstol',
+        hjelpetekst: 'For eksempel hev-senk pult eller spesialstol',
     },
-    { behov: FysiskTilrettelegging.TungeLøft, label: 'Unngå tunge løft' },
     {
         behov: FysiskTilrettelegging.UniversellUtforming,
         label: 'Universell utforming av arbeidsplassen',
+        hjelpetekst: 'For eksempel rullestolrampe eller trappeheis',
     },
+    {
+        behov: FysiskTilrettelegging.Arbeidsstilling,
+        label: 'Varierte arbeidsstillinger',
+    },
+    { behov: FysiskTilrettelegging.TungeLøft, label: 'Unngå tunge løft' },
 ];
 
 const arbeidshverdagen: Alternativ[] = [
@@ -76,7 +77,7 @@ const arbeidshverdagen: Alternativ[] = [
     {
         behov: Arbeidshverdagen.TettOppfølging,
         label: 'Tett oppfølging',
-        hjelpetekst: 'En egen person med ansvar for tett oppfølging',
+        hjelpetekst: 'For eksempel ekstra støtte fra en kollega eller mentor',
     },
     { behov: Arbeidshverdagen.StilleOgRoligMiljø, label: 'Stille og rolig miljø' },
 ];

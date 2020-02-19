@@ -19,24 +19,27 @@ const arbeidstidMapping: Behovmapping = new Map([
         Arbeidstid.BorteFasteDagerEllerTider,
         { label: 'Må være borte fra jobben til faste dager eller tider' },
     ],
-    [Arbeidstid.Fleksibel, { label: 'Må ha fleksible arbeidsdager' }],
     [Arbeidstid.GradvisØkning, { label: 'Ønsker gradvis økning av stillingsprosenten' }],
+    [Arbeidstid.Fleksibel, { label: 'Må ha fleksible arbeidsdager' }],
 ]);
 
 const fysiskTilretteleggingMapping: Behovmapping = new Map([
-    [FysiskTilrettelegging.Arbeidsstilling, { label: 'Varierte arbeidsstillinger' }],
     [
         FysiskTilrettelegging.Ergonomi,
         {
             label: 'Ergonomiske tilpasninger',
-            hjelpetekster: 'For eksempel hev-senk-pult eller spesialstol',
+            hjelpetekster: 'For eksempel hev-senk pult eller spesialstol',
         },
     ],
-    [FysiskTilrettelegging.TungeLøft, { label: 'Unngå tunge løft' }],
     [
         FysiskTilrettelegging.UniversellUtforming,
-        { label: 'Universell utforming av arbeidsplassen' },
+        {
+            label: 'Universell utforming av arbeidsplassen',
+            hjelpetekster: 'For eksempel rullestolrampe eller trappeheis',
+        },
     ],
+    [FysiskTilrettelegging.Arbeidsstilling, { label: 'Varierte arbeidsstillinger' }],
+    [FysiskTilrettelegging.TungeLøft, { label: 'Unngå tunge løft' }],
 ]);
 
 const arbeidshverdagenMapping: Behovmapping = new Map([
@@ -56,7 +59,10 @@ const arbeidshverdagenMapping: Behovmapping = new Map([
     ],
     [
         Arbeidshverdagen.TettOppfølging,
-        { label: 'Tett oppfølging', hjelpetekst: 'En egen person med ansvar for tett oppfølging' },
+        {
+            label: 'Tett oppfølging',
+            hjelpetekst: 'For eksempel ekstra støtte fra en kollega eller mentor',
+        },
     ],
     [Arbeidshverdagen.StilleOgRoligMiljø, { label: 'Stille og rolig miljø' }],
 ]);
