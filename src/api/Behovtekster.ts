@@ -17,7 +17,7 @@ const arbeidstidMapping: Behovmapping = new Map([
     [Arbeidstid.Fleksibel, { label: 'Må ha fleksible arbeidsdager' }],
 ]);
 
-const fysiskTilretteleggingMapping: Behovmapping = new Map([
+const fysiskMapping: Behovmapping = new Map([
     [
         Fysisk.Ergonomi,
         {
@@ -76,7 +76,7 @@ export const arbeidstidTekster = (arbeidstid: Arbeidstid[]): Alternativtekster[]
 };
 
 export const fysiskTekster = (fysisk: Fysisk[]): Alternativtekster[] => {
-    return fysisk.map(behov => hentBehovtekster(behov, fysiskTilretteleggingMapping));
+    return fysisk.map(behov => hentBehovtekster(behov, fysiskMapping));
 };
 
 export const arbeidshverdagenTekster = (
