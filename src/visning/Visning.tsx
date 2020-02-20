@@ -8,8 +8,8 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import {
     arbeidstidTekster,
     fysiskTekster,
-    grunnleggendeTekster,
-    arbeidsmiljøTekster,
+    utfordringerMedNorskTekster,
+    arbeidshverdagenTekster,
 } from '../api/Behovtekster';
 import { RestArbeidssøker } from '../api/Rest';
 import Advarsel from '../advarsel/Advarsel';
@@ -37,9 +37,9 @@ const Visning: FunctionComponent<Props> = ({ kandidat, arbeidssøker }) => {
                     behov={arbeidstidTekster(kandidat.arbeidstidBehov)}
                 />
                 <Behovgruppe
-                    overskrift="Arbeidsmiljø"
-                    beskrivelse="Behov for tilpasninger av arbeidsmiljøet"
-                    behov={arbeidsmiljøTekster(kandidat.arbeidsmiljøBehov)}
+                    overskrift="Arbeidshverdagen"
+                    beskrivelse="Behov for tilpasninger i arbeidshverdagen"
+                    behov={arbeidshverdagenTekster(kandidat.arbeidsmiljøBehov)}
                 />
                 <Behovgruppe
                     overskrift="Fysisk tilrettelegging"
@@ -47,9 +47,9 @@ const Visning: FunctionComponent<Props> = ({ kandidat, arbeidssøker }) => {
                     behov={fysiskTekster(kandidat.fysiskeBehov)}
                 />
                 <Behovgruppe
-                    overskrift="Grunnleggende ferdigheter"
-                    beskrivelse="Kandidaten har utfordringer med:"
-                    behov={grunnleggendeTekster(kandidat.grunnleggendeBehov)}
+                    overskrift="Utfordringer med norsk"
+                    beskrivelse="Kandidaten har utfordringer med å:"
+                    behov={utfordringerMedNorskTekster(kandidat.grunnleggendeBehov)}
                 />
             </div>
             <Hovedknapp mini onClick={navigerTilRegistreringsside}>

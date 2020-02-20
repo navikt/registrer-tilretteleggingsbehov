@@ -1,22 +1,22 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { Feilmelding, Ingress, Sidetittel } from 'nav-frontend-typografi';
-import KategoriSpørsmål from './kategori-spørsmål/KategoriSpørsmål';
 import {
-    ArbeidsmijøBehov,
-    ArbeidstidBehov,
+    Arbeidshverdagen,
+    Arbeidstid,
     Behov,
-    FysiskBehov,
-    GrunnleggendeBehov,
+    FysiskTilrettelegging,
+    UtfordringerMedNorsk,
 } from '../api/Behov';
 import { navigerTilVisningsside } from '../utils/navigering';
 import { KandidatDto } from '../api/Kandidat';
 import { opprettKandidat } from '../api/api';
-import { RestKandidat, Status, ikkeLastet, lasterInn } from '../api/Rest';
+import { ikkeLastet, lasterInn, RestKandidat, Status } from '../api/Rest';
 import Alertstripe from 'nav-frontend-alertstriper';
 import Tilbakeknapp from '../tilbakeknapp/Tilbakeknapp';
 import './Registrering.less';
 import GiTilbakemelding from '../gi-tilbakemelding/GiTilbakemelding';
+import { Feilmelding, Ingress, Sidetittel } from 'nav-frontend-typografi';
+import KategoriSpørsmål, { Kategori } from './kategori-spørsmål/KategoriSpørsmål';
 
 interface Props {
     fnr: string;
@@ -25,8 +25,8 @@ interface Props {
 const Registrering: FunctionComponent<Props> = ({ fnr }) => {
     const [arbeidstid, setArbeidstid] = useState<Behov[]>([]);
     const [fysisk, setFysisk] = useState<Behov[]>([]);
-    const [arbeidsmiljø, setArbeidsmiljø] = useState<Behov[]>([]);
-    const [grunnleggende, setGrunnleggende] = useState<Behov[]>([]);
+    const [arbeidshverdagen, setArbeidshverdagen] = useState<Behov[]>([]);
+    const [utfordringerMedNorsk, setUtfordringerMedNorsk] = useState<Behov[]>([]);
 
     const [respons, setRespons] = useState<RestKandidat>(ikkeLastet);
 
@@ -41,10 +41,10 @@ const Registrering: FunctionComponent<Props> = ({ fnr }) => {
 
         const kandidat: KandidatDto = {
             fnr,
-            arbeidstidBehov: arbeidstid as ArbeidstidBehov[],
-            fysiskeBehov: fysisk as FysiskBehov[],
-            arbeidsmiljøBehov: arbeidsmiljø as ArbeidsmijøBehov[],
-            grunnleggendeBehov: grunnleggende as GrunnleggendeBehov[],
+            arbeidstidBehov: arbeidstid as Arbeidstid[],
+            fysiskeBehov: fysisk as FysiskTilrettelegging[],
+            arbeidsmiljøBehov: arbeidshverdagen as Arbeidshverdagen[],
+            grunnleggendeBehov: utfordringerMedNorsk as UtfordringerMedNorsk[],
         };
 
         setRespons(lasterInn);
@@ -57,7 +57,7 @@ const Registrering: FunctionComponent<Props> = ({ fnr }) => {
             <main className="registrering__innhold">
                 <Tilbakeknapp />
                 <Sidetittel className="blokk-xxs">Registrer behov for tilrettelegging</Sidetittel>
-                <Ingress className="blokk-m">
+                <Ingress className="registrering__ingress">
                     Registrer bare brukere som har behov for tilrettelegging for å kunne jobbe. Du
                     skal ikke registrere brukere som har problemer med å få seg jobb av andre
                     årsaker (etnisitet, religion, hull i CV-en m.m.).
@@ -72,28 +72,28 @@ const Registrering: FunctionComponent<Props> = ({ fnr }) => {
                         beskrivelse="Behov for tilrettelegging av arbeidstiden"
                         valgteBehov={arbeidstid}
                         onChange={setArbeidstid}
-                        kategori="arbeidstid"
+                        kategori={Kategori.Arbeidstid}
                     />
                     <KategoriSpørsmål
                         tittel="Fysisk tilrettelegging"
                         beskrivelse="Behov for fysisk tilrettelegging på arbeidsplassen"
                         valgteBehov={fysisk}
                         onChange={setFysisk}
-                        kategori="fysisk"
+                        kategori={Kategori.FysiskTilrettelegging}
                     />
                     <KategoriSpørsmål
-                        tittel="Arbeidsmiljø"
-                        beskrivelse="Behov for tilpasning av arbeidsmiljøet"
-                        valgteBehov={arbeidsmiljø}
-                        onChange={setArbeidsmiljø}
-                        kategori="arbeidsmiljø"
+                        tittel="Arbeidshverdagen"
+                        beskrivelse="Behov for tilpasninger i arbeidshverdagen"
+                        valgteBehov={arbeidshverdagen}
+                        onChange={setArbeidshverdagen}
+                        kategori={Kategori.Arbeidshverdagen}
                     />
                     <KategoriSpørsmål
-                        tittel="Grunnleggende ferdigheter"
-                        beskrivelse="Har kandidaten utfordringer med noe av dette?"
-                        valgteBehov={grunnleggende}
-                        onChange={setGrunnleggende}
-                        kategori="grunnleggende"
+                        tittel="Utfordringer med norsk"
+                        beskrivelse="Kandidaten har utfordringer med å:"
+                        valgteBehov={utfordringerMedNorsk}
+                        onChange={setUtfordringerMedNorsk}
+                        kategori={Kategori.UtfordringerMedNorsk}
                     />
                     <GiTilbakemelding />
                     <Hovedknapp
