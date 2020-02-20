@@ -1,12 +1,6 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import {
-    Arbeidshverdagen,
-    Arbeidstid,
-    Behov,
-    FysiskTilrettelegging,
-    UtfordringerMedNorsk,
-} from '../api/Behov';
+import { Arbeidshverdagen, Arbeidstid, Behov, Fysisk, UtfordringerMedNorsk } from '../api/Behov';
 import { navigerTilVisningsside } from '../utils/navigering';
 import { KandidatDto } from '../api/Kandidat';
 import { opprettKandidat } from '../api/api';
@@ -41,10 +35,10 @@ const Registrering: FunctionComponent<Props> = ({ fnr }) => {
 
         const kandidat: KandidatDto = {
             fnr,
-            arbeidstidBehov: arbeidstid as Arbeidstid[],
-            fysiskeBehov: fysisk as FysiskTilrettelegging[],
-            arbeidsmiljøBehov: arbeidshverdagen as Arbeidshverdagen[],
-            grunnleggendeBehov: utfordringerMedNorsk as UtfordringerMedNorsk[],
+            arbeidstid: arbeidstid as Arbeidstid[],
+            fysisk: fysisk as Fysisk[],
+            arbeidshverdagen: arbeidshverdagen as Arbeidshverdagen[],
+            utfordringerMedNorsk: utfordringerMedNorsk as UtfordringerMedNorsk[],
         };
 
         setRespons(lasterInn);
@@ -79,7 +73,7 @@ const Registrering: FunctionComponent<Props> = ({ fnr }) => {
                         beskrivelse="Behov for fysisk tilrettelegging på arbeidsplassen"
                         valgteBehov={fysisk}
                         onChange={setFysisk}
-                        kategori={Kategori.FysiskTilrettelegging}
+                        kategori={Kategori.Fysisk}
                     />
                     <KategoriSpørsmål
                         tittel="Arbeidshverdagen"

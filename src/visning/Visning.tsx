@@ -26,7 +26,7 @@ const Visning: FunctionComponent<Props> = ({ kandidat, arbeidssøker }) => {
         <div className="visning">
             <div className="sistendret">
                 <Normaltekst className="blokk-s">
-                    Sist endret: {formaterDato(new Date(kandidat.sistEndret))}
+                    Sist endret: {formaterDato(new Date(kandidat.sistEndretAvVeileder))}
                 </Normaltekst>
             </div>
             <Advarsel arbeidssøker={arbeidssøker} />
@@ -34,22 +34,22 @@ const Visning: FunctionComponent<Props> = ({ kandidat, arbeidssøker }) => {
                 <Behovgruppe
                     overskrift="Arbeidstid"
                     beskrivelse="Behov for tilrettelegging av arbeidstiden"
-                    behov={arbeidstidTekster(kandidat.arbeidstidBehov)}
+                    behov={arbeidstidTekster(kandidat.arbeidstid)}
                 />
                 <Behovgruppe
                     overskrift="Arbeidshverdagen"
                     beskrivelse="Behov for tilpasninger i arbeidshverdagen"
-                    behov={arbeidshverdagenTekster(kandidat.arbeidsmiljøBehov)}
+                    behov={arbeidshverdagenTekster(kandidat.arbeidshverdagen)}
                 />
                 <Behovgruppe
                     overskrift="Fysisk tilrettelegging"
                     beskrivelse="Behov for fysisk tilrettelegging på arbeidsplassen"
-                    behov={fysiskTekster(kandidat.fysiskeBehov)}
+                    behov={fysiskTekster(kandidat.fysisk)}
                 />
                 <Behovgruppe
                     overskrift="Utfordringer med norsk"
                     beskrivelse="Kandidaten har utfordringer med å:"
-                    behov={utfordringerMedNorskTekster(kandidat.grunnleggendeBehov)}
+                    behov={utfordringerMedNorskTekster(kandidat.utfordringerMedNorsk)}
                 />
             </div>
             <Hovedknapp mini onClick={navigerTilRegistreringsside}>

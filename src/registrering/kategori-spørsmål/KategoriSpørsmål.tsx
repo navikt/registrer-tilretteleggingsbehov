@@ -7,7 +7,7 @@ import './KategoriSpørsmål.less';
 
 export enum Kategori {
     Arbeidstid = 'arbeidstid',
-    FysiskTilrettelegging = 'fysiskTilrettelegging',
+    Fysisk = 'fysisk',
     Arbeidshverdagen = 'arbeidshverdagen',
     UtfordringerMedNorsk = 'utfordringerMedNorsk',
 }

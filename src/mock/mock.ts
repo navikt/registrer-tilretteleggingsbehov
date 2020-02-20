@@ -12,7 +12,7 @@ fetchMock
     })
     .put(`${basePath}/kandidater`, {
         ...enKandidat,
-        sistEndret: new Date().toISOString(),
+        sistEndretAvVeileder: new Date().toISOString(),
     })
     .delete(`${basePath}/kandidater/${etFnr}`, 200)
     .get(`${pamBasePath}/rest/v1/arbeidssoker/${enKandidat.aktørId}/`, 403)
