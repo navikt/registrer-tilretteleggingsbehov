@@ -66,7 +66,7 @@ const Endring: FunctionComponent<Props> = ({ kandidat }) => {
                     </Knapp>
                 </div>
                 <Sidetittel className="blokk-xxs">Endre behov for tilrettelegging</Sidetittel>
-                <Ingress className="blokk-l">
+                <Ingress className="endring__ingress">
                     Registrer bare brukere som har behov for tilrettelegging for å kunne jobbe. Du
                     skal ikke registrere brukere som har problemer med å få seg jobb av andre
                     årsaker (etnisitet, religion, hull i CV-en m.m.).

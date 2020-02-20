@@ -8,30 +8,22 @@ interface Props {
     behov: Alternativtekster[];
 }
 
-const behovliste = (behov: Alternativtekster[]) => {
-    return behov.map(_ => (
-        <li key={_.label}>
-            <Normaltekst>{_.label}</Normaltekst>
-        </li>
-    ));
-};
-
 const Behovgruppe: FunctionComponent<Props> = ({ overskrift, beskrivelse, behov }) => {
     return (
         <section className="visning__behovgruppe">
             <Element>{overskrift}</Element>
             <Normaltekst>{beskrivelse}</Normaltekst>
-            <ul className="visning__behovliste">
-                {behov.length ? (
-                    behovliste(behov)
-                ) : (
-                    <li>
-                        <Normaltekst className="visning__ingenbehov">
-                            Ingen registrerte behov
-                        </Normaltekst>
-                    </li>
-                )}
-            </ul>
+            {behov.length ? (
+                <ul className="visning__behovliste">
+                    {behov.map(behov => (
+                        <li key={behov.label}>
+                            <Normaltekst>{behov.label}</Normaltekst>
+                        </li>
+                    ))}
+                </ul>
+            ) : (
+                <Normaltekst className="visning__ingenbehov">Ingen registrerte behov</Normaltekst>
+            )}
         </section>
     );
 };
