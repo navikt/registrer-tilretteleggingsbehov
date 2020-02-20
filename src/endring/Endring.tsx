@@ -8,7 +8,7 @@ import {
 } from '../api/Behov';
 import { RestKandidat, Status, ikkeLastet, lasterInn } from '../api/Rest';
 import { navigerTilVisningsside } from '../utils/navigering';
-import { Feilmelding, Sidetittel } from 'nav-frontend-typografi';
+import { Feilmelding, Ingress, Sidetittel } from 'nav-frontend-typografi';
 import Alertstripe from 'nav-frontend-alertstriper';
 import KategoriSpørsmål from '../registrering/kategori-spørsmål/KategoriSpørsmål';
 import { Kandidat, KandidatDto } from '../api/Kandidat';
@@ -58,15 +58,20 @@ const Endring: FunctionComponent<Props> = ({ kandidat }) => {
         <div className="endring">
             <main className="endring__innhold">
                 <Tilbakeknapp />
-                <div className="endring__tittel-wrapper">
-                    <Sidetittel>Endre behov for tilrettelegging</Sidetittel>
+                <Sidetittel className="blokk-xxs">Endre behov for tilrettelegging</Sidetittel>
+                <Ingress className="blokk-l">
+                    Registrer bare brukere som har behov for tilrettelegging for å kunne jobbe. Du
+                    skal ikke registrere brukere som har problemer med å få seg jobb av andre
+                    årsaker (etnisitet, religion, hull i CV-en m.m.).
+                </Ingress>
+                <div className="endring__slettknapp">
                     <Knapp onClick={() => toggleSlettModal(true)} mini={true}>
                         Slett
                     </Knapp>
                 </div>
-                <Alertstripe className="blokk-m" type="info">
+                <Alertstripe className="blokk-s" type="info">
                     Før du registrerer behovene, må du ha hatt en dialog med brukeren. Brukeren vil
-                    kunne se disse opplysningene.
+                    kunne se det du registrerer under Personopplysninger på Ditt NAV.
                 </Alertstripe>
                 <form className="endring__form">
                     <KategoriSpørsmål
