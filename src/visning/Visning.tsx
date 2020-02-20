@@ -26,7 +26,7 @@ const Visning: FunctionComponent<Props> = ({ kandidat, arbeidssøker }) => {
         <div className="visning">
             <div className="sistendret">
                 <Normaltekst className="blokk-s">
-                    Sist endret: {formaterDato(new Date(kandidat.sistEndret))}
+                    Sist endret: {formaterDato(new Date(kandidat.sistEndretAvVeileder))}
                 </Normaltekst>
             </div>
             <Advarsel arbeidssøker={arbeidssøker} />

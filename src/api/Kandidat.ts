@@ -3,7 +3,7 @@ import { Arbeidshverdagen, Arbeidstid, UtfordringerMedNorsk, Fysisk } from './Be
 export interface Kandidat {
     aktørId: string;
     fnr: string;
-    sistEndret: string;
+    sistEndretAvVeileder: string;
     sistEndretAv: string;
     navKontor: string;
     arbeidstid: Arbeidstid[];
