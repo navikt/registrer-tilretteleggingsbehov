@@ -1,11 +1,5 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
-import {
-    Arbeidshverdagen,
-    Arbeidstid,
-    Behov,
-    FysiskTilrettelegging,
-    UtfordringerMedNorsk,
-} from '../api/Behov';
+import { Arbeidshverdagen, Arbeidstid, Behov, UtfordringerMedNorsk, Fysisk } from '../api/Behov';
 import { ikkeLastet, lasterInn, RestKandidat, Status } from '../api/Rest';
 import { navigerTilVisningsside } from '../utils/navigering';
 import { Feilmelding, Ingress, Sidetittel } from 'nav-frontend-typografi';
@@ -24,11 +18,11 @@ interface Props {
 }
 
 const Endring: FunctionComponent<Props> = ({ kandidat }) => {
-    const [arbeidstid, setArbeidstid] = useState<Behov[]>(kandidat.arbeidstidBehov);
-    const [fysisk, setFysisk] = useState<Behov[]>(kandidat.fysiskeBehov);
-    const [arbeidshverdagen, setArbeidhverdagen] = useState<Behov[]>(kandidat.arbeidsmiljøBehov);
+    const [arbeidstid, setArbeidstid] = useState<Behov[]>(kandidat.arbeidstid);
+    const [fysisk, setFysisk] = useState<Behov[]>(kandidat.fysisk);
+    const [arbeidshverdagen, setArbeidhverdagen] = useState<Behov[]>(kandidat.arbeidshverdagen);
     const [utfordringerMedNorsk, setUtfordringerMedNorsk] = useState<Behov[]>(
-        kandidat.grunnleggendeBehov
+        kandidat.utfordringerMedNorsk
     );
 
     const [respons, setRespons] = useState<RestKandidat>(ikkeLastet);
@@ -45,10 +39,10 @@ const Endring: FunctionComponent<Props> = ({ kandidat }) => {
 
         const endring: KandidatDto = {
             fnr: kandidat.fnr,
-            arbeidstidBehov: arbeidstid as Arbeidstid[],
-            fysiskeBehov: fysisk as FysiskTilrettelegging[],
-            arbeidsmiljøBehov: arbeidshverdagen as Arbeidshverdagen[],
-            grunnleggendeBehov: utfordringerMedNorsk as UtfordringerMedNorsk[],
+            arbeidstid: arbeidstid as Arbeidstid[],
+            fysisk: fysisk as Fysisk[],
+            arbeidshverdagen: arbeidshverdagen as Arbeidshverdagen[],
+            utfordringerMedNorsk: utfordringerMedNorsk as UtfordringerMedNorsk[],
         };
 
         setRespons(lasterInn);
@@ -88,7 +82,7 @@ const Endring: FunctionComponent<Props> = ({ kandidat }) => {
                         beskrivelse="Behov for fysisk tilrettelegging på arbeidsplassen"
                         valgteBehov={fysisk}
                         onChange={setFysisk}
-                        kategori={Kategori.FysiskTilrettelegging}
+                        kategori={Kategori.Fysisk}
                     />
                     <KategoriSpørsmål
                         tittel="Arbeidshverdagen"

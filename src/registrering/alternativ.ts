@@ -1,10 +1,5 @@
-import {
-    Behov,
-    Arbeidstid,
-    FysiskTilrettelegging,
-    Arbeidshverdagen,
-    UtfordringerMedNorsk,
-} from '../api/Behov';
+import { Fysisk } from './../api/Behov';
+import { Behov, Arbeidstid, Arbeidshverdagen, UtfordringerMedNorsk } from '../api/Behov';
 import { Kategori } from './kategori-spørsmål/KategoriSpørsmål';
 
 export type Alternativ = {
@@ -18,8 +13,8 @@ export const hentAlternativer = (kategori: Kategori): Alternativ[] => {
         case Kategori.Arbeidstid:
             return arbeidstid;
 
-        case Kategori.FysiskTilrettelegging:
-            return fysiskTilrettelegging;
+        case Kategori.Fysisk:
+            return fysisk;
 
         case Kategori.Arbeidshverdagen:
             return arbeidshverdagen;
@@ -45,22 +40,22 @@ const arbeidstid: Alternativ[] = [
     { behov: Arbeidstid.Fleksibel, label: 'Må ha fleksible arbeidsdager' },
 ];
 
-const fysiskTilrettelegging: Alternativ[] = [
+const fysisk: Alternativ[] = [
     {
-        behov: FysiskTilrettelegging.Ergonomi,
+        behov: Fysisk.Ergonomi,
         label: 'Ergonomiske tilpasninger',
         hjelpetekst: 'For eksempel heve-/senkepult eller spesialstol',
     },
     {
-        behov: FysiskTilrettelegging.UniversellUtforming,
+        behov: Fysisk.UniversellUtforming,
         label: 'Universell utforming av arbeidsplassen',
         hjelpetekst: 'For eksempel rullestolrampe eller trappeheis',
     },
     {
-        behov: FysiskTilrettelegging.Arbeidsstilling,
+        behov: Fysisk.Arbeidsstilling,
         label: 'Varierte arbeidsstillinger',
     },
-    { behov: FysiskTilrettelegging.TungeLøft, label: 'Unngå tunge løft' },
+    { behov: Fysisk.TungeLøft, label: 'Unngå tunge løft' },
 ];
 
 const arbeidshverdagen: Alternativ[] = [
