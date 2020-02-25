@@ -49,7 +49,7 @@ const fysisk: Alternativ[] = [
     {
         behov: Fysisk.UniversellUtforming,
         label: 'Universell utforming av arbeidsplassen',
-        hjelpetekst: 'For eksempel rullestolrampe eller trappeheis',
+        hjelpetekst: 'For eksempel rullestolrampe, tale i heis eller teleslynge',
     },
     {
         behov: Fysisk.Arbeidsstilling,
