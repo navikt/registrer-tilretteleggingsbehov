@@ -29,7 +29,7 @@ const fysiskMapping: Behovmapping = new Map([
         Fysisk.UniversellUtforming,
         {
             label: 'Universell utforming av arbeidsplassen',
-            hjelpetekster: 'For eksempel rullestolrampe eller trappeheis',
+            hjelpetekster: 'For eksempel rullestolrampe, tale i heis eller teleslynge',
         },
     ],
     [Fysisk.Arbeidsstilling, { label: 'Varierte arbeidsstillinger' }],
