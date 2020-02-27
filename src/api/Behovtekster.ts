@@ -19,17 +19,17 @@ const arbeidstidMapping: Behovmapping = new Map([
 
 const fysiskMapping: Behovmapping = new Map([
     [
-        Fysisk.Ergonomi,
-        {
-            label: 'Ergonomiske tilpasninger',
-            hjelpetekster: 'For eksempel heve-/senkepult eller spesialstol',
-        },
-    ],
-    [
         Fysisk.UniversellUtforming,
         {
             label: 'Universell utforming av arbeidsplassen',
             hjelpetekster: 'For eksempel rullestolrampe, tale i heis eller teleslynge',
+        },
+    ],
+    [
+        Fysisk.Ergonomi,
+        {
+            label: 'Ergonomiske tilpasninger',
+            hjelpetekster: 'For eksempel heve-/senkepult eller spesialstol',
         },
     ],
     [Fysisk.Arbeidsstilling, { label: 'Varierte arbeidsstillinger' }],

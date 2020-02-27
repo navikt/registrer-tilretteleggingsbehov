@@ -42,14 +42,14 @@ const arbeidstid: Alternativ[] = [
 
 const fysisk: Alternativ[] = [
     {
-        behov: Fysisk.Ergonomi,
-        label: 'Ergonomiske tilpasninger',
-        hjelpetekst: 'For eksempel heve-/senkepult eller spesialstol',
-    },
-    {
         behov: Fysisk.UniversellUtforming,
         label: 'Universell utforming av arbeidsplassen',
         hjelpetekst: 'For eksempel rullestolrampe, tale i heis eller teleslynge',
+    },
+    {
+        behov: Fysisk.Ergonomi,
+        label: 'Ergonomiske tilpasninger',
+        hjelpetekst: 'For eksempel heve-/senkepult eller spesialstol',
     },
     {
         behov: Fysisk.Arbeidsstilling,
