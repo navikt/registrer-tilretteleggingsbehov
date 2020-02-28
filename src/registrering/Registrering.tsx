@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { Arbeidshverdagen, Arbeidstid, Behov, Fysisk, UtfordringerMedNorsk } from '../api/Behov';
 import { navigerTilVisningsside } from '../utils/navigering';
 import { KandidatDto } from '../api/Kandidat';
@@ -21,8 +21,15 @@ const Registrering: FunctionComponent<Props> = ({ fnr }) => {
     const [fysisk, setFysisk] = useState<Behov[]>([]);
     const [arbeidshverdagen, setArbeidshverdagen] = useState<Behov[]>([]);
     const [utfordringerMedNorsk, setUtfordringerMedNorsk] = useState<Behov[]>([]);
+    const [skalViseIngenValgteBehovFeil, setSkalViseIngenValgteBehovFeil] = useState<boolean>(
+        false
+    );
 
     const [respons, setRespons] = useState<RestKandidat>(ikkeLastet);
+
+    useEffect(() => {
+        setSkalViseIngenValgteBehovFeil(false);
+    }, [arbeidstid, fysisk, arbeidshverdagen, utfordringerMedNorsk]);
 
     useEffect(() => {
         if (respons.status === Status.Suksess) {
@@ -30,8 +37,22 @@ const Registrering: FunctionComponent<Props> = ({ fnr }) => {
         }
     }, [respons]);
 
+    const harIngenValgteBehov = () => {
+        return (
+            arbeidstid.length === 0 &&
+            fysisk.length === 0 &&
+            arbeidshverdagen.length === 0 &&
+            utfordringerMedNorsk.length === 0
+        );
+    };
+
     const lagreBehov = async () => {
         if (respons.status === Status.LasterInn) return;
+
+        if (harIngenValgteBehov()) {
+            setSkalViseIngenValgteBehovFeil(true);
+            return;
+        }
 
         const kandidat: KandidatDto = {
             fnr,
@@ -91,16 +112,25 @@ const Registrering: FunctionComponent<Props> = ({ fnr }) => {
                     />
                     <GiTilbakemelding />
                     <Hovedknapp
+                        className="registrering__lagreknapp"
                         onClick={lagreBehov}
                         spinner={respons.status === Status.LasterInn}
                         htmlType="button"
                     >
                         Lagre behov
                     </Hovedknapp>
+                    <Knapp onClick={navigerTilVisningsside}>Avbryt</Knapp>
                     {respons.status === Status.Feil ||
                         (respons.status === Status.UkjentFeil && (
-                            <Feilmelding>Kunne ikke lagre tilretteleggingsbehov</Feilmelding>
+                            <Feilmelding className="registrering__feilmelding">
+                                Kunne ikke lagre tilretteleggingsbehov
+                            </Feilmelding>
                         ))}
+                    {skalViseIngenValgteBehovFeil && (
+                        <Feilmelding className="registrering__feilmelding">
+                            Du må velge minst ett behov
+                        </Feilmelding>
+                    )}
                 </form>
             </main>
         </div>
