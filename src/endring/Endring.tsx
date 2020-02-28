@@ -24,9 +24,16 @@ const Endring: FunctionComponent<Props> = ({ kandidat }) => {
     const [utfordringerMedNorsk, setUtfordringerMedNorsk] = useState<Behov[]>(
         kandidat.utfordringerMedNorsk
     );
+    const [skalViseIngenValgteBehovFeil, setSkalViseIngenValgteBehovFeil] = useState<boolean>(
+        false
+    );
 
     const [respons, setRespons] = useState<RestKandidat>(ikkeLastet);
     const [visSlettModal, toggleSlettModal] = useState<boolean>(false);
+
+    useEffect(() => {
+        setSkalViseIngenValgteBehovFeil(false);
+    }, [arbeidstid, fysisk, arbeidshverdagen, utfordringerMedNorsk]);
 
     useEffect(() => {
         if (respons.status === Status.Suksess) {
@@ -34,8 +41,22 @@ const Endring: FunctionComponent<Props> = ({ kandidat }) => {
         }
     }, [respons]);
 
+    const harIngenValgteBehov = () => {
+        return (
+            arbeidstid.length === 0 &&
+            fysisk.length === 0 &&
+            arbeidshverdagen.length === 0 &&
+            utfordringerMedNorsk.length === 0
+        );
+    };
+
     const endreBehov = async () => {
         if (respons.status === Status.LasterInn) return;
+
+        if (harIngenValgteBehov()) {
+            setSkalViseIngenValgteBehovFeil(true);
+            return;
+        }
 
         const endring: KandidatDto = {
             fnr: kandidat.fnr,
@@ -110,8 +131,15 @@ const Endring: FunctionComponent<Props> = ({ kandidat }) => {
                     <Knapp onClick={navigerTilVisningsside}>Avbryt</Knapp>
                     {respons.status === Status.Feil ||
                         (respons.status === Status.UkjentFeil && (
-                            <Feilmelding>Kunne ikke endre behov for tilrettelegging</Feilmelding>
+                            <Feilmelding className="registrering__feilmelding">
+                                Kunne ikke endre behov for tilrettelegging
+                            </Feilmelding>
                         ))}
+                    {skalViseIngenValgteBehovFeil && (
+                        <Feilmelding className="registrering__feilmelding">
+                            Du må velge minst ett behov
+                        </Feilmelding>
+                    )}
                 </form>
             </main>
             <SlettModal
