@@ -4,7 +4,7 @@ import { ikkeLastet, lasterInn, RestKandidat, Status } from '../api/Rest';
 import { navigerTilVisningsside } from '../utils/navigering';
 import { Feilmelding, Ingress, Sidetittel } from 'nav-frontend-typografi';
 import Alertstripe from 'nav-frontend-alertstriper';
-import KategoriSpørsmål, { Kategori } from '../registrering/kategori-spørsmål/KategoriSpørsmål';
+import KategoriSpørsmål from '../registrering/kategori-spørsmål/KategoriSpørsmål';
 import { Kandidat, KandidatDto } from '../api/Kandidat';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { endreKandidat } from '../api/api';
@@ -12,6 +12,7 @@ import SlettModal from './slett-modal/SlettModal';
 import Tilbakeknapp from '../tilbakeknapp/Tilbakeknapp';
 import './Endring.less';
 import GiTilbakemelding from '../gi-tilbakemelding/GiTilbakemelding';
+import { Kategori } from '../api/Kategori';
 
 interface Props {
     kandidat: Kandidat;

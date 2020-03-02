@@ -5,7 +5,7 @@ const basePath = '/finn-kandidat-api';
 const pamBasePath = '/pam-cv-api';
 
 fetchMock
-    .get(`${basePath}/kandidater/${etFnr}`, enKandidat)
+    .get(`${basePath}/kandidater/${etFnr}`, 404)
     .post(`${basePath}/kandidater`, {
         status: 201,
         body: enKandidat,
