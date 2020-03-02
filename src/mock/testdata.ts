@@ -11,7 +11,7 @@ export const enKandidat: Kandidat = {
     sistEndretAv: 'J337738',
     navKontor: '1001',
     arbeidstid: [Arbeidstid.IkkeHeleDager, Arbeidstid.Fleksibel],
-    fysisk: [Fysisk.Arbeidsstilling],
+    fysisk: [Fysisk.Ergonomi, Fysisk.Arbeidsstilling, Fysisk.UniversellUtforming],
     arbeidshverdagen: [],
     utfordringerMedNorsk: [UtfordringerMedNorsk.Skrive, UtfordringerMedNorsk.Snakke],
 };

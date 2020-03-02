@@ -1,16 +1,24 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
+import { Feilmelding, Ingress, Sidetittel } from 'nav-frontend-typografi';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
-import { Arbeidshverdagen, Arbeidstid, Behov, Fysisk, UtfordringerMedNorsk } from '../api/Behov';
-import { navigerTilVisningsside } from '../utils/navigering';
-import { KandidatDto } from '../api/Kandidat';
-import { opprettKandidat } from '../api/api';
+
+import {
+    Arbeidshverdagen,
+    Arbeidstid,
+    Behov,
+    Fysisk,
+    UtfordringerMedNorsk,
+    Kategori,
+} from '../api/Behov';
 import { ikkeLastet, lasterInn, RestKandidat, Status } from '../api/Rest';
+import { KandidatDto } from '../api/Kandidat';
+import { navigerTilVisningsside } from '../utils/navigering';
+import { opprettKandidat } from '../api/api';
 import Alertstripe from 'nav-frontend-alertstriper';
+import GiTilbakemelding from '../gi-tilbakemelding/GiTilbakemelding';
+import KategoriSpørsmål from './kategori-spørsmål/KategoriSpørsmål';
 import Tilbakeknapp from '../tilbakeknapp/Tilbakeknapp';
 import './Registrering.less';
-import GiTilbakemelding from '../gi-tilbakemelding/GiTilbakemelding';
-import { Feilmelding, Ingress, Sidetittel } from 'nav-frontend-typografi';
-import KategoriSpørsmål, { Kategori } from './kategori-spørsmål/KategoriSpørsmål';
 
 interface Props {
     fnr: string;

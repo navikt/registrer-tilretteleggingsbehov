@@ -1,16 +1,9 @@
 import React, { FunctionComponent } from 'react';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Behov, Kategori } from '../../api/Behov';
 import { Checkbox, CheckboxGruppe } from 'nav-frontend-skjema';
-import { Alternativ, hentAlternativer } from '../alternativ';
-import { Behov } from '../../api/Behov';
+import { Behovtekst, hentTekster } from '../../api/tilretteleggingsbehov';
+import { Undertittel } from 'nav-frontend-typografi';
 import './KategoriSpørsmål.less';
-
-export enum Kategori {
-    Arbeidstid = 'arbeidstid',
-    Fysisk = 'fysisk',
-    Arbeidshverdagen = 'arbeidshverdagen',
-    UtfordringerMedNorsk = 'utfordringerMedNorsk',
-}
 
 interface Props {
     tittel: string;
@@ -27,7 +20,7 @@ const KategoriSpørsmål: FunctionComponent<Props> = ({
     onChange,
     kategori,
 }) => {
-    const alternativer = hentAlternativer(kategori);
+    const alternativer = hentTekster(kategori);
 
     const toggleAlternativ = (behov: Behov) => {
         onChange(
@@ -41,10 +34,10 @@ const KategoriSpørsmål: FunctionComponent<Props> = ({
         <section className="kategori-spørsmål">
             <Undertittel className="blokk-xxs">{tittel}</Undertittel>
             <CheckboxGruppe legend={beskrivelse}>
-                {alternativer.map((alternativ: Alternativ) => (
+                {alternativer.map((alternativ: Behovtekst) => (
                     <div className="kategori-spørsmål__checkbox" key={alternativ.behov}>
                         <Checkbox
-                            label={alternativ.label}
+                            label={alternativ.beskrivelse}
                             checked={valgteBehov.includes(alternativ.behov)}
                             onChange={() => toggleAlternativ(alternativ.behov)}
                             aria-describedby={alternativ.behov + '_hjelpetekst'}

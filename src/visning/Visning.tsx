@@ -4,17 +4,12 @@ import React, { FunctionComponent } from 'react';
 import { navigerTilRegistreringsside } from '../utils/navigering';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
-
-import {
-    arbeidstidTekster,
-    fysiskTekster,
-    utfordringerMedNorskTekster,
-    arbeidshverdagenTekster,
-} from '../api/Behovtekster';
 import { RestArbeidssøker } from '../api/Rest';
 import Advarsel from '../advarsel/Advarsel';
 import { Kandidat } from '../api/Kandidat';
+import { hentTeksterForValgteBehov } from '../api/tilretteleggingsbehov';
 import './Visning.less';
+import { Kategori } from '../api/Behov';
 
 interface Props {
     kandidat: Kandidat;
@@ -34,22 +29,28 @@ const Visning: FunctionComponent<Props> = ({ kandidat, arbeidssøker }) => {
                 <Behovgruppe
                     overskrift="Arbeidstid"
                     beskrivelse="Behov for tilrettelegging av arbeidstiden"
-                    behov={arbeidstidTekster(kandidat.arbeidstid)}
-                />
-                <Behovgruppe
-                    overskrift="Arbeidshverdagen"
-                    beskrivelse="Behov for tilpasninger i arbeidshverdagen"
-                    behov={arbeidshverdagenTekster(kandidat.arbeidshverdagen)}
+                    behov={hentTeksterForValgteBehov(Kategori.Arbeidstid, kandidat.arbeidstid)}
                 />
                 <Behovgruppe
                     overskrift="Fysisk tilrettelegging"
                     beskrivelse="Behov for fysisk tilrettelegging på arbeidsplassen"
-                    behov={fysiskTekster(kandidat.fysisk)}
+                    behov={hentTeksterForValgteBehov(Kategori.Fysisk, kandidat.fysisk)}
+                />
+                <Behovgruppe
+                    overskrift="Arbeidshverdagen"
+                    beskrivelse="Behov for tilpasninger i arbeidshverdagen"
+                    behov={hentTeksterForValgteBehov(
+                        Kategori.Arbeidshverdagen,
+                        kandidat.arbeidshverdagen
+                    )}
                 />
                 <Behovgruppe
                     overskrift="Utfordringer med norsk"
                     beskrivelse="Kandidaten har utfordringer med å:"
-                    behov={utfordringerMedNorskTekster(kandidat.utfordringerMedNorsk)}
+                    behov={hentTeksterForValgteBehov(
+                        Kategori.UtfordringerMedNorsk,
+                        kandidat.utfordringerMedNorsk
+                    )}
                 />
             </div>
             <Hovedknapp mini onClick={navigerTilRegistreringsside}>
