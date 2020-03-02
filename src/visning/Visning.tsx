@@ -7,9 +7,9 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { RestArbeidssøker } from '../api/Rest';
 import Advarsel from '../advarsel/Advarsel';
 import { Kandidat } from '../api/Kandidat';
+import { hentTeksterForValgteBehov } from '../api/tilretteleggingsbehov';
 import './Visning.less';
-import { Kategori } from '../api/Kategori';
-import { hentTeksterForValgteBehov } from '../api/Behovtekster';
+import { Kategori } from '../api/Behov';
 
 interface Props {
     kandidat: Kandidat;

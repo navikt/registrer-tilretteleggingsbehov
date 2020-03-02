@@ -1,8 +1,7 @@
 import React, { FunctionComponent } from 'react';
-import { Behov } from '../../api/Behov';
+import { Behov, Kategori } from '../../api/Behov';
 import { Checkbox, CheckboxGruppe } from 'nav-frontend-skjema';
-import { Behovtekst, hentTekster } from '../../api/Behovtekster';
-import { Kategori } from '../../api/Kategori';
+import { Behovtekst, hentTekster } from '../../api/tilretteleggingsbehov';
 import { Undertittel } from 'nav-frontend-typografi';
 import './KategoriSpørsmål.less';
 
@@ -38,7 +37,7 @@ const KategoriSpørsmål: FunctionComponent<Props> = ({
                 {alternativer.map((alternativ: Behovtekst) => (
                     <div className="kategori-spørsmål__checkbox" key={alternativ.behov}>
                         <Checkbox
-                            label={alternativ.label}
+                            label={alternativ.beskrivelse}
                             checked={valgteBehov.includes(alternativ.behov)}
                             onChange={() => toggleAlternativ(alternativ.behov)}
                             aria-describedby={alternativ.behov + '_hjelpetekst'}

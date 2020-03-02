@@ -2,10 +2,16 @@ import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Feilmelding, Ingress, Sidetittel } from 'nav-frontend-typografi';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 
-import { Arbeidshverdagen, Arbeidstid, Behov, Fysisk, UtfordringerMedNorsk } from '../api/Behov';
+import {
+    Arbeidshverdagen,
+    Arbeidstid,
+    Behov,
+    Fysisk,
+    UtfordringerMedNorsk,
+    Kategori,
+} from '../api/Behov';
 import { ikkeLastet, lasterInn, RestKandidat, Status } from '../api/Rest';
 import { KandidatDto } from '../api/Kandidat';
-import { Kategori } from '../api/Kategori';
 import { navigerTilVisningsside } from '../utils/navigering';
 import { opprettKandidat } from '../api/api';
 import Alertstripe from 'nav-frontend-alertstriper';
