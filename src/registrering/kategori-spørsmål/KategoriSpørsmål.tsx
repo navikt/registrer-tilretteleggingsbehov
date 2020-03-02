@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Behov } from '../../api/Behov';
 import { Checkbox, CheckboxGruppe } from 'nav-frontend-skjema';
-import { hentAlternativerForKategori, Behovalternativ } from '../../api/Behovtekster';
+import { Behovtekst, hentTekster } from '../../api/Behovtekster';
 import { Kategori } from '../../api/Kategori';
 import { Undertittel } from 'nav-frontend-typografi';
 import './KategoriSpørsmål.less';
@@ -21,7 +21,7 @@ const KategoriSpørsmål: FunctionComponent<Props> = ({
     onChange,
     kategori,
 }) => {
-    const alternativer = hentAlternativerForKategori(kategori);
+    const alternativer = hentTekster(kategori);
 
     const toggleAlternativ = (behov: Behov) => {
         onChange(
@@ -35,7 +35,7 @@ const KategoriSpørsmål: FunctionComponent<Props> = ({
         <section className="kategori-spørsmål">
             <Undertittel className="blokk-xxs">{tittel}</Undertittel>
             <CheckboxGruppe legend={beskrivelse}>
-                {alternativer.map((alternativ: Behovalternativ) => (
+                {alternativer.map((alternativ: Behovtekst) => (
                     <div className="kategori-spørsmål__checkbox" key={alternativ.behov}>
                         <Checkbox
                             label={alternativ.label}

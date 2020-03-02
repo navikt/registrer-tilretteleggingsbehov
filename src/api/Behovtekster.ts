@@ -1,85 +1,70 @@
 import { Kategori } from './Kategori';
-import { Behov, Arbeidstid, Fysisk, Arbeidshverdagen, UtfordringerMedNorsk } from './Behov';
+import { Behov, Arbeidshverdagen, UtfordringerMedNorsk, Fysisk } from './Behov';
 
 export type Behovtekst = {
+    behov: Behov;
     label: string;
     hjelpetekst?: string;
 };
 
-export type Behovalternativ = Behovtekst & {
-    behov: Behov;
+const tilretteleggingsbehov = {
+    [Kategori.Arbeidstid]: [
+        {
+            behov: Fysisk.UniversellUtforming,
+            label: 'Universell utforming av arbeidsplassen',
+            hjelpetekst: 'For eksempel rullestolrampe, tale i heis eller teleslynge',
+        },
+        {
+            behov: Fysisk.Ergonomi,
+            label: 'Ergonomiske tilpasninger',
+            hjelpetekst: 'For eksempel heve-/senkepult eller spesialstol',
+        },
+        { behov: Fysisk.Arbeidsstilling, label: 'Varierte arbeidsstillinger' },
+        { behov: Fysisk.TungeLøft, label: 'Unngå tunge løft' },
+    ],
+    [Kategori.Fysisk]: [
+        {
+            behov: Fysisk.UniversellUtforming,
+            label: 'Universell utforming av arbeidsplassen',
+            hjelpetekst: 'For eksempel rullestolrampe, tale i heis eller teleslynge',
+        },
+        {
+            behov: Fysisk.Ergonomi,
+            label: 'Ergonomiske tilpasninger',
+            hjelpetekst: 'For eksempel heve-/senkepult eller spesialstol',
+        },
+        { behov: Fysisk.Arbeidsstilling, label: 'Varierte arbeidsstillinger' },
+        { behov: Fysisk.TungeLøft, label: 'Unngå tunge løft' },
+    ],
+    [Kategori.Arbeidshverdagen]: [
+        {
+            behov: Arbeidshverdagen.Opplæring,
+            label: 'Opplæring',
+            hjelpetekst: 'For eksempel hyppige tilbakemeldinger eller lengre opplæringsperiode',
+        },
+        {
+            behov: Arbeidshverdagen.Arbeidsoppgaver,
+            label: 'Arbeidsoppgaver',
+            hjelpetekst: 'For eksempel tydelige oppgaver eller unntak fra noen typer oppgaver',
+        },
+        {
+            behov: Arbeidshverdagen.TettOppfølging,
+            label: 'Tett oppfølging',
+            hjelpetekst: 'For eksempel ekstra støtte fra en kollega eller mentor',
+        },
+        { behov: Arbeidshverdagen.StilleOgRoligMiljø, label: 'Stille og rolig miljø' },
+    ],
+    [Kategori.UtfordringerMedNorsk]: [
+        { behov: UtfordringerMedNorsk.Snakke, label: 'Snakke' },
+        { behov: UtfordringerMedNorsk.Skrive, label: 'Skrive' },
+        { behov: UtfordringerMedNorsk.Lese, label: 'Lese' },
+    ],
 };
 
-export type Kategoritekster = {
-    [behov: string]: Behovtekst;
+export const hentTekster = (kategori: Kategori): Behovtekst[] => {
+    return tilretteleggingsbehov[kategori];
 };
 
-const teksterTilArbeidstid: Kategoritekster = {
-    [Arbeidstid.IkkeHeleDager]: { label: 'Kan jobbe hver ukedag, men ikke hele dager' },
-    [Arbeidstid.BorteFasteDagerEllerTider]: {
-        label: 'Må være borte fra jobben til faste dager eller tider',
-    },
-    [Arbeidstid.GradvisØkning]: { label: 'Ønsker gradvis økning av stillingsprosenten' },
-    [Arbeidstid.Fleksibel]: { label: 'Må ha fleksible arbeidsdager' },
-};
-
-const teksterTilFysisk: Kategoritekster = {
-    [Fysisk.UniversellUtforming]: {
-        label: 'Universell utforming av arbeidsplassen',
-        hjelpetekst: 'For eksempel rullestolrampe, tale i heis eller teleslynge',
-    },
-    [Fysisk.Ergonomi]: {
-        label: 'Ergonomiske tilpasninger',
-        hjelpetekst: 'For eksempel heve-/senkepult eller spesialstol',
-    },
-    [Fysisk.Arbeidsstilling]: { label: 'Varierte arbeidsstillinger' },
-    [Fysisk.TungeLøft]: { label: 'Unngå tunge løft' },
-};
-
-const teksterTilArbeidshverdagen: Kategoritekster = {
-    [Arbeidshverdagen.Opplæring]: {
-        label: 'Opplæring',
-        hjelpetekst: 'For eksempel hyppige tilbakemeldinger eller lengre opplæringsperiode',
-    },
-    [Arbeidshverdagen.Arbeidsoppgaver]: {
-        label: 'Arbeidsoppgaver',
-        hjelpetekst: 'For eksempel tydelige oppgaver eller unntak fra noen typer oppgaver',
-    },
-    [Arbeidshverdagen.TettOppfølging]: {
-        label: 'Tett oppfølging',
-        hjelpetekst: 'For eksempel ekstra støtte fra en kollega eller mentor',
-    },
-    [Arbeidshverdagen.StilleOgRoligMiljø]: { label: 'Stille og rolig miljø' },
-};
-
-const teksterTilUtfordringerMedNorsk: Kategoritekster = {
-    [UtfordringerMedNorsk.Snakke]: { label: 'Snakke' },
-    [UtfordringerMedNorsk.Skrive]: { label: 'Skrive' },
-    [UtfordringerMedNorsk.Lese]: { label: 'Lese' },
-};
-
-const teksterTilAlleBehov = {
-    [Kategori.Arbeidstid]: teksterTilArbeidstid,
-    [Kategori.Fysisk]: teksterTilFysisk,
-    [Kategori.Arbeidshverdagen]: teksterTilArbeidshverdagen,
-    [Kategori.UtfordringerMedNorsk]: teksterTilUtfordringerMedNorsk,
-};
-
-const tekstTilAlternativ = ([behov, tekst]: [string, Behovtekst]): Behovalternativ => ({
-    behov: behov as Behov,
-    ...tekst,
-});
-
-export const hentTeksterForBehov = (behov: Behov[], kategori: Kategori): Behovtekst[] => {
-    const teksterTilKategori = teksterTilAlleBehov[kategori];
-    const aktuelleTekster = (Object.entries(teksterTilKategori) as [
-        string,
-        Behovtekst
-    ][]).filter(([b]) => behov.includes(b as Behov));
-    return aktuelleTekster.map(([_, tekst]) => tekst);
-};
-
-export const hentAlternativerForKategori = (kategori: Kategori): Behovalternativ[] => {
-    const teksterTilKategori = teksterTilAlleBehov[kategori];
-    return Object.entries(teksterTilKategori).map(tekstTilAlternativ);
+export const hentTeksterForValgteBehov = (kategori: Kategori, behov: Behov[]) => {
+    return (tilretteleggingsbehov[kategori] as Behovtekst[]).filter(b => behov.includes(b.behov));
 };
