@@ -43,7 +43,7 @@ const teksterTilArbeidshverdagen: Kategoritekster = {
     },
     [Arbeidshverdagen.Arbeidsoppgaver]: {
         label: 'Arbeidsoppgaver',
-        hjelpetekst: 'For eksempel tydelige oppgaver eller unntak fra noen type oppgaver',
+        hjelpetekst: 'For eksempel tydelige oppgaver eller unntak fra noen typer oppgaver',
     },
     [Arbeidshverdagen.TettOppfølging]: {
         label: 'Tett oppfølging',
