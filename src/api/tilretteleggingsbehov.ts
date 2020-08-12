@@ -1,4 +1,11 @@
-import { Kategori, Behov, Arbeidshverdagen, UtfordringerMedNorsk, Fysisk } from './Behov';
+import {
+    Kategori,
+    Behov,
+    Arbeidshverdagen,
+    UtfordringerMedNorsk,
+    Fysisk,
+    Arbeidstid,
+} from './Behov';
 
 export type Behovtekst = {
     behov: Behov;
@@ -9,17 +16,18 @@ export type Behovtekst = {
 const tilretteleggingsbehov = {
     [Kategori.Arbeidstid]: [
         {
-            behov: Fysisk.UniversellUtforming,
-            beskrivelse: 'Universell utforming av arbeidsplassen',
-            hjelpetekst: 'For eksempel rullestolrampe, tale i heis eller teleslynge',
+            behov: Arbeidstid.IkkeHeleDager,
+            beskrivelse: 'Kan jobbe hver ukedag, men ikke hele dager',
         },
         {
-            behov: Fysisk.Ergonomi,
-            beskrivelse: 'Ergonomiske tilpasninger',
-            hjelpetekst: 'For eksempel heve-/senkepult eller spesialstol',
+            behov: Arbeidstid.BorteFasteDagerEllerTider,
+            beskrivelse: 'Må være borte fra jobben til faste dager eller tider',
         },
-        { behov: Fysisk.Arbeidsstilling, beskrivelse: 'Varierte arbeidsstillinger' },
-        { behov: Fysisk.TungeLøft, beskrivelse: 'Unngå tunge løft' },
+        {
+            behov: Arbeidstid.GradvisØkning,
+            beskrivelse: 'Ønsker gradvis økning av stillingsprosenten',
+        },
+        { behov: Arbeidstid.Fleksibel, beskrivelse: 'Må ha fleksible arbeidsdager' },
     ],
     [Kategori.Fysisk]: [
         {
@@ -65,5 +73,5 @@ export const hentTekster = (kategori: Kategori): Behovtekst[] => {
 };
 
 export const hentTeksterForValgteBehov = (kategori: Kategori, behov: Behov[]) => {
-    return (tilretteleggingsbehov[kategori] as Behovtekst[]).filter(b => behov.includes(b.behov));
+    return (tilretteleggingsbehov[kategori] as Behovtekst[]).filter((b) => behov.includes(b.behov));
 };
