@@ -2,11 +2,12 @@ import React, { FunctionComponent } from 'react';
 import { Behov, Kategori } from '../../api/Behov';
 import { Checkbox, CheckboxGruppe } from 'nav-frontend-skjema';
 import { Behovtekst, hentTekster } from '../../api/tilretteleggingsbehov';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import './KategoriSpørsmål.less';
 
 interface Props {
     tittel: string;
+    hjelpetekst?: string;
     beskrivelse: string;
     valgteBehov: Behov[];
     onChange: (behov: Behov[]) => void;
@@ -16,6 +17,7 @@ interface Props {
 const KategoriSpørsmål: FunctionComponent<Props> = ({
     tittel,
     beskrivelse,
+    hjelpetekst,
     valgteBehov,
     onChange,
     kategori,
@@ -33,6 +35,7 @@ const KategoriSpørsmål: FunctionComponent<Props> = ({
     return (
         <section className="kategori-spørsmål">
             <Undertittel className="blokk-xxs">{tittel}</Undertittel>
+            <Normaltekst className="kategori-spørsmål__kategorihjelpetekst">{hjelpetekst}</Normaltekst>
             <CheckboxGruppe legend={beskrivelse}>
                 {alternativer.map((alternativ: Behovtekst) => (
                     <div className="kategori-spørsmål__checkbox" key={alternativ.behov}>
