@@ -28,7 +28,7 @@ const Visning: FunctionComponent<Props> = ({ kandidat, arbeidssøker }) => {
             <div className="visning__behovkategorier">
                 <Behovgruppe
                     overskrift="Arbeidstid"
-                    beskrivelse="Behov for tilrettelegging av arbeidstiden2222"
+                    beskrivelse="Behov for tilrettelegging av arbeidstiden"
                     behov={hentTeksterForValgteBehov(Kategori.Arbeidstid, kandidat.arbeidstid)}
                 />
                 <Behovgruppe
