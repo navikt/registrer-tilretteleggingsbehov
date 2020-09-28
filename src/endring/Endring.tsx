@@ -100,6 +100,7 @@ const Endring: FunctionComponent<Props> = ({ kandidat }) => {
                 <form className="endring__form">
                     <KategoriSpørsmål
                         tittel="Arbeidstid"
+                        hjelpetekst="I jobbprofilen må brukeren selv registrere informasjon om arbeidstid, slik som deltid/heltid, kun dagtid, turnus og lignende."
                         beskrivelse="Behov for tilrettelegging av arbeidstiden"
                         valgteBehov={arbeidstid}
                         onChange={setArbeidstid}
@@ -121,6 +122,7 @@ const Endring: FunctionComponent<Props> = ({ kandidat }) => {
                     />
                     <KategoriSpørsmål
                         tittel="Utfordringer med norsk"
+                        hjelpetekst="For eksempel brukere med lese- og skrivevansker, språk- og taleforstyrrelser eller utfordringer med norsk fordi personen kommer fra et annet land."
                         beskrivelse="Kandidaten har utfordringer med å:"
                         valgteBehov={utfordringerMedNorsk}
                         onChange={setUtfordringerMedNorsk}
