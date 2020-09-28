@@ -27,7 +27,7 @@ const KategoriSpørsmål: FunctionComponent<Props> = ({
     const toggleAlternativ = (behov: Behov) => {
         onChange(
             valgteBehov.includes(behov)
-                ? valgteBehov.filter(b => b !== behov)
+                ? valgteBehov.filter((b) => b !== behov)
                 : [...valgteBehov, behov]
         );
     };
@@ -35,7 +35,12 @@ const KategoriSpørsmål: FunctionComponent<Props> = ({
     return (
         <section className="kategori-spørsmål">
             <Undertittel className="blokk-xxs">{tittel}</Undertittel>
-            <Normaltekst className="kategori-spørsmål__kategorihjelpetekst">{hjelpetekst}</Normaltekst>
+            {hjelpetekst && (
+                <Normaltekst className="kategori-spørsmål__kategorihjelpetekst">
+                    {hjelpetekst}
+                </Normaltekst>
+            )}
+
             <CheckboxGruppe legend={beskrivelse}>
                 {alternativer.map((alternativ: Behovtekst) => (
                     <div className="kategori-spørsmål__checkbox" key={alternativ.behov}>
