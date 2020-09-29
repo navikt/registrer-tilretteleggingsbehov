@@ -60,6 +60,11 @@ const tilretteleggingsbehov = {
             hjelpetekst: 'For eksempel ekstra støtte fra en kollega eller mentor',
         },
         { behov: Arbeidshverdagen.StilleOgRoligMiljø, beskrivelse: 'Stille og rolig miljø' },
+        {
+            behov: Arbeidshverdagen.PersonligBistand,
+            beskrivelse: 'Personlig bistand',
+            hjelpetekst: 'For eksempel tolk, assistent eller lese- og sekretærhjelp',
+        },
     ],
     [Kategori.UtfordringerMedNorsk]: [
         { behov: UtfordringerMedNorsk.Snakke, beskrivelse: 'Snakke' },
