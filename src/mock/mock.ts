@@ -16,4 +16,5 @@ fetchMock
     })
     .delete(`${basePath}/kandidater/${etFnr}`, 200)
     .get(`${pamBasePath}/rest/v1/arbeidssoker/${enKandidat.aktørId}/`, 403)
-    .post(`${basePath}/tilbakemeldinger`, 201);
+    .post(`${basePath}/tilbakemeldinger`, 201)
+    .get(`${basePath}/samtykke/1000010000000`, 200);

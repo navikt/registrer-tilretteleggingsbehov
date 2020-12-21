@@ -66,12 +66,6 @@ const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
     }, [kandidat]);
 
     useEffect(() => {
-        if (samtykke === Status.Suksess) {
-            <SamtykkeAdvarsel />;
-        }
-    });
-
-    useEffect(() => {
         window.addEventListener(visDetaljerEvent, hentKandidatFraApi);
         return () => {
             window.removeEventListener(visDetaljerEvent, hentKandidatFraApi);
@@ -83,6 +77,9 @@ const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
         kandidat.status === Status.Slettet;
 
     const visKomponent = () => {
+        if (samtykke === Status.Suksess) {
+            return <SamtykkeAdvarsel />;
+        }
         if (viewType === Visningstype.RegistrerTilretteleggingsbehov) {
             if (kandidat.status === Status.Suksess) {
                 return <Endring kandidat={kandidat.data} />;
