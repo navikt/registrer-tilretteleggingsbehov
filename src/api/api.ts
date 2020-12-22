@@ -82,7 +82,7 @@ export const sendTilbakemelding = async (tilbakemelding: string): Promise<Tilbak
 export const hentSamtykke = async (aktørId: string): Promise<Samtykkestatus> => {
     try {
         const respons = await fetch('/finn-kandidat-api/samtykke/' + aktørId, medCookies);
-        if (respons.status == 404) {
+        if (respons.status === 404) {
             return Status.IkkeFunnet;
         }
         if (respons.ok) {

@@ -10,6 +10,7 @@ import { Kandidat } from '../api/Kandidat';
 import { hentTeksterForValgteBehov } from '../api/tilretteleggingsbehov';
 import './Visning.less';
 import { Kategori } from '../api/Behov';
+import SamtykkeAdvarsel from '../advarsel/Samtykkeadvarsel';
 
 interface Props {
     kandidat: Kandidat;
@@ -18,38 +19,42 @@ interface Props {
 
 const Visning: FunctionComponent<Props> = ({ kandidat, arbeidssøker }) => {
     return (
-        <div className="visning">
-            <div className="sistendret">
-                <Normaltekst className="blokk-s">
+        <div className='visning'>
+            <div className='sistendret'>
+                <Normaltekst className='blokk-s'>
                     Sist endret: {formaterDato(new Date(kandidat.sistEndretAvVeileder))}
                 </Normaltekst>
             </div>
-            <Advarsel arbeidssøker={arbeidssøker} />
-            <div className="visning__behovkategorier">
+
+            <div className='visning__advarsler'>
+                <Advarsel arbeidssøker={arbeidssøker} />
+                <SamtykkeAdvarsel aktørId={kandidat.aktørId} />
+            </div>
+            <div className='visning__behovkategorier'>
                 <Behovgruppe
-                    overskrift="Arbeidstid"
-                    beskrivelse="Behov for tilrettelegging av arbeidstiden"
+                    overskrift='Arbeidstid'
+                    beskrivelse='Behov for tilrettelegging av arbeidstiden'
                     behov={hentTeksterForValgteBehov(Kategori.Arbeidstid, kandidat.arbeidstid)}
                 />
                 <Behovgruppe
-                    overskrift="Fysisk tilrettelegging"
-                    beskrivelse="Behov for fysisk tilrettelegging på arbeidsplassen"
+                    overskrift='Fysisk tilrettelegging'
+                    beskrivelse='Behov for fysisk tilrettelegging på arbeidsplassen'
                     behov={hentTeksterForValgteBehov(Kategori.Fysisk, kandidat.fysisk)}
                 />
                 <Behovgruppe
-                    overskrift="Arbeidshverdagen"
-                    beskrivelse="Behov for tilpasninger i arbeidshverdagen"
+                    overskrift='Arbeidshverdagen'
+                    beskrivelse='Behov for tilpasninger i arbeidshverdagen'
                     behov={hentTeksterForValgteBehov(
                         Kategori.Arbeidshverdagen,
-                        kandidat.arbeidshverdagen
+                        kandidat.arbeidshverdagen,
                     )}
                 />
                 <Behovgruppe
-                    overskrift="Utfordringer med norsk"
-                    beskrivelse="Kandidaten har utfordringer med å:"
+                    overskrift='Utfordringer med norsk'
+                    beskrivelse='Kandidaten har utfordringer med å:'
                     behov={hentTeksterForValgteBehov(
                         Kategori.UtfordringerMedNorsk,
-                        kandidat.utfordringerMedNorsk
+                        kandidat.utfordringerMedNorsk,
                     )}
                 />
             </div>

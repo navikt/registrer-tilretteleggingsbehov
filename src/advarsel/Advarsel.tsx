@@ -1,8 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { RestArbeidssøker, Status } from '../api/Rest';
-import Ikon from 'nav-frontend-ikoner-assets';
-import { Element } from 'nav-frontend-typografi';
-import './Advarsel.less';
+import AlertStripe from 'nav-frontend-alertstriper';
 
 enum Variant {
     IngenAdvarsel,
@@ -35,10 +33,9 @@ const Advarsel: FunctionComponent<Props> = ({ arbeidssøker }) => {
         return null;
     } else {
         return (
-            <div className="advarsel blokk-s">
-                <Ikon kind="advarsel-sirkel-fyll" size="1.5em" />
-                <Element>{advarsel}</Element>
-            </div>
+            <AlertStripe type="advarsel">
+                {advarsel}
+            </AlertStripe>
         );
     }
 };
