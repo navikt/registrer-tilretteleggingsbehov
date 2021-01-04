@@ -78,7 +78,7 @@ const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
     };
 
     return (
-        <Normaltekst className='registrer-tilretteleggingsbehov-app' tag='div'>
+        <Normaltekst className="registrer-tilretteleggingsbehov-app" tag="div">
             {visKomponent()}
         </Normaltekst>
     );

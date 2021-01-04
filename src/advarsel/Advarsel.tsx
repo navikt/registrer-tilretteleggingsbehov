@@ -32,11 +32,7 @@ const Advarsel: FunctionComponent<Props> = ({ arbeidssøker }) => {
     if (advarsel === Variant.IngenAdvarsel) {
         return null;
     } else {
-        return (
-            <AlertStripe type="advarsel">
-                {advarsel}
-            </AlertStripe>
-        );
+        return <AlertStripe type="advarsel">{advarsel}</AlertStripe>;
     }
 };
 
