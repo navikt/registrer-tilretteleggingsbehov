@@ -1,26 +1,14 @@
-import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
+import React, { FunctionComponent } from 'react';
 import { Samtykkestatus, Status } from '../api/Rest';
-import { hentSamtykke } from '../api/api';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { Normaltekst } from 'nav-frontend-typografi';
 import './Samtykkeadvarsel.less';
 
 interface Props {
-    aktørId: string;
+    samtykke: Samtykkestatus;
 }
 
-const SamtykkeAdvarsel: FunctionComponent<Props> = ({ aktørId }) => {
-    const [samtykke, setSamtykke] = useState<Samtykkestatus>(Status.IkkeLastet);
-
-    const finnSamtykke = useCallback(async () => {
-        setSamtykke(Status.LasterInn);
-        setSamtykke(await hentSamtykke(aktørId));
-    }, [aktørId]);
-
-    useEffect(() => {
-        finnSamtykke();
-    }, [finnSamtykke]);
-
+const SamtykkeAdvarsel: FunctionComponent<Props> = ({ samtykke }) => {
     if (samtykke === Status.IkkeFunnet) {
         return (
             <AlertStripe type="advarsel" className="Samtykkeadvarsel">

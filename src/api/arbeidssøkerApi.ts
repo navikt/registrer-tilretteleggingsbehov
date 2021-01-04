@@ -7,10 +7,7 @@ export interface Arbeidssøker {
 
 export const hentArbeidssøker = async (aktørid: string): Promise<RestArbeidssøker> => {
     try {
-        const respons = await fetch(
-            '/pam-cv-api/rest/v1/arbeidssoker/' + aktørid + '/',
-            medCookies
-        );
+        const respons = await fetch(`/pam-cv-api/rest/v1/arbeidssoker/${aktørid}/`, medCookies);
 
         if (!respons.ok || respons.status === 204) {
             return {

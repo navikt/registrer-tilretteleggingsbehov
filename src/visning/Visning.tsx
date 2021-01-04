@@ -4,7 +4,7 @@ import React, { FunctionComponent } from 'react';
 import { navigerTilRegistreringsside } from '../utils/navigering';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { RestArbeidssøker } from '../api/Rest';
+import { RestArbeidssøker, Samtykkestatus } from '../api/Rest';
 import Advarsel from '../advarsel/Advarsel';
 import { Kandidat } from '../api/Kandidat';
 import { hentTeksterForValgteBehov } from '../api/tilretteleggingsbehov';
@@ -15,9 +15,10 @@ import SamtykkeAdvarsel from '../advarsel/Samtykkeadvarsel';
 interface Props {
     kandidat: Kandidat;
     arbeidssøker: RestArbeidssøker;
+    samtykke: Samtykkestatus;
 }
 
-const Visning: FunctionComponent<Props> = ({ kandidat, arbeidssøker }) => {
+const Visning: FunctionComponent<Props> = ({ kandidat, arbeidssøker, samtykke }) => {
     return (
         <div className="visning">
             <div className="sistendret">
@@ -28,7 +29,7 @@ const Visning: FunctionComponent<Props> = ({ kandidat, arbeidssøker }) => {
 
             <div className="visning__advarsler">
                 <Advarsel arbeidssøker={arbeidssøker} />
-                <SamtykkeAdvarsel aktørId={kandidat.aktørId} />
+                <SamtykkeAdvarsel samtykke={samtykke} />
             </div>
             <div className="visning__behovkategorier">
                 <Behovgruppe
