@@ -10,7 +10,6 @@ import { Kandidat } from '../api/Kandidat';
 import { hentTeksterForValgteBehov } from '../api/tilretteleggingsbehov';
 import './Visning.less';
 import { Kategori } from '../api/Behov';
-import SamtykkeAdvarsel from '../advarsel/Samtykkeadvarsel';
 
 interface Props {
     kandidat: Kandidat;
@@ -28,8 +27,7 @@ const Visning: FunctionComponent<Props> = ({ kandidat, arbeidssøker, samtykke }
             </div>
 
             <div className="visning__advarsler">
-                <Advarsel arbeidssøker={arbeidssøker} />
-                <SamtykkeAdvarsel samtykke={samtykke} />
+                <Advarsel arbeidssøker={arbeidssøker} samtykke={samtykke} />
             </div>
             <div className="visning__behovkategorier">
                 <Behovgruppe
