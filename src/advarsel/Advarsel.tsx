@@ -1,13 +1,13 @@
-import React, { FunctionComponent } from "react";
-import { RestArbeidssøker, Samtykkestatus, Status } from "../api/Rest";
-import AlertStripe from "nav-frontend-alertstriper";
-import { Normaltekst } from "nav-frontend-typografi";
-import "./Advarsel.less";
+import React, { FunctionComponent } from 'react';
+import { RestArbeidssøker, Samtykkestatus, Status } from '../api/Rest';
+import AlertStripe from 'nav-frontend-alertstriper';
+import { Normaltekst } from 'nav-frontend-typografi';
+import './Advarsel.less';
 
 enum Variant {
-    IngenJobbprofil = "Kandidaten har ikke jobbprofil",
-    IngenCv = "Kandidaten har ikke CV",
-    ManglerSamtykke = "Kandidaten har ikke sett NAVs behandlingsgrunnlag",
+    IngenJobbprofil = 'Kandidaten har ikke jobbprofil',
+    IngenCv = 'Kandidaten har ikke CV',
+    ManglerSamtykke = 'Kandidaten har ikke blitt informert om NAVs behandlingsgrunnlag',
 }
 
 interface Props {
