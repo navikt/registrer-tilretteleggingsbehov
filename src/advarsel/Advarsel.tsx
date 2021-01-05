@@ -1,13 +1,13 @@
-import React, { FunctionComponent } from 'react';
-import { RestArbeidssøker, Samtykkestatus, Status } from '../api/Rest';
-import AlertStripe from 'nav-frontend-alertstriper';
-import { Normaltekst } from 'nav-frontend-typografi';
-import './Advarsel.less';
+import React, { FunctionComponent } from "react";
+import { RestArbeidssøker, Samtykkestatus, Status } from "../api/Rest";
+import AlertStripe from "nav-frontend-alertstriper";
+import { Normaltekst } from "nav-frontend-typografi";
+import "./Advarsel.less";
 
 enum Variant {
-    IngenJobbprofil = 'Kandidaten har ikke jobbprofil',
-    IngenCv = 'Kandidaten har ikke CV',
-    ManglerSamtykke = 'Kandidaten har ikke sett NAVs behandlingsgrunnlag',
+    IngenJobbprofil = "Kandidaten har ikke jobbprofil",
+    IngenCv = "Kandidaten har ikke CV",
+    ManglerSamtykke = "Kandidaten har ikke sett NAVs behandlingsgrunnlag",
 }
 
 interface Props {
@@ -18,7 +18,7 @@ interface Props {
 const Advarsel: FunctionComponent<Props> = ({ arbeidssøker, samtykke }) => {
     if (arbeidssøker.status === Status.Feil && arbeidssøker.statusKode === 403) {
         return (
-            <AlertStripe type='advarsel'>
+            <AlertStripe type="advarsel">
                 Du har ikke tilgang til å se informasjon om brukeren.
             </AlertStripe>
         );
@@ -44,12 +44,12 @@ const Advarsel: FunctionComponent<Props> = ({ arbeidssøker, samtykke }) => {
         return null;
     } else {
         return (
-            <AlertStripe type='advarsel' className='Samtykkeadvarsel'>
-                <Normaltekst className='blokk-s'>
+            <AlertStripe type="advarsel" className="Samtykkeadvarsel">
+                <Normaltekst className="blokk-s">
                     Brukeren er ikke synlig i kandidatsøket.
                 </Normaltekst>
                 <Normaltekst>Årsak er:</Normaltekst>
-                <ul className='Samtykkeadvarsel__liste'>
+                <ul className="Samtykkeadvarsel__liste">
                     {advarsel.map((melding) => (
                         <li>{melding}</li>
                     ))}
@@ -57,7 +57,7 @@ const Advarsel: FunctionComponent<Props> = ({ arbeidssøker, samtykke }) => {
                 {advarsel.includes(Variant.ManglerSamtykke) && (
                     <>
                         <Normaltekst>Be brukeren om å:</Normaltekst>
-                        <ol className='Samtykkeadvarsel__liste'>
+                        <ol className="Samtykkeadvarsel__liste">
                             <li>logge inn på arbeidsplassen.no</li>
                             <li>lese teksten om at du må dele CV-en med NAV</li>
                             <li>gå videre og gjennomføre det tjenesten ber om</li>
