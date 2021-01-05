@@ -3,9 +3,15 @@ import { AlertStripeFeil } from 'nav-frontend-alertstriper';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 import { hentArbeidssøker } from './api/arbeidssøkerApi';
-import { hentKandidat } from './api/api';
-import { ikkeLastet, lasterInn, RestKandidat, Status, RestArbeidssøker } from './api/Rest';
-import { Kandidat } from './api/Kandidat';
+import { hentKandidat, hentSamtykke } from './api/api';
+import {
+    ikkeLastet,
+    lasterInn,
+    RestArbeidssøker,
+    RestKandidat,
+    Samtykkestatus,
+    Status,
+} from './api/Rest';
 import { visDetaljerEvent } from './utils/navigering';
 import Endring from './endring/Endring';
 import Introduksjon from './introduksjon/Introduksjon';
@@ -26,25 +32,32 @@ interface Props {
 const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
     const [kandidat, setKandidat] = useState<RestKandidat>(ikkeLastet);
     const [arbeidssøker, setArbeidssøker] = useState<RestArbeidssøker>(ikkeLastet);
+    const [samtykke, setSamtykke] = useState<Samtykkestatus>(Status.IkkeLastet);
 
     const hentKandidatFraApi = useCallback(async () => {
         setKandidat(lasterInn);
         setKandidat(await hentKandidat(fnr));
     }, [fnr]);
 
-    const hentOgSettArbeidssøker = async (kandidat: Kandidat) => {
-        setArbeidssøker(lasterInn);
-        setArbeidssøker(await hentArbeidssøker(kandidat.aktørId));
-    };
-
     useEffect(() => {
         hentKandidatFraApi();
     }, [hentKandidatFraApi]);
 
+    const hentOgSettArbeidssøker = async (aktørId: string) => {
+        setArbeidssøker(lasterInn);
+        setArbeidssøker(await hentArbeidssøker(aktørId));
+    };
+
+    const hentOgSettSamtykke = async (aktørId: string) => {
+        setSamtykke(Status.LasterInn);
+        setSamtykke(await hentSamtykke(aktørId));
+    };
+
     useEffect(() => {
-        if (kandidat.status === Status.Suksess) {
-            hentOgSettArbeidssøker(kandidat.data);
-        }
+        if (kandidat.status !== Status.Suksess) return;
+
+        hentOgSettArbeidssøker(kandidat.data.aktørId);
+        hentOgSettSamtykke(kandidat.data.aktørId);
     }, [kandidat]);
 
     useEffect(() => {
@@ -67,7 +80,13 @@ const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
             }
         } else if (viewType === Visningstype.VisTilretteleggingsbehov) {
             if (kandidat.status === Status.Suksess) {
-                return <Visning kandidat={kandidat.data} arbeidssøker={arbeidssøker} />;
+                return (
+                    <Visning
+                        kandidat={kandidat.data}
+                        arbeidssøker={arbeidssøker}
+                        samtykke={samtykke}
+                    />
+                );
             } else if (kandidatErIkkeRegistrert) {
                 return <Introduksjon />;
             }

@@ -1,4 +1,4 @@
-import { RestKandidat, Status, ukjentFeil, Tilbakemeldingstatus } from './Rest';
+import { RestKandidat, Status, ukjentFeil, Tilbakemeldingstatus, Samtykkestatus } from './Rest';
 import { KandidatDto } from './Kandidat';
 
 export const hentKandidat = async (fnr: string): Promise<RestKandidat> => {
@@ -69,6 +69,22 @@ export const sendTilbakemelding = async (tilbakemelding: string): Promise<Tilbak
             })
         );
 
+        if (respons.ok) {
+            return Status.Suksess;
+        }
+
+        return Status.Feil;
+    } catch (error) {
+        return Status.UkjentFeil;
+    }
+};
+
+export const hentSamtykke = async (aktørId: string): Promise<Samtykkestatus> => {
+    try {
+        const respons = await fetch('/finn-kandidat-api/samtykke/' + aktørId, medCookies);
+        if (respons.status === 404) {
+            return Status.IkkeFunnet;
+        }
         if (respons.ok) {
             return Status.Suksess;
         }

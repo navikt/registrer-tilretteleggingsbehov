@@ -1,5 +1,6 @@
-import { Arbeidshverdagen, Fysisk, Arbeidstid, UtfordringerMedNorsk } from '../api/Behov';
+import { Arbeidshverdagen, Arbeidstid, Fysisk, UtfordringerMedNorsk } from '../api/Behov';
 import { Kandidat } from '../api/Kandidat';
+import { Arbeidssøker } from '../api/arbeidssøkerApi';
 
 export const etFnr = '12345678901';
 
@@ -13,4 +14,12 @@ export const enKandidat: Kandidat = {
     fysisk: [Fysisk.Ergonomi, Fysisk.Arbeidsstilling, Fysisk.UniversellUtforming],
     arbeidshverdagen: [Arbeidshverdagen.PersonligBistand],
     utfordringerMedNorsk: [UtfordringerMedNorsk.Skrive, UtfordringerMedNorsk.Snakke],
+};
+
+export const enArbeidssoker: Arbeidssøker = {
+    jobbprofil: 'jobbprofil',
+};
+
+export const enArbeidssokerUtenJobbProfil: Arbeidssøker = {
+    jobbprofil: undefined,
 };

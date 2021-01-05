@@ -11,6 +11,14 @@ export type Tilbakemeldingstatus =
     | Status.Feil
     | Status.UkjentFeil;
 
+export type Samtykkestatus =
+    | Status.IkkeLastet
+    | Status.LasterInn
+    | Status.Suksess
+    | Status.Feil
+    | Status.IkkeFunnet
+    | Status.UkjentFeil;
+
 export enum Status {
     IkkeLastet,
     LasterInn,
@@ -32,6 +40,10 @@ interface LasterInn {
 interface Suksess<T> {
     status: Status.Suksess;
     data: T;
+}
+
+interface SuksessEmpty {
+    status: Status.Suksess;
 }
 
 interface Slettet {
