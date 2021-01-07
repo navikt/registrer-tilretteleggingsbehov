@@ -16,7 +16,11 @@ interface Props {
 }
 
 const Advarsel: FunctionComponent<Props> = ({ arbeidssøker, samtykke }) => {
-    if (arbeidssøker.status === Status.Feil && arbeidssøker.statusKode === 403) {
+    if (
+        arbeidssøker.status === Status.Feil &&
+        arbeidssøker.statusKode === 403 &&
+        samtykke === Status.Suksess
+    ) {
         return (
             <AlertStripe type="advarsel">
                 Du har ikke tilgang til å se informasjon om brukeren.
