@@ -83,9 +83,6 @@ const Endring: FunctionComponent<Props> = ({ kandidat }) => {
             <main className="endring__innhold">
                 <div className="endring__tilbake-og-slett">
                     <Tilbakeknapp />
-                    <Knapp onClick={() => toggleSlettModal(true)} mini={true}>
-                        Slett
-                    </Knapp>
                 </div>
                 <Sidetittel className="blokk-xxs">Endre behov for tilrettelegging</Sidetittel>
                 <Ingress className="endring__ingress">
@@ -137,7 +134,12 @@ const Endring: FunctionComponent<Props> = ({ kandidat }) => {
                     >
                         Lagre endringer
                     </Hovedknapp>
-                    <Knapp onClick={navigerTilVisningsside}>Avbryt</Knapp>
+                    <Knapp onClick={() => toggleSlettModal(true)} className="endring__slettknapp">
+                        Slett
+                    </Knapp>
+                    <Knapp onClick={navigerTilVisningsside} className="endring__avbrytknapp">
+                        Avbryt
+                    </Knapp>
                     {respons.status === Status.Feil ||
                         (respons.status === Status.UkjentFeil && (
                             <Feilmelding className="registrering__feilmelding">
