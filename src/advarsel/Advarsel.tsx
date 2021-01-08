@@ -50,7 +50,7 @@ const Advarsel: FunctionComponent<Props> = ({ arbeidssøker, samtykke }) => {
         return (
             <AlertStripe type="advarsel" className="Samtykkeadvarsel">
                 <Normaltekst className="blokk-s">
-                    Brukeren er ikke synlig i kandidatsøket.
+                    Brukeren er ikke synlig i kandidatsøket i Rekrutteringsbistand.
                 </Normaltekst>
                 <Normaltekst>Årsak er:</Normaltekst>
                 <ul className="Samtykkeadvarsel__liste">
