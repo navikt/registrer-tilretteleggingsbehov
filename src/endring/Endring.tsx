@@ -134,7 +134,11 @@ const Endring: FunctionComponent<Props> = ({ kandidat }) => {
                     >
                         Lagre endringer
                     </Hovedknapp>
-                    <Knapp onClick={() => toggleSlettModal(true)} className="endring__slettknapp">
+                    <Knapp
+                        onClick={() => toggleSlettModal(true)}
+                        className="endring__slettknapp"
+                        htmlType="button"
+                    >
                         Slett
                     </Knapp>
                     <Knapp onClick={navigerTilVisningsside} className="endring__avbrytknapp">
