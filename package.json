@@ -46,7 +46,7 @@
         "express": "^4.17.1"
     },
     "scripts": {
-        "mock": "REACT_APP_MOCK=true npm run start",
+        "start:mock": "REACT_APP_MOCK=true npm run start",
         "start": "craco start",
         "build": "craco build",
         "eject": "craco eject"
