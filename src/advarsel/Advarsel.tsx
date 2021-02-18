@@ -55,7 +55,7 @@ const Advarsel: FunctionComponent<Props> = ({ arbeidssøker, samtykke }) => {
                 <Normaltekst>Årsak er:</Normaltekst>
                 <ul className="Samtykkeadvarsel__liste">
                     {advarsel.map((melding) => (
-                        <li>{melding}</li>
+                        <li key={melding}>{melding}</li>
                     ))}
                 </ul>
                 {advarsel.includes(Variant.ManglerSamtykke) && (

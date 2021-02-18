@@ -1,8 +1,8 @@
-import { AlertStripeSuksess, AlertStripeFeil } from 'nav-frontend-alertstriper';
+import { AlertStripeFeil, AlertStripeSuksess } from 'nav-frontend-alertstriper';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { Knapp } from 'nav-frontend-knapper';
 import { Textarea } from 'nav-frontend-skjema';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { Element, Normaltekst } from 'nav-frontend-typografi';
 import React, { ChangeEvent, FunctionComponent, useState } from 'react';
 import { sendTilbakemelding } from '../api/api';
 import { Status, Tilbakemeldingstatus } from '../api/Rest';
@@ -51,26 +51,25 @@ const GiTilbakemelding: FunctionComponent = () => {
     return (
         <Ekspanderbartpanel
             border
-            tittel="Savner du et alternativ?"
-            tittelProps="element"
-            className="gi-tilbakemelding blokk-m"
+            tittel={<Element>Savner du et alternativ?</Element>}
+            className='gi-tilbakemelding blokk-m'
         >
             {visTilbakemeldingsboks && (
                 <>
-                    <Normaltekst className="blokk-s">
+                    <Normaltekst className='blokk-s'>
                         Send oss et forslag. Forslaget blir kun brukt til videreutvikling av
                         verktøyet.
                     </Normaltekst>
                     <Textarea
-                        label="Forslag"
+                        label='Forslag'
                         feil={feilmelding}
                         value={tilbakemelding}
                         onChange={onTilbakemeldingChange}
                     />
                     <Knapp
                         mini
-                        className="gi-tilbakemelding__sendknapp"
-                        htmlType="button"
+                        className='gi-tilbakemelding__sendknapp'
+                        htmlType='button'
                         onClick={validerOgSendForslag}
                         spinner={status === Status.LasterInn}
                     >

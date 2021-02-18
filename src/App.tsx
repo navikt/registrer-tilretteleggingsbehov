@@ -4,14 +4,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 
 import { hentArbeidssøker } from './api/arbeidssøkerApi';
 import { hentKandidat, hentSamtykke } from './api/api';
-import {
-    ikkeLastet,
-    lasterInn,
-    RestArbeidssøker,
-    RestKandidat,
-    Samtykkestatus,
-    Status,
-} from './api/Rest';
+import { ikkeLastet, lasterInn, RestArbeidssøker, RestKandidat, Samtykkestatus, Status } from './api/Rest';
 import { visDetaljerEvent } from './utils/navigering';
 import Endring from './endring/Endring';
 import Introduksjon from './introduksjon/Introduksjon';
@@ -95,6 +88,8 @@ const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
         if (kandidat.status === Status.Feil) {
             return <AlertStripeFeil>Kunne ikke hente tilretteleggingsbehov</AlertStripeFeil>;
         }
+
+        return '';
     };
 
     return (

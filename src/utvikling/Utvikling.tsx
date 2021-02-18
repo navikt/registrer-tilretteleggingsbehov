@@ -4,10 +4,13 @@ import { etFnr } from '../mock/testdata';
 import { visDetaljerEvent, visRegistreringEvent } from '../utils/navigering';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import './Utvikling.less';
+import Modal from 'nav-frontend-modal';
+
+Modal.setAppElement(document.getElementById('registrer-tilretteleggingsbehov-utvikling'));
 
 const Utvikling: FunctionComponent = () => {
     const [visningstype, setVisningstype] = useState<Visningstype>(
-        Visningstype.VisTilretteleggingsbehov
+        Visningstype.VisTilretteleggingsbehov,
     );
 
     useEffect(() => {
@@ -31,7 +34,7 @@ const Utvikling: FunctionComponent = () => {
     }`;
 
     return (
-        <div className="utvikling">
+        <div className='utvikling'>
             <Innholdstittel>Utviklingsapp for tilretteleggingsbehov</Innholdstittel>
             <div className={className}>
                 <App viewType={visningstype} fnr={etFnr} />
