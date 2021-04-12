@@ -1,11 +1,11 @@
 import fetchMock from 'fetch-mock';
-import { enKandidat, etFnr } from './testdata';
+import { enArbeidssoker, enKandidat } from './testdata';
 
 const basePath = '/finn-kandidat-api';
 const pamBasePath = '/pam-cv-api';
 
 fetchMock
-    .get(`${basePath}/kandidater/${etFnr}`, enKandidat)
+    .get(`express:${basePath}/kandidater/:fnr`, enKandidat)
     .post(`${basePath}/kandidater`, {
         status: 201,
         body: enKandidat,
@@ -14,7 +14,7 @@ fetchMock
         ...enKandidat,
         sistEndretAvVeileder: new Date().toISOString(),
     })
-    .delete(`${basePath}/kandidater/${etFnr}`, 200)
-    .get(`${pamBasePath}/rest/v1/arbeidssoker/${enKandidat.aktørId}/`, 403)
+    .delete(`express:${basePath}/kandidater/:fnr`, 200)
+    .get(`express:${pamBasePath}/rest/v1/arbeidssoker/:aktorId/`, enArbeidssoker)
     .post(`${basePath}/tilbakemeldinger`, 201)
-    .get(`${basePath}/samtykke/${enKandidat.aktørId}`, 404);
+    .get(`express:${basePath}/samtykke/:aktorId`, 200);
