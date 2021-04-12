@@ -1,5 +1,5 @@
 import fetchMock from 'fetch-mock';
-import { enKandidat } from './testdata';
+import { enArbeidssoker, enKandidat } from './testdata';
 
 const basePath = '/finn-kandidat-api';
 const pamBasePath = '/pam-cv-api';
@@ -15,6 +15,6 @@ fetchMock
         sistEndretAvVeileder: new Date().toISOString(),
     })
     .delete(`express:${basePath}/kandidater/:fnr`, 200)
-    .get(`express:${pamBasePath}/rest/v1/arbeidssoker/:aktorId/`, 403)
+    .get(`express:${pamBasePath}/rest/v1/arbeidssoker/:aktorId/`, enArbeidssoker)
     .post(`${basePath}/tilbakemeldinger`, 201)
-    .get(`express:${basePath}/samtykke/:aktorId`, 404);
+    .get(`express:${basePath}/samtykke/:aktorId`, 200);
