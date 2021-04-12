@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/registrer-tilretteleggingsbehov/static/css/main.cadf6895.css",
+    "main.js": "/registrer-tilretteleggingsbehov/static/js/main.65b45d0e.js",
+    "main.js.map": "/registrer-tilretteleggingsbehov/static/js/main.65b45d0e.js.map",
+    "index.html": "/registrer-tilretteleggingsbehov/index.html",
+    "static/css/main.cadf6895.css.map": "/registrer-tilretteleggingsbehov/static/css/main.cadf6895.css.map",
+    "static/js/main.65b45d0e.js.LICENSE.txt": "/registrer-tilretteleggingsbehov/static/js/main.65b45d0e.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/css/main.cadf6895.css",
+    "static/js/main.65b45d0e.js"
+  ]
+}
