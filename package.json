@@ -50,6 +50,7 @@
         "start:mock": "REACT_APP_MOCK=true npm run start",
         "start": "craco start",
         "build": "craco build",
+        "build:mock": "REACT_APP_MOCK=true npm run build",
         "eject": "craco eject"
     },
     "eslintConfig": {
