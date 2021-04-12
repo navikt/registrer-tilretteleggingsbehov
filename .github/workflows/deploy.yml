@@ -69,7 +69,7 @@ jobs:
             - uses: actions/setup-node@v1
               with:
                   node-version: '12.x'
-            - name: Innstaller avhengigheter
+            - name: Installer avhengigheter
               run: npm ci
             - name: Build mock application
               run: npm run build:mock
