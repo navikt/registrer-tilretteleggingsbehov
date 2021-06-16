@@ -30,16 +30,14 @@ const Advarsel: FunctionComponent<Props> = ({ arbeidssøker, samtykke }) => {
 
     let advarsel = [];
 
-    //TODO: Fiks eller erstatt feil i cv api, og ta i bruk koden under.
-    /*const notFoundNoContent = (status: number) => status === 404 || status === 204;
-    if (arbeidssøker.status === Status.Feil && notFoundNoContent(arbeidssøker.statusKode)) {
-        advarsel.push(Variant.IngenCv);
-        advarsel.push(Variant.IngenJobbprofil);
+    if (arbeidssøker.status === Status.Suksess) {
+        if (!arbeidssøker.data.harCv) {
+            advarsel.push(Variant.IngenCv);
+        }
+        if (!arbeidssøker.data.harJobbprofil) {
+            advarsel.push(Variant.IngenJobbprofil);
+        }
     }
-
-    if (arbeidssøker.status === Status.Suksess && !arbeidssøker.data.jobbprofil) {
-        advarsel.push(Variant.IngenJobbprofil);
-    }*/
 
     if (samtykke === Status.IkkeFunnet) {
         advarsel.push(Variant.ManglerSamtykke);

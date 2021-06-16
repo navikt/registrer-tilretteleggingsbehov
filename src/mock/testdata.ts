@@ -16,9 +16,6 @@ export const enKandidat: Kandidat = {
 };
 
 export const enArbeidssoker: Arbeidssøker = {
-    jobbprofil: 'jobbprofil',
-};
-
-export const enArbeidssokerUtenJobbProfil: Arbeidssøker = {
-    jobbprofil: undefined,
+    harJobbprofil: true,
+    harCv: false,
 };
