@@ -32,10 +32,10 @@ const Advarsel: FunctionComponent<Props> = ({ arbeidssøker, samtykke }) => {
 
     if (arbeidssøker.status === Status.Suksess) {
         if (!arbeidssøker.data.harCv) {
-            advarsel.push(Variant.IngenCv);
+            //advarsel.push(Variant.IngenCv);
         }
         if (!arbeidssøker.data.harJobbprofil) {
-            advarsel.push(Variant.IngenJobbprofil);
+            //advarsel.push(Variant.IngenJobbprofil);
         }
     }
 
