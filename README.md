@@ -4,6 +4,26 @@ Microfrontend for å vise og endre tilretteleggingsbehov til oppfølgingsbrukere
 
 Injiseres i [Veilarbmaofs](https://github.com/navikt/veilarbmaofs), en tjeneste for veiledere.
 
+# Hvordan se appen i prod
+Appen er ikke en del av arbeidsflaten Rekrutteringsbistand, den er en microfrontend som inngår arbeidsflaten Aktivitetsplanen (alias "Arbeidsrettet oppfølging"? alias "Modia"?) som eies av Produktområde arbeidsoppfølgign (POAO). Men det er mulig å navigere dit ved å starte fra Rekrutteringsbistand.
+
+## Mac
+
+## Linux
+Per november 2021 er det ikke mulig å se Aktivitetsplanen fra Linux
+
+## Windows
+
+1. Bruk nettleseren Google Chrome eller Microsoft Edge. Firefox er ikke støttet per høsten 2021.
+2. Gå til https://mobapps.nav.no for å komme inn i Citrix
+3. Det burde funke å starte "Chrome SKSS", men det funker ikke for Are per november 2021. Workaround: Start Confluence. Et nytt Citrix nettleservindu med Cofluence skal åpne seg.
+4. I nettleserens adressefelt, skriv inn URL-en til Rekrutteringsbistand: https://rekrutteringsbistand.nais.adeo.no. Du skal komme til Rekrutteringsbistand.
+5. Inne i Rekrutteringsbistand, velg en tilfeldig kandidat. Inne i oversikten over kandidatens jobbønsker og CV, klikk lenken "Se aktivitetsplan". Det skal åpne seg en ny nettleserarkfane med Aktivitetsplan/Arbeidsrettet oppfølging.
+6. Inne i Aktivitetsplanen, velg "Detaljer". Du skal få se en liste med ekspanderbare linjer, hvorav en av dem heter "Behov for tilrettelegging. Den er vår microfrontend. Ekspander den for å se våre tilretteleggingsbehovdata for den aktuelle kandidaten.
+
+
+
+
 # Henvendelser
 
 ## For Nav-ansatte
