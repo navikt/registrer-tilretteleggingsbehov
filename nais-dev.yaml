@@ -2,9 +2,9 @@ apiVersion: nais.io/v1alpha1
 kind: Application
 metadata:
     name: registrer-tilretteleggingsbehov
-    namespace: default
+    namespace: toi
     labels:
-        team: arbeidsgiver
+        team: toi
 spec:
     image: {{ image }}
     port: 3000
