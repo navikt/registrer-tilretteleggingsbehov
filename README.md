@@ -1,8 +1,14 @@
 # Registrer tilretteleggingsbehov
 
-Microfrontend for å vise og endre tilretteleggingsbehov til oppfølgingsbrukere.
+Vise og endre tilretteleggingsbehov til oppfølgingsbrukere.
 
-Injiseres i [Veilarbmaofs](https://github.com/navikt/veilarbmaofs), en tjeneste for veiledere.
+Dette er en microfrontend-app som inngår i arbeidsflaten Aktivitetsplanen (alias "Arbeidsrettet oppfølging"? alias "Modia"?) som eies av Produktområde arbeidsoppfølging (POAO). Container-applikasjonen er [Veilarbmaofs](https://github.com/navikt/veilarbmaofs), en tjeneste for veiledere.
+
+Appen er ikke en del av arbeidsflaten/systemet Rekrutteringsbistand, men det er mulig å navigere til den ved å starte fra Rekrutteringsbistand og følge en lenke derfra.
+
+
+# Hvordan se appen i dev/testmiljø
+Gå til https://app-q1.adeo.no/veilarbpersonflatefs/ i Citrix (https://mobapps.nav.no) eller i utviklerimage (alias VDI). Du trenger å logge på som en testbruker som har de riktige rettighetene.
 
 # Hvordan se appen i prod
 Appen er ikke en del av arbeidsflaten Rekrutteringsbistand, den er en microfrontend som inngår arbeidsflaten Aktivitetsplanen (alias "Arbeidsrettet oppfølging"? alias "Modia"?) som eies av Produktområde arbeidsoppfølgign (POAO). Men det er mulig å navigere dit ved å starte fra Rekrutteringsbistand.
