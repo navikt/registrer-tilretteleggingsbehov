@@ -7,6 +7,18 @@ Injiseres i [Veilarbmaofs](https://github.com/navikt/veilarbmaofs), en tjeneste 
 # Hvordan se appen i prod
 Appen er ikke en del av arbeidsflaten Rekrutteringsbistand, den er en microfrontend som inngår arbeidsflaten Aktivitetsplanen (alias "Arbeidsrettet oppfølging"? alias "Modia"?) som eies av Produktområde arbeidsoppfølgign (POAO). Men det er mulig å navigere dit ved å starte fra Rekrutteringsbistand.
 
+## Nødvendige roller/tilganger
+Tilganger bestilles per epost på nav.it.identhandtering@nav.no
+
+Are måtte få rollen "Systemforvalter" for å kunne se Aktivitetsplanen.
+
+I tillegg har Are følgende roller, men vet ikke hvilke som egentlig er nødvendig:
+- Modia Generell
+- Modia Endre navn
+- Modia Oppfølging
+- Modia Oppgavestyring
+
+
 ## Mac
 
 ## Linux
