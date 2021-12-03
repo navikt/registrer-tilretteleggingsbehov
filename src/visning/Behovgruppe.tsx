@@ -15,7 +15,7 @@ const Behovgruppe: FunctionComponent<Props> = ({ overskrift, beskrivelse, behov 
             <Normaltekst>{beskrivelse}</Normaltekst>
             {behov.length ? (
                 <ul className="visning__behovliste">
-                    {behov.map(behov => (
+                    {behov.map((behov) => (
                         <li key={behov.beskrivelse}>
                             <Normaltekst>{behov.beskrivelse}</Normaltekst>
                         </li>

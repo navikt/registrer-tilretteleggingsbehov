@@ -52,24 +52,24 @@ const GiTilbakemelding: FunctionComponent = () => {
         <Ekspanderbartpanel
             border
             tittel={<Element>Savner du et alternativ?</Element>}
-            className='gi-tilbakemelding blokk-m'
+            className="gi-tilbakemelding blokk-m"
         >
             {visTilbakemeldingsboks && (
                 <>
-                    <Normaltekst className='blokk-s'>
+                    <Normaltekst className="blokk-s">
                         Send oss et forslag. Forslaget blir kun brukt til videreutvikling av
                         verktøyet.
                     </Normaltekst>
                     <Textarea
-                        label='Forslag'
+                        label="Forslag"
                         feil={feilmelding}
                         value={tilbakemelding}
                         onChange={onTilbakemeldingChange}
                     />
                     <Knapp
                         mini
-                        className='gi-tilbakemelding__sendknapp'
-                        htmlType='button'
+                        className="gi-tilbakemelding__sendknapp"
+                        htmlType="button"
                         onClick={validerOgSendForslag}
                         spinner={status === Status.LasterInn}
                     >

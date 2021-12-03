@@ -10,7 +10,7 @@ Modal.setAppElement(document.getElementById('registrer-tilretteleggingsbehov-utv
 
 const Utvikling: FunctionComponent = () => {
     const [visningstype, setVisningstype] = useState<Visningstype>(
-        Visningstype.VisTilretteleggingsbehov,
+        Visningstype.VisTilretteleggingsbehov
     );
 
     useEffect(() => {
@@ -34,7 +34,7 @@ const Utvikling: FunctionComponent = () => {
     }`;
 
     return (
-        <div className='utvikling'>
+        <div className="utvikling">
             <Innholdstittel>Utviklingsapp for tilretteleggingsbehov</Innholdstittel>
             <div className={className}>
                 <App viewType={visningstype} fnr={etFnr} />

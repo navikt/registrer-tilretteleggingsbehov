@@ -31,9 +31,8 @@ const Endring: FunctionComponent<Props> = ({ kandidat }) => {
     const [utfordringerMedNorsk, setUtfordringerMedNorsk] = useState<Behov[]>(
         kandidat.utfordringerMedNorsk
     );
-    const [skalViseIngenValgteBehovFeil, setSkalViseIngenValgteBehovFeil] = useState<boolean>(
-        false
-    );
+    const [skalViseIngenValgteBehovFeil, setSkalViseIngenValgteBehovFeil] =
+        useState<boolean>(false);
 
     const [respons, setRespons] = useState<RestKandidat>(ikkeLastet);
     const [visSlettModal, toggleSlettModal] = useState<boolean>(false);

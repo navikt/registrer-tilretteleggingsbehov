@@ -29,9 +29,8 @@ const Registrering: FunctionComponent<Props> = ({ fnr }) => {
     const [fysisk, setFysisk] = useState<Behov[]>([]);
     const [arbeidshverdagen, setArbeidshverdagen] = useState<Behov[]>([]);
     const [utfordringerMedNorsk, setUtfordringerMedNorsk] = useState<Behov[]>([]);
-    const [skalViseIngenValgteBehovFeil, setSkalViseIngenValgteBehovFeil] = useState<boolean>(
-        false
-    );
+    const [skalViseIngenValgteBehovFeil, setSkalViseIngenValgteBehovFeil] =
+        useState<boolean>(false);
 
     const [respons, setRespons] = useState<RestKandidat>(ikkeLastet);
 
