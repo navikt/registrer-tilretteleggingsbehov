@@ -2,6 +2,7 @@
     "name": "registrer-tilretteleggingsbehov",
     "version": "0.1.0",
     "private": true,
+    "homepage": "/registrer-tilretteleggingsbehov",
     "dependencies": {
         "@craco/craco": "^6.1.1",
         "@navikt/fnrvalidator": "^1.1.3",
