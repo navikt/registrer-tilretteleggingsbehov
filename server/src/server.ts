@@ -1,11 +1,11 @@
-const path = require('path');
-const express = require('express');
-const app = express();
+import path from 'path';
+import express from 'express';
 
 const PORT = 3000;
 const BASE_PATH = '/registrer-tilretteleggingsbehov';
-
 const buildPath = path.join(__dirname, '../build');
+
+const app = express();
 
 const startServer = () => {
     app.use('/*', (req, res, next) => {
