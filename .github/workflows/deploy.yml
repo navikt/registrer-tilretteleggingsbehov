@@ -17,10 +17,15 @@ jobs:
                   cache: 'npm'
                   cache-dependency-path: |
                       package-lock.json
+                      server/package-lock.json
             - name: Installer avhengigheter
               run: npm install --legacy-peer-deps
             - name: Bygg applikasjon
               run: npm run build
+            - name: Installer avhengigheter for server
+              run: cd server && npm ci
+            - name: Bygg server
+              run: cd server && npm run build
             - name: Bygg og publiser Docker-image
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -32,10 +37,10 @@ jobs:
     deploy-til-dev-fss:
         name: Deploy til dev-fss
         needs: bygg-og-push-docker-image
-        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/placeholder'
+        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/serverforbedringer'
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v1
+            - uses: actions/checkout@v2
             - uses: nais/deploy/actions/deploy@v1
               env:
                   APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
@@ -48,7 +53,7 @@ jobs:
         if: github.ref == 'refs/heads/master'
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v1
+            - uses: actions/checkout@v2
             - uses: nais/deploy/actions/deploy@v1
               env:
                   APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
@@ -58,10 +63,10 @@ jobs:
     deploy-til-dev-gcp:
         name: Deploy til dev-gcp
         needs: bygg-og-push-docker-image
-        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/placeholder'
+        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/serverforbedringer'
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v1
+            - uses: actions/checkout@v2
             - uses: nais/deploy/actions/deploy@v1
               env:
                   APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
@@ -74,7 +79,7 @@ jobs:
         if: github.ref == 'refs/heads/master'
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v1
+            - uses: actions/checkout@v2
             - uses: nais/deploy/actions/deploy@v1
               env:
                   APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
@@ -86,7 +91,7 @@ jobs:
         runs-on: ubuntu-latest
         if: github.ref == 'refs/heads/master'
         steps:
-            - uses: actions/checkout@v1
+            - uses: actions/checkout@v2
             - uses: actions/setup-node@v1
               with:
                   node-version: '12.x'
