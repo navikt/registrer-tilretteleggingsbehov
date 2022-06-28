@@ -12,6 +12,7 @@ spec:
     ingresses:
         - https://app-q0.adeo.no/registrer-tilretteleggingsbehov/
         - https://app-q1.adeo.no/registrer-tilretteleggingsbehov/
+        - https://registrer-tilretteleggingsbehov.dev.intern.nav.no
     liveness:
         initialDelay: 5
         path: /registrer-tilretteleggingsbehov/internal/isAlive
