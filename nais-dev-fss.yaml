@@ -1,0 +1,20 @@
+apiVersion: nais.io/v1alpha1
+kind: Application
+metadata:
+    name: registrer-tilretteleggingsbehov
+    namespace: toi
+    labels:
+        team: toi
+spec:
+    # prettier-ignore
+    image: {{ image }}
+    port: 3000
+    ingresses:
+        - https://app-q0.adeo.no/registrer-tilretteleggingsbehov/
+        - https://app-q1.adeo.no/registrer-tilretteleggingsbehov/
+    liveness:
+        initialDelay: 5
+        path: /registrer-tilretteleggingsbehov/internal/isAlive
+    readiness:
+        initialDelay: 5
+        path: /registrer-tilretteleggingsbehov/internal/isReady

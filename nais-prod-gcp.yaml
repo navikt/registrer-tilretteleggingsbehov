@@ -10,7 +10,6 @@ spec:
     image: {{ image }}
     port: 3000
     ingresses:
-        - https://app.adeo.no/registrer-tilretteleggingsbehov/
         - https://registrer-tilretteleggingsbehov.dev.intern.nav.no
     liveness:
         initialDelay: 5

@@ -34,10 +34,10 @@ jobs:
                   echo ${GITHUB_TOKEN} | docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} --password-stdin
                   docker push ${IMAGE}
 
-    deploy-til-dev:
-        name: Deploy til dev
+    deploy-til-dev-fss:
+        name: Deploy til dev-fss
         needs: bygg-og-push-docker-image
-        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/flytt-fra-default-namespace'
+        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/placeholder'
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v1
@@ -45,11 +45,11 @@ jobs:
               env:
                   APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
                   CLUSTER: dev-fss
-                  RESOURCE: nais-dev.yaml
+                  RESOURCE: nais-dev-fss.yaml
 
-    deploy-to-prod:
-        name: Deploy til prod
-        needs: deploy-til-dev
+    deploy-to-prod-fss:
+        name: Deploy til prod-fss
+        needs: deploy-til-dev-fss
         if: github.ref == 'refs/heads/master'
         runs-on: ubuntu-latest
         steps:
@@ -58,7 +58,33 @@ jobs:
               env:
                   APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
                   CLUSTER: prod-fss
-                  RESOURCE: nais-prod.yaml
+                  RESOURCE: nais-prod-fss.yaml
+
+    deploy-til-dev-gcp:
+        name: Deploy til dev-gcp
+        needs: bygg-og-push-docker-image
+        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/placeholder'
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v1
+            - uses: nais/deploy/actions/deploy@v1
+              env:
+                  APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+                  CLUSTER: dev-gcp
+                  RESOURCE: nais-dev-gcp.yaml
+
+    deploy-to-prod-gcp:
+        name: Deploy til prod-gcp
+        needs: deploy-til-dev-gcp
+        if: github.ref == 'refs/heads/master'
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v1
+            - uses: nais/deploy/actions/deploy@v1
+              env:
+                  APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+                  CLUSTER: prod-gcp
+                  RESOURCE: nais-prod-gcp.yaml
 
     oppdater-gh-pages:
         name: Update GitHub pages
