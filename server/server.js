@@ -8,6 +8,16 @@ const BASE_PATH = '/registrer-tilretteleggingsbehov';
 const buildPath = path.join(__dirname, '../build');
 
 const startServer = () => {
+    app.use('/*', (req, res, next) => {
+        const { origin } = req.headers;
+
+        if (origin?.includes('intern.nav.no')) {
+            res.header('Access-Control-Allow-Origin', origin);
+        }
+
+        next();
+    });
+
     app.use(
         `${BASE_PATH}/static`,
         express.static(`${buildPath}/static`, {
