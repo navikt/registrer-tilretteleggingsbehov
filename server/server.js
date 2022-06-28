@@ -11,7 +11,7 @@ const startServer = () => {
     app.use('/*', (req, res, next) => {
         const { origin } = req.headers;
 
-        if (origin && origin.includes('intern.nav.no')) {
+        if (origin?.includes('intern.nav.no')) {
             res.header('Access-Control-Allow-Origin', origin);
         }
 
