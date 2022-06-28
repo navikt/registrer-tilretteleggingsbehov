@@ -18,7 +18,7 @@ jobs:
                   cache-dependency-path: |
                       package-lock.json
             - name: Installer avhengigheter
-              run: npm install
+              run: npm install --legacy-peer-deps
             - name: Bygg applikasjon
               run: npm run build
             - name: Bygg og publiser Docker-image
