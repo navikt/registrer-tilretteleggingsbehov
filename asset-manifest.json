@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/registrer-tilretteleggingsbehov/static/css/main.7276c81f.css",
-    "main.js": "/registrer-tilretteleggingsbehov/static/js/main.2adfa7d4.js",
-    "main.js.map": "/registrer-tilretteleggingsbehov/static/js/main.2adfa7d4.js.map",
+    "main.css": "/registrer-tilretteleggingsbehov/static/css/main.ba475197.css",
+    "main.js": "/registrer-tilretteleggingsbehov/static/js/main.6fdc0992.js",
+    "main.js.map": "/registrer-tilretteleggingsbehov/static/js/main.6fdc0992.js.map",
     "index.html": "/registrer-tilretteleggingsbehov/index.html",
-    "static/css/main.7276c81f.css.map": "/registrer-tilretteleggingsbehov/static/css/main.7276c81f.css.map",
-    "static/js/main.2adfa7d4.js.LICENSE.txt": "/registrer-tilretteleggingsbehov/static/js/main.2adfa7d4.js.LICENSE.txt"
+    "static/css/main.ba475197.css.map": "/registrer-tilretteleggingsbehov/static/css/main.ba475197.css.map",
+    "static/js/main.6fdc0992.js.LICENSE.txt": "/registrer-tilretteleggingsbehov/static/js/main.6fdc0992.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/css/main.7276c81f.css",
-    "static/js/main.2adfa7d4.js"
+    "static/css/main.ba475197.css",
+    "static/js/main.6fdc0992.js"
   ]
 }
