@@ -1,6 +1,5 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
-import { Feilmelding, Ingress, Sidetittel } from 'nav-frontend-typografi';
-import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
+import React, { FormEvent, FunctionComponent, useEffect, useState } from 'react';
+import { Alert, BodyShort, Button, Heading, Ingress } from '@navikt/ds-react';
 
 import {
     Arbeidshverdagen,
@@ -53,7 +52,9 @@ const Registrering: FunctionComponent<Props> = ({ fnr }) => {
         );
     };
 
-    const lagreBehov = async () => {
+    const onRegistreringSubmit = async (event: FormEvent) => {
+        event.preventDefault();
+
         if (respons.status === Status.LasterInn) return;
 
         if (harIngenValgteBehov()) {
@@ -76,19 +77,21 @@ const Registrering: FunctionComponent<Props> = ({ fnr }) => {
 
     return (
         <div className="registrering">
-            <main className="registrering__innhold">
+            <div className="registrering__innhold">
                 <Tilbakeknapp />
-                <Sidetittel className="blokk-xxs">Registrer behov for tilrettelegging</Sidetittel>
+                <Heading size="large" level="2">
+                    Registrer behov for tilrettelegging
+                </Heading>
                 <Ingress className="registrering__ingress">
                     Registrer bare brukere som har behov for tilrettelegging for å kunne jobbe. Du
                     skal ikke registrere brukere som har problemer med å få seg jobb av andre
                     årsaker (etnisitet, religion, hull i CV-en m.m.).
                 </Ingress>
-                <Alertstripe className="blokk-s" type="info">
+                <Alert variant="info" className="registrering__alert">
                     Før du registrerer behovene, må du ha hatt en dialog med brukeren. Brukeren vil
                     kunne se det du registrerer under Personopplysninger på Ditt NAV.
-                </Alertstripe>
-                <form className="registrering__form">
+                </Alert>
+                <form className="registrering__form" onSubmit={onRegistreringSubmit}>
                     <KategoriSpørsmål
                         tittel="Arbeidstid"
                         hjelpetekst="I jobbprofilen må brukeren selv registrere informasjon om arbeidstid, slik som deltid/heltid, kun dagtid, turnus og lignende."
@@ -119,29 +122,32 @@ const Registrering: FunctionComponent<Props> = ({ fnr }) => {
                         onChange={setUtfordringerMedNorsk}
                         kategori={Kategori.UtfordringerMedNorsk}
                     />
-                    <GiTilbakemelding />
-                    <Hovedknapp
-                        className="registrering__lagreknapp"
-                        onClick={lagreBehov}
-                        spinner={respons.status === Status.LasterInn}
-                        htmlType="button"
-                    >
-                        Lagre behov
-                    </Hovedknapp>
-                    <Knapp onClick={navigerTilVisningsside}>Avbryt</Knapp>
+                    <div className="registrering__knapper">
+                        <Button
+                            variant="primary"
+                            loading={respons.status === Status.LasterInn}
+                            className="registrering__lagreknapp"
+                        >
+                            Lagre behov
+                        </Button>
+                        <Button variant="secondary" onClick={navigerTilVisningsside}>
+                            Avbryt
+                        </Button>
+                    </div>
                     {respons.status === Status.Feil ||
                         (respons.status === Status.UkjentFeil && (
-                            <Feilmelding className="registrering__feilmelding">
+                            <BodyShort className="registrering__feilmelding">
                                 Kunne ikke lagre tilretteleggingsbehov
-                            </Feilmelding>
+                            </BodyShort>
                         ))}
                     {skalViseIngenValgteBehovFeil && (
-                        <Feilmelding className="registrering__feilmelding">
+                        <BodyShort className="registrering__feilmelding">
                             Du må velge minst ett behov
-                        </Feilmelding>
+                        </BodyShort>
                     )}
                 </form>
-            </main>
+                <GiTilbakemelding />
+            </div>
         </div>
     );
 };

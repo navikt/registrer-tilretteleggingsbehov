@@ -1,9 +1,5 @@
-import { AlertStripeFeil, AlertStripeSuksess } from 'nav-frontend-alertstriper';
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
-import { Knapp } from 'nav-frontend-knapper';
-import { Textarea } from 'nav-frontend-skjema';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
-import React, { ChangeEvent, FunctionComponent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, FunctionComponent, useState } from 'react';
+import { Accordion, Alert, BodyShort, Button, Textarea } from '@navikt/ds-react';
 import { sendTilbakemelding } from '../api/api';
 import { Status, Tilbakemeldingstatus } from '../api/Rest';
 import './GiTilbakemelding.less';
@@ -37,7 +33,9 @@ const GiTilbakemelding: FunctionComponent = () => {
         return true;
     };
 
-    const validerOgSendForslag = async () => {
+    const validerOgSendForslag = async (event: FormEvent) => {
+        event.preventDefault();
+
         setHarTrykketSend(true);
 
         if (validerTilbakemelding(tilbakemelding)) {
@@ -49,43 +47,38 @@ const GiTilbakemelding: FunctionComponent = () => {
     const visTilbakemeldingsboks = status === Status.IkkeLastet || status === Status.LasterInn;
 
     return (
-        <Ekspanderbartpanel
-            border
-            tittel={<Element>Savner du et alternativ?</Element>}
-            className="gi-tilbakemelding blokk-m"
-        >
-            {visTilbakemeldingsboks && (
-                <>
-                    <Normaltekst className="blokk-s">
-                        Send oss et forslag. Forslaget blir kun brukt til videreutvikling av
-                        verktøyet.
-                    </Normaltekst>
-                    <Textarea
-                        label="Forslag"
-                        feil={feilmelding}
-                        value={tilbakemelding}
-                        onChange={onTilbakemeldingChange}
-                    />
-                    <Knapp
-                        mini
-                        className="gi-tilbakemelding__sendknapp"
-                        htmlType="button"
-                        onClick={validerOgSendForslag}
-                        spinner={status === Status.LasterInn}
-                    >
-                        Send forslag
-                    </Knapp>
-                </>
-            )}
+        <Accordion className="gi-tilbakemelding">
+            <Accordion.Item>
+                <Accordion.Header>Savner du et alternativ?</Accordion.Header>
+                <Accordion.Content>
+                    {visTilbakemeldingsboks && (
+                        <form onSubmit={validerOgSendForslag}>
+                            <BodyShort className="blokk-s">
+                                Send oss et forslag. Forslaget blir kun brukt til videreutvikling av
+                                verktøyet.
+                            </BodyShort>
+                            <Textarea
+                                label="Forslag"
+                                error={feilmelding}
+                                value={tilbakemelding}
+                                onChange={onTilbakemeldingChange}
+                            />
+                            <Button loading={status === Status.LasterInn}>Send forslag</Button>
+                        </form>
+                    )}
 
-            {status === Status.Suksess && (
-                <AlertStripeSuksess>Takk for din tilbakemelding!</AlertStripeSuksess>
-            )}
+                    {status === Status.Suksess && (
+                        <Alert variant="success">Takk for din tilbakemelding!</Alert>
+                    )}
 
-            {status === Status.Feil && (
-                <AlertStripeFeil>Det skjedde en feil, vennligst prøv igjen senere.</AlertStripeFeil>
-            )}
-        </Ekspanderbartpanel>
+                    {status === Status.Feil && (
+                        <Alert variant="error">
+                            Det skjedde en feil, vennligst prøv igjen senere.
+                        </Alert>
+                    )}
+                </Accordion.Content>
+            </Accordion.Item>
+        </Accordion>
     );
 };
 

@@ -1,8 +1,7 @@
 import React, { FunctionComponent } from 'react';
+import { BodyLong, Checkbox, CheckboxGroup, Detail, Heading } from '@navikt/ds-react';
 import { Behov, Kategori } from '../../api/Behov';
-import { Checkbox, CheckboxGruppe } from 'nav-frontend-skjema';
 import { Behovtekst, hentTekster } from '../../api/tilretteleggingsbehov';
-import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import './KategoriSpørsmål.less';
 
 interface Props {
@@ -34,33 +33,37 @@ const KategoriSpørsmål: FunctionComponent<Props> = ({
 
     return (
         <section className="kategori-spørsmål">
-            <Undertittel className="blokk-xxs">{tittel}</Undertittel>
+            <Heading level="3" size="medium">
+                {tittel}
+            </Heading>
             {hjelpetekst && (
-                <Normaltekst className="kategori-spørsmål__kategorihjelpetekst">
+                <BodyLong className="kategori-spørsmål__kategorihjelpetekst">
                     {hjelpetekst}
-                </Normaltekst>
+                </BodyLong>
             )}
 
-            <CheckboxGruppe legend={beskrivelse}>
+            <CheckboxGroup legend={beskrivelse}>
                 {alternativer.map((alternativ: Behovtekst) => (
                     <div className="kategori-spørsmål__checkbox" key={alternativ.behov}>
                         <Checkbox
-                            label={alternativ.beskrivelse}
                             checked={valgteBehov.includes(alternativ.behov)}
                             onChange={() => toggleAlternativ(alternativ.behov)}
                             aria-describedby={alternativ.behov + '_hjelpetekst'}
-                        />
+                        >
+                            {alternativ.beskrivelse}
+                        </Checkbox>
                         {alternativ.hjelpetekst && (
-                            <div
+                            <Detail
+                                size="small"
                                 id={alternativ.behov + '_hjelpetekst'}
                                 className="kategori-spørsmål__hjelpetekst"
                             >
                                 {alternativ.hjelpetekst}
-                            </div>
+                            </Detail>
                         )}
                     </div>
                 ))}
-            </CheckboxGruppe>
+            </CheckboxGroup>
         </section>
     );
 };
