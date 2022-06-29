@@ -1,11 +1,9 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
-import Modal from 'nav-frontend-modal';
-import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
-import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import { RestKandidat, Status, ikkeLastet } from '../../api/Rest';
 import { slettKandidat } from '../../api/api';
 import { navigerTilVisningsside } from '../../utils/navigering';
 import './SlettModal.less';
+import { BodyLong, Button, Heading, Modal } from '@navikt/ds-react';
 
 interface Props {
     erÅpen: boolean;
@@ -24,28 +22,36 @@ const SlettModal: FunctionComponent<Props> = ({ erÅpen, fnr, lukk }) => {
     }, [respons, lukk]);
 
     const slettKandidatOgLukk = async () => {
+        setRespons({
+            status: Status.LasterInn,
+        });
+
         const responsFraSletting: RestKandidat = await slettKandidat(fnr);
         setRespons(responsFraSletting);
     };
 
     return (
-        <Modal
-            isOpen={erÅpen}
-            onRequestClose={lukk}
-            closeButton={true}
-            contentLabel="Slett behov for tilrettelegging"
-            className="slett-modal"
-        >
-            <Systemtittel className="blokk-s">Slett behov for tilrettelegging</Systemtittel>
-            <Normaltekst className="blokk-l">
-                Er du sikker på at du vil slette tilretteleggingsbehovene til denne kandidaten?
-            </Normaltekst>
-            <div>
-                <Hovedknapp className="slett-modal__slettknapp" onClick={slettKandidatOgLukk}>
-                    Slett
-                </Hovedknapp>
-                <Knapp onClick={lukk}>Avbryt</Knapp>
-            </div>
+        <Modal closeButton open={erÅpen} onClose={lukk} className="slett-modal">
+            <Modal.Content>
+                <Heading level="1" size="medium">
+                    Slett behov for tilrettelegging
+                </Heading>
+                <BodyLong className="slett-modal__tekst">
+                    Er du sikker på at du vil slette tilretteleggingsbehovene til denne kandidaten?
+                </BodyLong>
+                <div className="slett-modal__knapper">
+                    <Button
+                        variant="primary"
+                        onClick={slettKandidatOgLukk}
+                        loading={respons.status === Status.LasterInn}
+                    >
+                        Slett
+                    </Button>
+                    <Button variant="secondary" onClick={lukk}>
+                        Avbryt
+                    </Button>
+                </div>
+            </Modal.Content>
         </Modal>
     );
 };

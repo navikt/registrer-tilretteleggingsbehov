@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { FormEvent, FunctionComponent, useEffect, useState } from 'react';
 import {
     Arbeidshverdagen,
     Arbeidstid,
@@ -9,16 +9,14 @@ import {
 } from '../api/Behov';
 import { ikkeLastet, lasterInn, RestKandidat, Status } from '../api/Rest';
 import { navigerTilVisningsside } from '../utils/navigering';
-import { Feilmelding, Ingress, Sidetittel } from 'nav-frontend-typografi';
-import Alertstripe from 'nav-frontend-alertstriper';
 import KategoriSpørsmål from '../registrering/kategori-spørsmål/KategoriSpørsmål';
 import { Kandidat, KandidatDto } from '../api/Kandidat';
-import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { endreKandidat } from '../api/api';
 import SlettModal from './slett-modal/SlettModal';
 import Tilbakeknapp from '../tilbakeknapp/Tilbakeknapp';
 import GiTilbakemelding from '../gi-tilbakemelding/GiTilbakemelding';
-import './Endring.less';
+import { Alert, BodyShort, Button, Heading, Ingress } from '@navikt/ds-react';
+import '../registrering/Registrering.less';
 
 interface Props {
     kandidat: Kandidat;
@@ -56,7 +54,9 @@ const Endring: FunctionComponent<Props> = ({ kandidat }) => {
         );
     };
 
-    const endreBehov = async () => {
+    const onEndreSubmit = async (event: FormEvent) => {
+        event.preventDefault();
+
         if (respons.status === Status.LasterInn) return;
 
         if (harIngenValgteBehov()) {
@@ -78,22 +78,22 @@ const Endring: FunctionComponent<Props> = ({ kandidat }) => {
     };
 
     return (
-        <div className="endring">
-            <main className="endring__innhold">
-                <div className="endring__tilbake-og-slett">
-                    <Tilbakeknapp />
-                </div>
-                <Sidetittel className="blokk-xxs">Endre behov for tilrettelegging</Sidetittel>
-                <Ingress className="endring__ingress">
+        <div className="registrering">
+            <div className="registrering__innhold">
+                <Tilbakeknapp />
+                <Heading size="large" level="2">
+                    Endre behov for tilrettelegging
+                </Heading>
+                <Ingress className="registrering__ingress">
                     Registrer bare brukere som har behov for tilrettelegging for å kunne jobbe. Du
                     skal ikke registrere brukere som har problemer med å få seg jobb av andre
                     årsaker (etnisitet, religion, hull i CV-en m.m.).
                 </Ingress>
-                <Alertstripe className="blokk-s" type="info">
+                <Alert variant="info" className="registrering__alert">
                     Før du registrerer behovene, må du ha hatt en dialog med brukeren. Brukeren vil
                     kunne se det du registrerer under Personopplysninger på Ditt NAV.
-                </Alertstripe>
-                <form className="endring__form">
+                </Alert>
+                <form className="registrering__form" onSubmit={onEndreSubmit}>
                     <KategoriSpørsmål
                         tittel="Arbeidstid"
                         hjelpetekst="I jobbprofilen må brukeren selv registrere informasjon om arbeidstid, slik som deltid/heltid, kun dagtid, turnus og lignende."
@@ -124,38 +124,36 @@ const Endring: FunctionComponent<Props> = ({ kandidat }) => {
                         onChange={setUtfordringerMedNorsk}
                         kategori={Kategori.UtfordringerMedNorsk}
                     />
-                    <GiTilbakemelding />
-                    <Hovedknapp
-                        onClick={endreBehov}
-                        spinner={respons.status === Status.LasterInn}
-                        htmlType="button"
-                        className="endring__lagreknapp"
-                    >
-                        Lagre endringer
-                    </Hovedknapp>
-                    <Knapp
-                        onClick={() => toggleSlettModal(true)}
-                        className="endring__slettknapp"
-                        htmlType="button"
-                    >
-                        Slett
-                    </Knapp>
-                    <Knapp onClick={navigerTilVisningsside} className="endring__avbrytknapp">
-                        Avbryt
-                    </Knapp>
+                    <div className="registrering__knapper">
+                        <Button variant="primary" loading={respons.status === Status.LasterInn}>
+                            Lagre endringer
+                        </Button>
+                        <Button
+                            variant="primary"
+                            disabled={respons.status === Status.LasterInn}
+                            onClick={() => toggleSlettModal(true)}
+                            type="button"
+                        >
+                            Slett
+                        </Button>
+                        <Button variant="secondary" onClick={navigerTilVisningsside}>
+                            Avbryt
+                        </Button>
+                    </div>
                     {respons.status === Status.Feil ||
                         (respons.status === Status.UkjentFeil && (
-                            <Feilmelding className="registrering__feilmelding">
+                            <BodyShort className="registrering__feilmelding">
                                 Kunne ikke endre behov for tilrettelegging
-                            </Feilmelding>
+                            </BodyShort>
                         ))}
                     {skalViseIngenValgteBehovFeil && (
-                        <Feilmelding className="registrering__feilmelding">
+                        <BodyShort className="registrering__feilmelding">
                             Du må velge minst ett behov
-                        </Feilmelding>
+                        </BodyShort>
                     )}
                 </form>
-            </main>
+                <GiTilbakemelding />
+            </div>
             <SlettModal
                 erÅpen={visSlettModal}
                 fnr={kandidat.fnr}

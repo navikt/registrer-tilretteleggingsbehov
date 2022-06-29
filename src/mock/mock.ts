@@ -13,7 +13,9 @@ fetchMock
         ...enKandidat,
         sistEndretAvVeileder: new Date().toISOString(),
     })
-    .delete(`express:${basePath}/kandidater/:fnr`, 200)
+    .delete(`express:${basePath}/kandidater/:fnr`, 200, {
+        delay: 20000,
+    })
     .get(`express:${basePath}/synlighet/:aktorId`, enArbeidssoker)
     .post(`${basePath}/tilbakemeldinger`, 201)
     .get(`express:${basePath}/samtykke/:aktorId`, 200);

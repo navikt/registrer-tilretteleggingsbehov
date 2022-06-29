@@ -37,7 +37,7 @@ jobs:
     deploy-til-dev-fss:
         name: Deploy til dev-fss
         needs: bygg-og-push-docker-image
-        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/serverforbedringer'
+        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/nytt-designbibliotek'
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
@@ -63,7 +63,7 @@ jobs:
     deploy-til-dev-gcp:
         name: Deploy til dev-gcp
         needs: bygg-og-push-docker-image
-        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/serverforbedringer'
+        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/nytt-designbibliotek'
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2

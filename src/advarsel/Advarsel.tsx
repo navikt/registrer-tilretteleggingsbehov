@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react';
+import { Alert, BodyShort } from '@navikt/ds-react';
 import { RestArbeidssøker, Samtykkestatus, Status } from '../api/Rest';
-import AlertStripe from 'nav-frontend-alertstriper';
-import { Normaltekst } from 'nav-frontend-typografi';
 import './Advarsel.less';
 
 enum Variant {
@@ -22,9 +21,7 @@ const Advarsel: FunctionComponent<Props> = ({ arbeidssøker, samtykke }) => {
         samtykke === Status.Suksess
     ) {
         return (
-            <AlertStripe type="advarsel">
-                Du har ikke tilgang til å se informasjon om brukeren.
-            </AlertStripe>
+            <Alert variant="warning">Du har ikke tilgang til å se informasjon om brukeren.</Alert>
         );
     }
 
@@ -47,27 +44,33 @@ const Advarsel: FunctionComponent<Props> = ({ arbeidssøker, samtykke }) => {
         return null;
     } else {
         return (
-            <AlertStripe type="advarsel" className="Samtykkeadvarsel">
-                <Normaltekst className="blokk-s">
+            <Alert variant="warning" className="samtykkeadvarsel">
+                <BodyShort>
                     Brukeren er ikke synlig i kandidatsøket i Rekrutteringsbistand.
-                </Normaltekst>
-                <Normaltekst>Årsak er:</Normaltekst>
-                <ul className="Samtykkeadvarsel__liste">
+                </BodyShort>
+                <BodyShort>Årsak er:</BodyShort>
+                <ul className="samtykkeadvarsel__liste">
                     {advarsel.map((melding) => (
-                        <li key={melding}>{melding}</li>
+                        <BodyShort as="li" key={melding}>
+                            {melding}
+                        </BodyShort>
                     ))}
                 </ul>
                 {advarsel.includes(Variant.ManglerSamtykke) && (
                     <>
-                        <Normaltekst>Be brukeren om å:</Normaltekst>
-                        <ol className="Samtykkeadvarsel__liste">
-                            <li>logge inn på arbeidsplassen.no</li>
-                            <li>lese teksten om at du må dele CV-en med NAV</li>
-                            <li>gå videre og gjennomføre det tjenesten ber om</li>
+                        <BodyShort>Be brukeren om å:</BodyShort>
+                        <ol className="samtykkeadvarsel__liste">
+                            <BodyShort as="li">logge inn på arbeidsplassen.no</BodyShort>
+                            <BodyShort as="li">
+                                lese teksten om at du må dele CV-en med NAV
+                            </BodyShort>
+                            <BodyShort as="li">
+                                gå videre og gjennomføre det tjenesten ber om
+                            </BodyShort>
                         </ol>
                     </>
                 )}
-            </AlertStripe>
+            </Alert>
         );
     }
 };

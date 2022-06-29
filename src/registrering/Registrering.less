@@ -13,21 +13,36 @@
         }
     }
 
+    &__alert {
+        margin: 1.5rem 0;
+    }
+
     &__form {
         background-color: white;
         padding: 2rem 2rem 2.5rem;
     }
 
-    &__lagreknapp {
+    &__knapper {
+        display: flex;
+        align-items: center;
+
+        button {
+            min-width: 5rem;
+            margin-right: 1.25rem;
+        }
+    }
+
+    &__lagreknapp.navds-button {
         margin-right: 1.25rem;
     }
 
-    &__feilmelding {
+    &__feilmelding.navds-body-short {
         margin-top: 0.5rem;
+        font-weight: var(--navds-font-weight-bold);
+        color: var(--navds-semantic-color-feedback-danger-text);
     }
 
-    &__ingress {
-        line-height: 1.8rem;
-        margin-bottom: 2rem;
+    &__ingress.navds-ingress {
+        margin-top: 1rem;
     }
 }

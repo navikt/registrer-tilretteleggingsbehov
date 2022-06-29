@@ -1,15 +1,14 @@
+import React, { FunctionComponent } from 'react';
+import { BodyShort, Button } from '@navikt/ds-react';
 import Behovgruppe from './Behovgruppe';
 import { formaterDato } from '../utils/datoUtils';
-import React, { FunctionComponent } from 'react';
 import { navigerTilRegistreringsside } from '../utils/navigering';
-import { Hovedknapp } from 'nav-frontend-knapper';
-import { Normaltekst } from 'nav-frontend-typografi';
 import { RestArbeidssøker, Samtykkestatus } from '../api/Rest';
 import Advarsel from '../advarsel/Advarsel';
 import { Kandidat } from '../api/Kandidat';
 import { hentTeksterForValgteBehov } from '../api/tilretteleggingsbehov';
-import './Visning.less';
 import { Kategori } from '../api/Behov';
+import './Visning.less';
 
 interface Props {
     kandidat: Kandidat;
@@ -19,16 +18,11 @@ interface Props {
 
 const Visning: FunctionComponent<Props> = ({ kandidat, arbeidssøker, samtykke }) => {
     return (
-        <div className="visning">
-            <div className="sistendret">
-                <Normaltekst className="blokk-s">
-                    Sist endret: {formaterDato(new Date(kandidat.sistEndretAvVeileder))}
-                </Normaltekst>
-            </div>
-
-            <div className="visning__advarsler">
-                <Advarsel arbeidssøker={arbeidssøker} samtykke={samtykke} />
-            </div>
+        <>
+            <BodyShort>
+                Sist endret: {formaterDato(new Date(kandidat.sistEndretAvVeileder))}
+            </BodyShort>
+            <Advarsel arbeidssøker={arbeidssøker} samtykke={samtykke} />
             <div className="visning__behovkategorier">
                 <Behovgruppe
                     overskrift="Arbeidstid"
@@ -57,10 +51,10 @@ const Visning: FunctionComponent<Props> = ({ kandidat, arbeidssøker, samtykke }
                     )}
                 />
             </div>
-            <Hovedknapp mini onClick={navigerTilRegistreringsside}>
+            <Button variant="primary" size="medium" onClick={navigerTilRegistreringsside}>
                 Endre
-            </Hovedknapp>
-        </div>
+            </Button>
+        </>
     );
 };
 
