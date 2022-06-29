@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Behovtekst } from '../api/tilretteleggingsbehov';
 import { BodyShort, Heading } from '@navikt/ds-react';
+import visningCss from './Visning.module.css';
 
 interface Props {
     overskrift: String;
@@ -10,13 +11,13 @@ interface Props {
 
 const Behovgruppe: FunctionComponent<Props> = ({ overskrift, beskrivelse, behov }) => {
     return (
-        <section className="visning__behovgruppe">
-            <Heading level="3" size="small" className="visning__behovgruppetittel">
+        <section className={visningCss.behovgruppe}>
+            <Heading level="3" size="small" className={visningCss.behovgruppetittel}>
                 {overskrift}
             </Heading>
             <BodyShort>{beskrivelse}</BodyShort>
             {behov.length ? (
-                <ul className="visning__behovliste">
+                <ul className={visningCss.behovliste}>
                     {behov.map((behov) => (
                         <BodyShort as="li" key={behov.beskrivelse}>
                             {behov.beskrivelse}
@@ -24,7 +25,7 @@ const Behovgruppe: FunctionComponent<Props> = ({ overskrift, beskrivelse, behov 
                     ))}
                 </ul>
             ) : (
-                <BodyShort className="visning__ingenbehov">Ingen registrerte behov</BodyShort>
+                <BodyShort className={visningCss.ingenbehov}>Ingen registrerte behov</BodyShort>
             )}
         </section>
     );

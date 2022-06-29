@@ -2,8 +2,8 @@ import React, { FunctionComponent, useEffect, useState } from 'react';
 import { RestKandidat, Status, ikkeLastet } from '../../api/Rest';
 import { slettKandidat } from '../../api/api';
 import { navigerTilVisningsside } from '../../utils/navigering';
-import './SlettModal.less';
 import { BodyLong, Button, Heading, Modal } from '@navikt/ds-react';
+import css from './SlettModal.module.css';
 
 interface Props {
     erÅpen: boolean;
@@ -31,15 +31,15 @@ const SlettModal: FunctionComponent<Props> = ({ erÅpen, fnr, lukk }) => {
     };
 
     return (
-        <Modal closeButton open={erÅpen} onClose={lukk} className="slett-modal">
+        <Modal closeButton open={erÅpen} onClose={lukk} className={css.slettModal}>
             <Modal.Content>
                 <Heading level="1" size="medium">
                     Slett behov for tilrettelegging
                 </Heading>
-                <BodyLong className="slett-modal__tekst">
+                <BodyLong className={css.tekst}>
                     Er du sikker på at du vil slette tilretteleggingsbehovene til denne kandidaten?
                 </BodyLong>
-                <div className="slett-modal__knapper">
+                <div className={css.knapper}>
                     <Button
                         variant="primary"
                         onClick={slettKandidatOgLukk}

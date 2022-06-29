@@ -1,0 +1,15 @@
+.giTilbakemelding {
+    margin: 2rem 0;
+}
+
+.beskrivelse {
+    margin-bottom: 1rem;
+}
+
+.giTilbakemelding form {
+    margin: 0 1rem;
+}
+
+.giTilbakemelding textarea {
+    margin-bottom: 1.5rem;
+}

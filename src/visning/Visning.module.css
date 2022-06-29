@@ -1,0 +1,28 @@
+.behovkategorier {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.behovgruppe {
+    width: 50%;
+    min-width: 25rem;
+    margin: 1.5rem 0;
+}
+
+.behovgruppetittel:global(.navds-heading) {
+    margin-bottom: 0.5rem;
+}
+
+.ingenbehov:global(.navds-body-short) {
+    font-style: italic;
+    margin-top: 0.5rem;
+}
+
+.behovliste {
+    margin: 0.5rem 0;
+}
+
+.advarsler > *:not(:first-child) {
+    margin-top: 1rem;
+}

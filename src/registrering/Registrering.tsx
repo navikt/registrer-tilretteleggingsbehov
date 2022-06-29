@@ -16,7 +16,7 @@ import { opprettKandidat } from '../api/api';
 import GiTilbakemelding from '../gi-tilbakemelding/GiTilbakemelding';
 import KategoriSpørsmål from './kategori-spørsmål/KategoriSpørsmål';
 import Tilbakeknapp from '../tilbakeknapp/Tilbakeknapp';
-import './Registrering.less';
+import css from './Registrering.module.css';
 
 interface Props {
     fnr: string;
@@ -75,22 +75,22 @@ const Registrering: FunctionComponent<Props> = ({ fnr }) => {
     };
 
     return (
-        <div className="registrering">
-            <div className="registrering__innhold">
+        <div className={css.registrering}>
+            <div className={css.innhold}>
                 <Tilbakeknapp />
                 <Heading size="large" level="2">
                     Registrer behov for tilrettelegging
                 </Heading>
-                <Ingress className="registrering__ingress">
+                <Ingress className={css.ingress}>
                     Registrer bare brukere som har behov for tilrettelegging for å kunne jobbe. Du
                     skal ikke registrere brukere som har problemer med å få seg jobb av andre
                     årsaker (etnisitet, religion, hull i CV-en m.m.).
                 </Ingress>
-                <Alert variant="info" className="registrering__alert">
+                <Alert variant="info" className={css.alert}>
                     Før du registrerer behovene, må du ha hatt en dialog med brukeren. Brukeren vil
                     kunne se det du registrerer under Personopplysninger på Ditt NAV.
                 </Alert>
-                <form className="registrering__form" onSubmit={onRegistreringSubmit}>
+                <form className={css.form} onSubmit={onRegistreringSubmit}>
                     <KategoriSpørsmål
                         tittel="Arbeidstid"
                         hjelpetekst="I jobbprofilen må brukeren selv registrere informasjon om arbeidstid, slik som deltid/heltid, kun dagtid, turnus og lignende."
@@ -121,11 +121,11 @@ const Registrering: FunctionComponent<Props> = ({ fnr }) => {
                         onChange={setUtfordringerMedNorsk}
                         kategori={Kategori.UtfordringerMedNorsk}
                     />
-                    <div className="registrering__knapper">
+                    <div className={css.knapper}>
                         <Button
                             variant="primary"
                             loading={respons.status === Status.LasterInn}
-                            className="registrering__lagreknapp"
+                            className={css.lagreknapp}
                         >
                             Lagre behov
                         </Button>
@@ -135,12 +135,12 @@ const Registrering: FunctionComponent<Props> = ({ fnr }) => {
                     </div>
                     {respons.status === Status.Feil ||
                         (respons.status === Status.UkjentFeil && (
-                            <BodyShort className="registrering__feilmelding">
+                            <BodyShort className={css.feilmelding}>
                                 Kunne ikke lagre tilretteleggingsbehov
                             </BodyShort>
                         ))}
                     {skalViseIngenValgteBehovFeil && (
-                        <BodyShort className="registrering__feilmelding">
+                        <BodyShort className={css.feilmelding}>
                             Du må velge minst ett behov
                         </BodyShort>
                     )}

@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { BodyLong, Checkbox, CheckboxGroup, Detail, Heading } from '@navikt/ds-react';
 import { Behov, Kategori } from '../../api/Behov';
 import { Behovtekst, hentTekster } from '../../api/tilretteleggingsbehov';
-import './KategoriSpørsmål.less';
+import css from './KategoriSpørsmål.module.css';
 
 interface Props {
     tittel: string;
@@ -32,19 +32,15 @@ const KategoriSpørsmål: FunctionComponent<Props> = ({
     };
 
     return (
-        <section className="kategori-spørsmål">
-            <Heading level="3" size="medium">
+        <section className={css.kategoriSpørsmål}>
+            <Heading level="3" size="medium" className={css.tittel}>
                 {tittel}
             </Heading>
-            {hjelpetekst && (
-                <BodyLong className="kategori-spørsmål__kategorihjelpetekst">
-                    {hjelpetekst}
-                </BodyLong>
-            )}
+            {hjelpetekst && <BodyLong className={css.kategorihjelpetekst}>{hjelpetekst}</BodyLong>}
 
             <CheckboxGroup legend={beskrivelse}>
                 {alternativer.map((alternativ: Behovtekst) => (
-                    <div className="kategori-spørsmål__checkbox" key={alternativ.behov}>
+                    <div className={css.checkbox} key={alternativ.behov}>
                         <Checkbox
                             checked={valgteBehov.includes(alternativ.behov)}
                             onChange={() => toggleAlternativ(alternativ.behov)}
@@ -56,7 +52,7 @@ const KategoriSpørsmål: FunctionComponent<Props> = ({
                             <Detail
                                 size="small"
                                 id={alternativ.behov + '_hjelpetekst'}
-                                className="kategori-spørsmål__hjelpetekst"
+                                className={css.hjelpetekst}
                             >
                                 {alternativ.hjelpetekst}
                             </Detail>

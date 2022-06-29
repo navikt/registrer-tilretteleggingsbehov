@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Alert, BodyShort } from '@navikt/ds-react';
 import { RestArbeidssøker, Samtykkestatus, Status } from '../api/Rest';
-import './Advarsel.less';
+import css from './Advarsel.module.css';
 
 enum Variant {
     IngenJobbprofil = 'Kandidaten har ikke jobbprofil',
@@ -44,12 +44,12 @@ const Advarsel: FunctionComponent<Props> = ({ arbeidssøker, samtykke }) => {
         return null;
     } else {
         return (
-            <Alert variant="warning" className="samtykkeadvarsel">
+            <Alert variant="warning" className={css.advarsel}>
                 <BodyShort>
                     Brukeren er ikke synlig i kandidatsøket i Rekrutteringsbistand.
                 </BodyShort>
                 <BodyShort>Årsak er:</BodyShort>
-                <ul className="samtykkeadvarsel__liste">
+                <ul className={css.liste}>
                     {advarsel.map((melding) => (
                         <BodyShort as="li" key={melding}>
                             {melding}
@@ -59,7 +59,7 @@ const Advarsel: FunctionComponent<Props> = ({ arbeidssøker, samtykke }) => {
                 {advarsel.includes(Variant.ManglerSamtykke) && (
                     <>
                         <BodyShort>Be brukeren om å:</BodyShort>
-                        <ol className="samtykkeadvarsel__liste">
+                        <ol className={css.liste}>
                             <BodyShort as="li">logge inn på arbeidsplassen.no</BodyShort>
                             <BodyShort as="li">
                                 lese teksten om at du må dele CV-en med NAV
