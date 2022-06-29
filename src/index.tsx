@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import NAVSPA from '@navikt/navspa';
 import Utvikling from './utvikling/Utvikling';
-import './index.less';
 import '@navikt/ds-css';
 
 if (process.env.REACT_APP_MOCK) {
