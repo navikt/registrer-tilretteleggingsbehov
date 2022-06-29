@@ -1,9 +1,9 @@
-import { Heading } from '@navikt/ds-react';
 import React, { FunctionComponent, useEffect, useState } from 'react';
+import { Heading } from '@navikt/ds-react';
 import App, { Visningstype } from '../App';
 import { etFnr } from '../mock/testdata';
 import { visDetaljerEvent, visRegistreringEvent } from '../utils/navigering';
-import './Utvikling.less';
+import css from './Utvikling.module.css';
 
 const Utvikling: FunctionComponent = () => {
     const [visningstype, setVisningstype] = useState<Visningstype>(
@@ -26,16 +26,17 @@ const Utvikling: FunctionComponent = () => {
         };
     }, []);
 
-    const className = `utvikling__${
-        visningstype === Visningstype.VisTilretteleggingsbehov ? 'vis' : 'registrer'
-    }`;
+    const wrapperClassName =
+        visningstype === Visningstype.VisTilretteleggingsbehov
+            ? css.simulertEkspanderbartPanel
+            : undefined;
 
     return (
-        <div className="utvikling">
+        <div className={css.utvikling}>
             <Heading size="medium" level="1">
                 Utviklingsapp for tilretteleggingsbehov
             </Heading>
-            <div className={className}>
+            <div className={wrapperClassName}>
                 <App viewType={visningstype} fnr={etFnr} />
             </div>
         </div>
