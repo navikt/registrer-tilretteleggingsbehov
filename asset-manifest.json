@@ -1,23 +1,13 @@
 {
   "files": {
-    "main.css": "/registrer-tilretteleggingsbehov/static/css/main.150ccdc2.chunk.css",
-    "main.js": "/registrer-tilretteleggingsbehov/static/js/main.63544937.chunk.js",
-    "main.js.map": "/registrer-tilretteleggingsbehov/static/js/main.63544937.chunk.js.map",
-    "runtime-main.js": "/registrer-tilretteleggingsbehov/static/js/runtime-main.012c46c1.js",
-    "runtime-main.js.map": "/registrer-tilretteleggingsbehov/static/js/runtime-main.012c46c1.js.map",
-    "static/css/2.ebbfab78.chunk.css": "/registrer-tilretteleggingsbehov/static/css/2.ebbfab78.chunk.css",
-    "static/js/2.ec92f33f.chunk.js": "/registrer-tilretteleggingsbehov/static/js/2.ec92f33f.chunk.js",
-    "static/js/2.ec92f33f.chunk.js.map": "/registrer-tilretteleggingsbehov/static/js/2.ec92f33f.chunk.js.map",
+    "main.css": "/registrer-tilretteleggingsbehov/static/css/main.23cf4c0d.css",
+    "main.js": "/registrer-tilretteleggingsbehov/static/js/main.38bbe16b.js",
     "index.html": "/registrer-tilretteleggingsbehov/index.html",
-    "static/css/2.ebbfab78.chunk.css.map": "/registrer-tilretteleggingsbehov/static/css/2.ebbfab78.chunk.css.map",
-    "static/css/main.150ccdc2.chunk.css.map": "/registrer-tilretteleggingsbehov/static/css/main.150ccdc2.chunk.css.map",
-    "static/js/2.ec92f33f.chunk.js.LICENSE.txt": "/registrer-tilretteleggingsbehov/static/js/2.ec92f33f.chunk.js.LICENSE.txt"
+    "main.23cf4c0d.css.map": "/registrer-tilretteleggingsbehov/static/css/main.23cf4c0d.css.map",
+    "main.38bbe16b.js.map": "/registrer-tilretteleggingsbehov/static/js/main.38bbe16b.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.012c46c1.js",
-    "static/css/2.ebbfab78.chunk.css",
-    "static/js/2.ec92f33f.chunk.js",
-    "static/css/main.150ccdc2.chunk.css",
-    "static/js/main.63544937.chunk.js"
+    "static/css/main.23cf4c0d.css",
+    "static/js/main.38bbe16b.js"
   ]
 }
