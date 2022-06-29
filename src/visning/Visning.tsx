@@ -8,7 +8,7 @@ import Advarsel from '../advarsel/Advarsel';
 import { Kandidat } from '../api/Kandidat';
 import { hentTeksterForValgteBehov } from '../api/tilretteleggingsbehov';
 import { Kategori } from '../api/Behov';
-import './Visning.less';
+import css from './Visning.module.css';
 
 interface Props {
     kandidat: Kandidat;
@@ -23,7 +23,7 @@ const Visning: FunctionComponent<Props> = ({ kandidat, arbeidssøker, samtykke }
                 Sist endret: {formaterDato(new Date(kandidat.sistEndretAvVeileder))}
             </BodyShort>
             <Advarsel arbeidssøker={arbeidssøker} samtykke={samtykke} />
-            <div className="visning__behovkategorier">
+            <div className={css.behovkategorier}>
                 <Behovgruppe
                     overskrift="Arbeidstid"
                     beskrivelse="Behov for tilrettelegging av arbeidstiden"

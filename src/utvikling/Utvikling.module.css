@@ -1,0 +1,14 @@
+.utvikling {
+    background-color: #f4f4f4;
+    min-height: 100vh;
+    padding: 3rem 1rem;
+}
+
+.simulertEkspanderbartPanel {
+    background-color: white;
+    max-width: 87.5rem;
+    margin: 2.5rem auto;
+
+    padding: 1rem;
+    border-radius: 0.25rem;
+}

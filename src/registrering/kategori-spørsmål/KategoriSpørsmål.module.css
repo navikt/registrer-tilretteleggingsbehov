@@ -1,0 +1,21 @@
+.kategoriSpørsmål {
+    margin-bottom: 2.5rem;
+}
+
+.kategoriSpørsmål:last-of-type {
+    margin-bottom: 2.5rem;
+}
+
+.tittel {
+    margin-bottom: 1rem;
+}
+
+.kategorihjelpetekst:global(.navds-body-long) {
+    margin-bottom: 1rem;
+}
+
+.hjelpetekst:global(.navds-detail) {
+    margin-left: 2rem;
+    font-size: 14px;
+    margin-top: -0.5rem;
+}

@@ -4,7 +4,6 @@
     "private": true,
     "homepage": "/registrer-tilretteleggingsbehov",
     "dependencies": {
-        "@craco/craco": "^6.1.1",
         "@navikt/ds-css": "^0.18.19",
         "@navikt/ds-icons": "^0.8.17",
         "@navikt/ds-react": "^0.19.15",
@@ -12,7 +11,6 @@
         "@types/node": "^14.14.28",
         "@types/react": "^17.0.2",
         "@types/react-dom": "^17.0.1",
-        "craco-less": "^1.17.1",
         "fetch-mock": "^9.11.0",
         "react": "^17.0.1",
         "react-dom": "^17.0.1",
@@ -27,10 +25,10 @@
     },
     "scripts": {
         "start:mock": "REACT_APP_MOCK=true npm run start",
-        "start": "craco start",
-        "build": "craco build",
+        "start": "react-scripts start",
+        "build": "react-scripts build",
         "build:mock": "REACT_APP_MOCK=true npm run build",
-        "eject": "craco eject",
+        "eject": "react-scripts eject",
         "prepare": "husky install",
         "format": "prettier --write ."
     },

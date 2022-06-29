@@ -1,0 +1,14 @@
+.tilbakeknapp {
+    border: none;
+    background: none;
+    padding: 0.25rem 0.25rem 0.25rem 0;
+    margin-bottom: 1.5rem;
+}
+
+.tilbakeknapp:hover {
+    cursor: pointer;
+}
+
+.tilbakeknapp:active:not(:focus) {
+    color: #0067c5;
+}

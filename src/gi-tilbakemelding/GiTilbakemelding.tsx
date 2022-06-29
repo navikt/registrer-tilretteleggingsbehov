@@ -2,7 +2,7 @@ import React, { ChangeEvent, FormEvent, FunctionComponent, useState } from 'reac
 import { Accordion, Alert, BodyShort, Button, Textarea } from '@navikt/ds-react';
 import { sendTilbakemelding } from '../api/api';
 import { Status, Tilbakemeldingstatus } from '../api/Rest';
-import './GiTilbakemelding.less';
+import css from './GiTilbakemelding.module.css';
 
 const GiTilbakemelding: FunctionComponent = () => {
     const [tilbakemelding, setTilbakemelding] = useState<string>('');
@@ -47,13 +47,13 @@ const GiTilbakemelding: FunctionComponent = () => {
     const visTilbakemeldingsboks = status === Status.IkkeLastet || status === Status.LasterInn;
 
     return (
-        <Accordion className="gi-tilbakemelding">
+        <Accordion className={css.giTilbakemelding}>
             <Accordion.Item>
                 <Accordion.Header>Savner du et alternativ?</Accordion.Header>
                 <Accordion.Content>
                     {visTilbakemeldingsboks && (
                         <form onSubmit={validerOgSendForslag}>
-                            <BodyShort className="blokk-s">
+                            <BodyShort className={css.beskrivelse}>
                                 Send oss et forslag. Forslaget blir kun brukt til videreutvikling av
                                 verktøyet.
                             </BodyShort>
