@@ -1,6 +1,5 @@
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
-import { AlertStripeFeil } from 'nav-frontend-alertstriper';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { Alert } from '@navikt/ds-react';
 
 import { hentArbeidssøker } from './api/arbeidssøkerApi';
 import { hentKandidat, hentSamtykke } from './api/api';
@@ -17,7 +16,6 @@ import Endring from './endring/Endring';
 import Introduksjon from './introduksjon/Introduksjon';
 import Registrering from './registrering/Registrering';
 import Visning from './visning/Visning';
-import './App.less';
 
 export enum Visningstype {
     VisTilretteleggingsbehov = 'VIS_TILRETTELEGGINGSBEHOV',
@@ -71,39 +69,27 @@ const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
         (kandidat.status === Status.Feil && kandidat.statusKode === 404) ||
         kandidat.status === Status.Slettet;
 
-    const visKomponent = () => {
-        if (viewType === Visningstype.RegistrerTilretteleggingsbehov) {
-            if (kandidat.status === Status.Suksess) {
-                return <Endring kandidat={kandidat.data} />;
-            } else if (kandidatErIkkeRegistrert) {
-                return <Registrering fnr={fnr} />;
-            }
-        } else if (viewType === Visningstype.VisTilretteleggingsbehov) {
-            if (kandidat.status === Status.Suksess) {
-                return (
-                    <Visning
-                        kandidat={kandidat.data}
-                        arbeidssøker={arbeidssøker}
-                        samtykke={samtykke}
-                    />
-                );
-            } else if (kandidatErIkkeRegistrert) {
-                return <Introduksjon />;
-            }
+    if (viewType === Visningstype.RegistrerTilretteleggingsbehov) {
+        if (kandidat.status === Status.Suksess) {
+            return <Endring kandidat={kandidat.data} />;
+        } else if (kandidatErIkkeRegistrert) {
+            return <Registrering fnr={fnr} />;
         }
-
-        if (kandidat.status === Status.Feil) {
-            return <AlertStripeFeil>Kunne ikke hente tilretteleggingsbehov</AlertStripeFeil>;
+    } else if (viewType === Visningstype.VisTilretteleggingsbehov) {
+        if (kandidat.status === Status.Suksess) {
+            return (
+                <Visning kandidat={kandidat.data} arbeidssøker={arbeidssøker} samtykke={samtykke} />
+            );
+        } else if (kandidatErIkkeRegistrert) {
+            return <Introduksjon />;
         }
+    }
 
-        return '';
-    };
+    if (kandidat.status === Status.Feil) {
+        return <Alert variant="error">Kunne ikke hente tilretteleggingsbehov</Alert>;
+    }
 
-    return (
-        <Normaltekst className="registrer-tilretteleggingsbehov-app" tag="div">
-            {visKomponent()}
-        </Normaltekst>
-    );
+    return null;
 };
 
 export default App;

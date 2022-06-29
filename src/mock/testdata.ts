@@ -1,4 +1,4 @@
-import { Arbeidshverdagen, Arbeidstid, Fysisk, UtfordringerMedNorsk } from '../api/Behov';
+import { Arbeidshverdagen, Arbeidstid, Fysisk } from '../api/Behov';
 import { Kandidat } from '../api/Kandidat';
 import { Arbeidssøker } from '../api/arbeidssøkerApi';
 
@@ -12,10 +12,10 @@ export const enKandidat: Kandidat = {
     arbeidstid: [Arbeidstid.IkkeHeleDager, Arbeidstid.Fleksibel],
     fysisk: [Fysisk.Ergonomi, Fysisk.Arbeidsstilling, Fysisk.UniversellUtforming],
     arbeidshverdagen: [Arbeidshverdagen.PersonligBistand],
-    utfordringerMedNorsk: [UtfordringerMedNorsk.Skrive, UtfordringerMedNorsk.Snakke],
+    utfordringerMedNorsk: [],
 };
 
 export const enArbeidssoker: Arbeidssøker = {
     harJobbprofil: true,
-    harCv: false,
+    harCv: true,
 };

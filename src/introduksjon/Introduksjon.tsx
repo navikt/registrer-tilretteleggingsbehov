@@ -13,7 +13,7 @@ const Introduksjon: FunctionComponent = () => (
         <BodyLong className="introduksjon__tekst">
             Du kan søke fram brukere med behov for tilrettelegging i Rekrutteringsbistand.
         </BodyLong>
-        <Button size="small" onClick={navigerTilRegistreringsside}>
+        <Button size="medium" onClick={navigerTilRegistreringsside}>
             Registrer
         </Button>
     </>
