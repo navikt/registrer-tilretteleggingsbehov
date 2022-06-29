@@ -42,10 +42,6 @@ interface Suksess<T> {
     data: T;
 }
 
-interface SuksessEmpty {
-    status: Status.Suksess;
-}
-
 interface Slettet {
     status: Status.Slettet;
 }
