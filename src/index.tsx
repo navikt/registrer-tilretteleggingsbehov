@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import App from './App';
 import NAVSPA from '@navikt/navspa';
 import Utvikling from './utvikling/Utvikling';
@@ -10,10 +10,10 @@ if (process.env.REACT_APP_MOCK) {
 }
 
 if (document.getElementById('registrer-tilretteleggingsbehov-utvikling')) {
-    ReactDOM.render(
-        <Utvikling />,
-        document.getElementById('registrer-tilretteleggingsbehov-utvikling')
-    );
+    const utviklingsapp = document.getElementById('registrer-tilretteleggingsbehov-utvikling');
+    const root = createRoot(utviklingsapp!);
+
+    root.render(<Utvikling />);
 } else {
     NAVSPA.eksporter('tilretteleggingsbehov', App);
 }
