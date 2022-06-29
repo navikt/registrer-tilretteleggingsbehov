@@ -13,7 +13,6 @@ import { ikkeLastet, lasterInn, RestKandidat, Status } from '../api/Rest';
 import { KandidatDto } from '../api/Kandidat';
 import { navigerTilVisningsside } from '../utils/navigering';
 import { opprettKandidat } from '../api/api';
-import Alertstripe from 'nav-frontend-alertstriper';
 import GiTilbakemelding from '../gi-tilbakemelding/GiTilbakemelding';
 import KategoriSpørsmål from './kategori-spørsmål/KategoriSpørsmål';
 import Tilbakeknapp from '../tilbakeknapp/Tilbakeknapp';
