@@ -2,8 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import NAVSPA from '@navikt/navspa';
-import './index.less';
 import Utvikling from './utvikling/Utvikling';
+import './index.less';
+import '@navikt/ds-css';
 
 if (process.env.REACT_APP_MOCK) {
     require('./mock/mock');
