@@ -10,7 +10,7 @@ spec:
     image: {{ image }}
     port: 3000
     ingresses:
-        - https://registrer-tilretteleggingsbehov.dev.intern.nav.no
+        - https://registrer-tilretteleggingsbehov.intern.nav.no
     liveness:
         initialDelay: 5
         path: /registrer-tilretteleggingsbehov/internal/isAlive
