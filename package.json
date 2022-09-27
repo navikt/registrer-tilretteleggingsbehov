@@ -4,9 +4,9 @@
     "private": true,
     "homepage": "/registrer-tilretteleggingsbehov",
     "dependencies": {
-        "@navikt/ds-css": "^0.18.19",
-        "@navikt/ds-icons": "^0.8.17",
-        "@navikt/ds-react": "^0.19.16",
+        "@navikt/ds-css": "^0.18.29",
+        "@navikt/ds-icons": "^0.8.20",
+        "@navikt/ds-react": "^0.19.27",
         "@navikt/navspa": "^6.0.1",
         "fetch-mock": "^9.11.0",
         "react": "^18.2.0",
