@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/registrer-tilretteleggingsbehov/static/css/main.23cf4c0d.css",
-    "main.js": "/registrer-tilretteleggingsbehov/static/js/main.38bbe16b.js",
+    "main.css": "/registrer-tilretteleggingsbehov/static/css/main.5af3cdfa.css",
+    "main.js": "/registrer-tilretteleggingsbehov/static/js/main.dffb8d02.js",
     "index.html": "/registrer-tilretteleggingsbehov/index.html",
-    "main.23cf4c0d.css.map": "/registrer-tilretteleggingsbehov/static/css/main.23cf4c0d.css.map",
-    "main.38bbe16b.js.map": "/registrer-tilretteleggingsbehov/static/js/main.38bbe16b.js.map"
+    "main.5af3cdfa.css.map": "/registrer-tilretteleggingsbehov/static/css/main.5af3cdfa.css.map",
+    "main.dffb8d02.js.map": "/registrer-tilretteleggingsbehov/static/js/main.dffb8d02.js.map"
   },
   "entrypoints": [
-    "static/css/main.23cf4c0d.css",
-    "static/js/main.38bbe16b.js"
+    "static/css/main.5af3cdfa.css",
+    "static/js/main.dffb8d02.js"
   ]
 }
