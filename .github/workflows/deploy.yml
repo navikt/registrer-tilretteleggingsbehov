@@ -42,7 +42,7 @@ jobs:
     deploy-til-dev-gcp:
         name: Deploy til dev-gcp
         needs: bygg-og-push-docker-image
-        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/oppgraderinger'
+        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/ikke-vis-samtykke-og-synlighet'
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
