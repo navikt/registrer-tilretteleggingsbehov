@@ -3,8 +3,6 @@ import { BodyShort, Button } from '@navikt/ds-react';
 import Behovgruppe from './Behovgruppe';
 import { formaterDato } from '../utils/datoUtils';
 import { navigerTilRegistreringsside } from '../utils/navigering';
-import { RestArbeidssøker, Samtykkestatus } from '../api/Rest';
-import Advarsel from '../advarsel/Advarsel';
 import { Kandidat } from '../api/Kandidat';
 import { hentTeksterForValgteBehov } from '../api/tilretteleggingsbehov';
 import { Kategori } from '../api/Behov';
@@ -12,17 +10,14 @@ import css from './Visning.module.css';
 
 interface Props {
     kandidat: Kandidat;
-    arbeidssøker: RestArbeidssøker;
-    samtykke: Samtykkestatus;
 }
 
-const Visning: FunctionComponent<Props> = ({ kandidat, arbeidssøker, samtykke }) => {
+const Visning: FunctionComponent<Props> = ({ kandidat }) => {
     return (
         <>
             <BodyShort>
                 Sist endret: {formaterDato(new Date(kandidat.sistEndretAvVeileder))}
             </BodyShort>
-            <Advarsel arbeidssøker={arbeidssøker} samtykke={samtykke} />
             <div className={css.behovkategorier}>
                 <Behovgruppe
                     overskrift="Arbeidstid"
