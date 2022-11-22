@@ -42,7 +42,7 @@ jobs:
               ## Ved fix av prodfeil, sett continue-on-error=true, slik at workflow fortsetter selvom snyk finner sårbarheter
               continue-on-error: false
             - name: Bygg og publiser Docker-image
-              uses: docker/build-push-action@v2
+              uses: docker/build-push-action@v3
               with:
                   context: .
                   push: true
