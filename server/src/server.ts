@@ -27,7 +27,7 @@ const startServer = () => {
 const configureCors = (req: Request, res: Response, next: NextFunction) => {
     const { origin } = req.headers;
 
-    if (origin?.includes('intern.nav.no')) {
+    if (origin?.includes('intern.nav.no') || origin?.includes('intern.dev.nav.no')) {
         res.header('Access-Control-Allow-Origin', origin);
     }
 
