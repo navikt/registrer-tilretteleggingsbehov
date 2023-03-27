@@ -1,8 +1,9 @@
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { hentKandidat } from './api/api';
-import { ikkeLastet, lasterInn, RestKandidat, Status } from './api/Rest';
+import { ikkeLastet, lasterInn, RestKandidat } from './api/Rest';
 import { visDetaljerEvent } from './utils/navigering';
-import { BodyLong } from '@navikt/ds-react';
+import { BodyLong, Link } from '@navikt/ds-react';
+import { ExternalLink } from '@navikt/ds-icons';
 
 export enum Visningstype {
     VisTilretteleggingsbehov = 'VIS_TILRETTELEGGINGSBEHOV',
@@ -15,7 +16,7 @@ interface Props {
 }
 
 const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
-    const [_, setKandidat] = useState<RestKandidat>(ikkeLastet);
+    const [, setKandidat] = useState<RestKandidat>(ikkeLastet);
 
     const hentKandidatFraApi = useCallback(async () => {
         setKandidat(lasterInn);
@@ -36,10 +37,15 @@ const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
     return (
         <>
             <BodyLong spacing>
-                Muligheten for å registrere tilretteleggingsbehov på kandidater har blitt fjernet.
+                Vi tester å ta bort muligheten for å registrere tilretteleggingsbehov. Hva tenker om
+                det?
             </BodyLong>
             <BodyLong>
-                Dersom du har noen innspill om dette, kontakt oss via dette skjemaet: URL
+                <Link target="_blank" rel="noreferrer" href="https://forms.office.com/e/1irdQKeKim">
+                    Gi oss tilbakemelding om hvordan du jobber med tilrettelegging (Microsoft
+                    forms).
+                    <ExternalLink />
+                </Link>
             </BodyLong>
         </>
     );
