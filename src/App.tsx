@@ -3,7 +3,6 @@ import { hentKandidat } from './api/api';
 import { ikkeLastet, lasterInn, RestKandidat, Status } from './api/Rest';
 import { visDetaljerEvent } from './utils/navigering';
 import Visning from './visning/Visning';
-import Introduksjon from './introduksjon/Introduksjon';
 import { Alert, BodyLong } from '@navikt/ds-react';
 
 export enum Visningstype {
