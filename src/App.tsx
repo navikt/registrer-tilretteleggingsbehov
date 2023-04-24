@@ -54,12 +54,7 @@ const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
                 </>
             );
         } else if (kandidatErIkkeRegistrert) {
-            return (
-                <>
-                    <Introduksjon />
-                    {informasjonOmAvviklingAvTilretteleggingsbehov}
-                </>
-            );
+            return informasjonOmAvviklingAvTilretteleggingsbehov;
         }
     }
 
