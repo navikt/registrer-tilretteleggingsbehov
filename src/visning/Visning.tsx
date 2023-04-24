@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { BodyShort, Button } from '@navikt/ds-react';
+import { BodyShort } from '@navikt/ds-react';
 import Behovgruppe from './Behovgruppe';
 import { formaterDato } from '../utils/datoUtils';
 import { Kandidat } from '../api/Kandidat';
