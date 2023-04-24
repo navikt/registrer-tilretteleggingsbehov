@@ -1,9 +1,10 @@
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { hentKandidat } from './api/api';
-import { ikkeLastet, lasterInn, RestKandidat } from './api/Rest';
+import { ikkeLastet, lasterInn, RestKandidat, Status } from './api/Rest';
 import { visDetaljerEvent } from './utils/navigering';
-import { BodyLong, Link } from '@navikt/ds-react';
-import { ExternalLink } from '@navikt/ds-icons';
+import Visning from './visning/Visning';
+import Introduksjon from './introduksjon/Introduksjon';
+import { Alert, BodyLong } from '@navikt/ds-react';
 
 export enum Visningstype {
     VisTilretteleggingsbehov = 'VIS_TILRETTELEGGINGSBEHOV',
@@ -16,7 +17,7 @@ interface Props {
 }
 
 const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
-    const [, setKandidat] = useState<RestKandidat>(ikkeLastet);
+    const [kandidat, setKandidat] = useState<RestKandidat>(ikkeLastet);
 
     const hentKandidatFraApi = useCallback(async () => {
         setKandidat(lasterInn);
@@ -34,36 +35,31 @@ const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
         };
     }, [hentKandidatFraApi]);
 
-    return (
-        <>
-            <BodyLong spacing>
-                Vi tester å ta bort muligheten for å registrere tilretteleggingsbehov. Hva tenker om
-                det?
-            </BodyLong>
-            <BodyLong>
-                <Link target="_blank" rel="noreferrer" href="https://forms.office.com/e/1irdQKeKim">
-                    Gi oss tilbakemelding om hvordan du jobber med tilrettelegging (Microsoft
-                    forms).
-                    <ExternalLink />
-                </Link>
-            </BodyLong>
-        </>
-    );
-    /*    const kandidatErIkkeRegistrert =
+    const kandidatErIkkeRegistrert =
         (kandidat.status === Status.Feil && kandidat.statusKode === 404) ||
         kandidat.status === Status.Slettet;
 
-    if (viewType === Visningstype.RegistrerTilretteleggingsbehov) {
+    const informasjonOmAvviklingAvTilretteleggingsbehov = (
+        <BodyLong>
+            Her skal vi skrive inn informasjon som forklarer hvorfor vi avvikler alt dette her!
+        </BodyLong>
+    );
+
+    if (viewType === Visningstype.VisTilretteleggingsbehov) {
         if (kandidat.status === Status.Suksess) {
-            return <Endring kandidat={kandidat.data} />;
+            return (
+                <>
+                    <Visning kandidat={kandidat.data} />
+                    {informasjonOmAvviklingAvTilretteleggingsbehov}
+                </>
+            );
         } else if (kandidatErIkkeRegistrert) {
-            return <Registrering fnr={fnr} />;
-        }
-    } else if (viewType === Visningstype.VisTilretteleggingsbehov) {
-        if (kandidat.status === Status.Suksess) {
-            return <Visning kandidat={kandidat.data} />;
-        } else if (kandidatErIkkeRegistrert) {
-            return <Introduksjon />;
+            return (
+                <>
+                    <Introduksjon />
+                    {informasjonOmAvviklingAvTilretteleggingsbehov}
+                </>
+            );
         }
     }
 
@@ -72,7 +68,6 @@ const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
     }
 
     return null;
-    */
 };
 
 export default App;
