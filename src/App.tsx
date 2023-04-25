@@ -51,8 +51,10 @@ const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
 
             <BodyLong spacing>
                 De siste månedene har vi sett at muligheten for å registrere tilrettelegginsbehov
-                brukes ganske lite: ~40 ganger i uken. Filtervalget for å finne kandidater med
-                tilretteleggingsbehov har blitt brukt enda mindre: ~6 ganger i uken.
+                brukes ganske lite: ~40 ganger i uken. Andelen av kandidater i kandidatsøket som har
+                registrert tilretteleggingsbehov er kun 1.4%, og dette tror vi er alt for lavt.
+                Filtervalget for å finne kandidater med tilretteleggingsbehov har blitt brukt svært
+                lite: ~6 ganger i uken.
             </BodyLong>
 
             <BodyLong spacing>
@@ -75,15 +77,15 @@ const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
             </BodyLong>
 
             <BodyLong spacing>
-                Hva gjorde vi?  Vi kjørte et eksperiment. Vi tok vekk funksjonen, og spurte om
+                Hva gjorde vi? Vi kjørte et eksperiment. Vi tok vekk funksjonen, og spurte om
                 hvordan dere holder oversikt over tilretteleggingsbehov i dag.
             </BodyLong>
 
             <BodyLong spacing>
                 48 av dere svarte, og vi lærte at måten behovene blir dokumentert på er ganske
-                forskjellig fra veileder til veileder:  - Noen bruker dagens løsning for
-                registrering.  - Noen husker behov i hodet.  - Noen har det som notater, i
-                dokumenter, eller i aktivitetsplanen.
+                forskjellig fra veileder til veileder: - Noen bruker dagens løsning for
+                registrering. - Noen husker behov i hodet. - Noen har det som notater, i dokumenter,
+                eller i aktivitetsplanen.
             </BodyLong>
 
             <BodyLong spacing>
@@ -92,8 +94,8 @@ const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
             </BodyLong>
 
             <BodyLong spacing>
-                På grunn av dette ser vi at det er behov for å registrere tilretteleggingsbehov, men
-                at det må løses på en bedre måte enn i dag.
+                Samlet sett ser vi at det er et viktig behov å kunne finne kandidater som har
+                tilretteleggingsbehov, men at det må løses på en bedre måte enn i dag.
             </BodyLong>
 
             <BodyLong spacing>
