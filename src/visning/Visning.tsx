@@ -1,8 +1,7 @@
 import React, { FunctionComponent } from 'react';
-import { BodyShort, Button } from '@navikt/ds-react';
+import { BodyShort } from '@navikt/ds-react';
 import Behovgruppe from './Behovgruppe';
 import { formaterDato } from '../utils/datoUtils';
-import { navigerTilRegistreringsside } from '../utils/navigering';
 import { Kandidat } from '../api/Kandidat';
 import { hentTeksterForValgteBehov } from '../api/tilretteleggingsbehov';
 import { Kategori } from '../api/Behov';
@@ -46,9 +45,6 @@ const Visning: FunctionComponent<Props> = ({ kandidat }) => {
                     )}
                 />
             </div>
-            <Button variant="primary" size="medium" onClick={navigerTilRegistreringsside}>
-                Endre
-            </Button>
         </>
     );
 };
