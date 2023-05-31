@@ -1,9 +1,5 @@
-import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
-import { hentKandidat } from './api/api';
-import { ikkeLastet, lasterInn, RestKandidat, Status } from './api/Rest';
-import { visDetaljerEvent } from './utils/navigering';
-import Visning from './visning/Visning';
-import { Alert, BodyLong, Heading } from '@navikt/ds-react';
+import React, { FunctionComponent } from 'react';
+import { BodyLong, Heading } from '@navikt/ds-react';
 
 export enum Visningstype {
     VisTilretteleggingsbehov = 'VIS_TILRETTELEGGINGSBEHOV',
@@ -16,29 +12,7 @@ interface Props {
 }
 
 const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
-    const [kandidat, setKandidat] = useState<RestKandidat>(ikkeLastet);
-
-    const hentKandidatFraApi = useCallback(async () => {
-        setKandidat(lasterInn);
-        setKandidat(await hentKandidat(fnr));
-    }, [fnr]);
-
-    useEffect(() => {
-        hentKandidatFraApi();
-    }, [hentKandidatFraApi]);
-
-    useEffect(() => {
-        window.addEventListener(visDetaljerEvent, hentKandidatFraApi);
-        return () => {
-            window.removeEventListener(visDetaljerEvent, hentKandidatFraApi);
-        };
-    }, [hentKandidatFraApi]);
-
-    const kandidatErIkkeRegistrert =
-        (kandidat.status === Status.Feil && kandidat.statusKode === 404) ||
-        kandidat.status === Status.Slettet;
-
-    const informasjonOmAvviklingAvTilretteleggingsbehov = (
+    return (
         <div style={{ maxWidth: '40rem', margin: '1rem 0 0 2rem' }}>
             <Heading level="3" size="medium" spacing>
                 Mulighet for å registrere og søke opp personer med tilretteleggingsbehov fjernes
@@ -75,15 +49,15 @@ const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
             </BodyLong>
 
             <BodyLong spacing>
-                Hva gjorde vi?  Vi kjørte et eksperiment. Vi tok vekk funksjonen, og spurte om
+                Hva gjorde vi? Vi kjørte et eksperiment. Vi tok vekk funksjonen, og spurte om
                 hvordan dere holder oversikt over tilretteleggingsbehov i dag.
             </BodyLong>
 
             <BodyLong spacing>
                 48 av dere svarte, og vi lærte at måten behovene blir dokumentert på er ganske
-                forskjellig fra veileder til veileder:  - Noen bruker dagens løsning for
-                registrering.  - Noen husker behov i hodet.  - Noen har det som notater, i
-                dokumenter, eller i aktivitetsplanen.
+                forskjellig fra veileder til veileder: - Noen bruker dagens løsning for
+                registrering. - Noen husker behov i hodet. - Noen har det som notater, i dokumenter,
+                eller i aktivitetsplanen.
             </BodyLong>
 
             <BodyLong spacing>
@@ -119,25 +93,6 @@ const App: FunctionComponent<Props> = ({ viewType, fnr }) => {
             </BodyLong>
         </div>
     );
-
-    if (viewType === Visningstype.VisTilretteleggingsbehov) {
-        if (kandidat.status === Status.Suksess) {
-            return (
-                <>
-                    <Visning kandidat={kandidat.data} />
-                    {informasjonOmAvviklingAvTilretteleggingsbehov}
-                </>
-            );
-        } else if (kandidatErIkkeRegistrert) {
-            return informasjonOmAvviklingAvTilretteleggingsbehov;
-        }
-    }
-
-    if (kandidat.status === Status.Feil) {
-        return <Alert variant="error">Kunne ikke hente tilretteleggingsbehov</Alert>;
-    }
-
-    return null;
 };
 
 export default App;
